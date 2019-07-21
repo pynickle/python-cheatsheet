@@ -8,7 +8,10 @@ Depend on Python v3.7.4
 
 ## Contents
 
-Text Processing: [``string``](#string), [``re``](#re), [``difflib``](#difflib)
+Text Processing: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
+                 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata),
+Binary Data: [``codecs``](#codecs)
+Data Type: [``datetime``](#datetime), [``calendar``](#calendar)
 
 ## string
 
@@ -208,6 +211,50 @@ Match(a=1, b=0, size=4)
 '11.0.0'
 ```
 
+## codecs
 
+#### encode, decode, getencoder, getdecoder
+
+```python
+>>> import codecs
+>>> codecs.encode("你好")
+b'\xe4\xbd\xa0\xe5\xa5\xbd'
+>>> codecs.decode(b"\xe4\xbd\xa0\xe5\xa5\xbd")
+'你好'
+>>> codecs.getencoder("utf-8")
+<built-in function utf_8_encode>
+>>> codecs.getdecoder("gbk")
+<built-in method decode of MultibyteCodec object at 0x0000019E080AA078>
+```
+
+## datetime
+
+#### MINYEAR, MAXYEAR, date
+
+```python
+>>> import datetime
+>>> datetime.MINYEAR
+1
+>>> datetime.MAXYEAR
+9999
+>>> date = datetime.date
+>>> date.today()
+datetime.date(2019, 7, 21)
+>>> date = datetime.date(2019, 7, 21)
+>>> date.today()
+datetime.date(2019, 7, 21)
+>>> date.weekday()
+6
+>>> date.isocalendar()
+(2019, 29, 7)
+>>> date.ctime()
+'Sun Jul 21 00:00:00 2019'
+>>> date.strftime("%Y %d %y, %H:%M:%S")
+'2019 21 19, 00:00:00'
+```
+
+## calendar
+
+####
 
 
