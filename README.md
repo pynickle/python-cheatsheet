@@ -255,6 +255,52 @@ datetime.date(2019, 7, 21)
 
 ## calendar
 
-####
+#### isleap, firstweekday, month
 
+```python
+>>> import calendar
+>>> calendar.isleap(2000)
+True
+>>> calendar.firstweekday()
+0
+>>> print(calendar.month(2019, 7))
+     July 2019
+Mo Tu We Th Fr Sa Su
+ 1  2  3  4  5  6  7
+ 8  9 10 11 12 13 14
+15 16 17 18 19 20 21
+22 23 24 25 26 27 28
+29 30 31
+```
 
+## collections
+
+#### namedtuple, deque, defaultdict, OrderedDict, Counter
+
+```python
+>>> import collections
+>>> point = collections.namedtuple("point", ["x", "y"])
+>>> p = point(2, 1)
+>>> p.x, p.y
+(2, 1)
+>>> deque = collections.deque(["b", "c", "d"])
+>>> deque.appendleft("a")
+>>> deque.append("e")
+>>> deque
+deque(['a', 'b', 'c', 'd', 'e'])
+>>> dd = collections.defaultdict(lambda: "None")
+>>> dd ["key-1"] = "value-1"
+>>> dd["key-1"]
+'value-1'
+>>> dd["key-2"]
+'None'
+>>> od = collections.OrderedDict([("a", 1), ("b", 2)])
+>>> od
+OrderedDict([('a', 1), ('b', 2)])
+>>> c = collections.Counter()
+>>> for i in "Hello, World":
+...     c[i] = c[i] + 1
+...
+>>> c
+Counter({'l': 3, 'o': 2, 'H': 1, 'e': 1, ',': 1, ' ': 1, 'W': 1, 'r': 1, 'd': 1})
+```
