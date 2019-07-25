@@ -8,12 +8,17 @@ Depend on Python v3.7.4
 
 ## Contents
 
-Text Processing: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
-                 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata),
-Binary Data: [``codecs``](#codecs)
-Data Type: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),
+**Text Processing**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
+                 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata)
+
+**Binary Data**: [``codecs``](#codecs)
+
+**Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),
            [``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
-Mathematical Modules: [``math``](#math), [``cmath``](#cmath)
+     
+**Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)
+
+**Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
 
 ## string
 
@@ -430,3 +435,47 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 9
 ```
 
+## itertools
+
+#### count, repeat, groupby
+
+```python
+>>> import itertools
+>>> for i in zip(itertools.count(1), ["A", "B", "C"]):
+...     print(i)
+...
+(1, 'A')
+(2, 'B')
+(3, 'C')
+>>> for i in itertools.repeat("Hello Repeat!", 5):
+...     print(i)
+...
+Hello Repeat!
+Hello Repeat!
+Hello Repeat!
+Hello Repeat!
+Hello Repeat!
+>>> [list(g) for k, g in itertools.groupby('AAAABBBCCD')]
+[['A', 'A', 'A', 'A'], ['B', 'B', 'B'], ['C', 'C'], ['D']]
+```
+
+## functools
+
+####
+
+```python
+>>> import functools
+>>> @functools.lru_cache(None)
+... def fibonacci(n):
+...     if n<2:
+...         return n
+...     return fibonacci(n-1) + fibonacci(n-2)
+...
+>>> fibonacci(10)
+55
+>>> def add(a, b):
+...     return a+b
+...
+>>> functools.reduce(add, range(1,100))
+4950
+```
