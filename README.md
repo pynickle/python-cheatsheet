@@ -1,4 +1,4 @@
-# Python Standard Libraries Cheatsheet
+# Python Standard Libraries Cheatsheet(Python标准库速查表)
 
 Depend on Python v3.8.0b2
 
@@ -7,10 +7,12 @@ Depend on Python v3.8.0b2
 **Notes**: 
 - **Every code snippet here can run independently**
 - **If you want to copy the code, use [command to code](https://pynickle.github.io/ctc.html)**
+- **You can use GETREADME.py to download README.md from the repository**
 
 **注意**:
 - **这里的每个代码片段都可以独立运行**
 - **如果你希望复制代码，请使用[command to code](https://pynickle.github.io/ctc.html)**
+- **你可以使用GETREADME.py来从仓库中下载README.md**
 
 ## Contents(目录)
 
