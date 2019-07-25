@@ -11,7 +11,9 @@ Depend on Python v3.7.4
 Text Processing: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
                  [``textwrap``](#textwrap), [``unicodedata``](#unicodedata),
 Binary Data: [``codecs``](#codecs)
-Data Type: [``datetime``](#datetime), [``calendar``](#calendar)
+Data Type: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),
+           [``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
+Mathematical Modules: [``math``](#math), [``cmath``](#cmath)
 
 ## string
 
@@ -304,3 +306,127 @@ OrderedDict([('a', 1), ('b', 2)])
 >>> c
 Counter({'l': 3, 'o': 2, 'H': 1, 'e': 1, ',': 1, ' ': 1, 'W': 1, 'r': 1, 'd': 1})
 ```
+
+## copy
+
+#### copy, deepcopy
+
+```python
+>>> import copy
+>>> origin = [1, 2, [3, 4]]
+>>> copy1 = copy.copy(origin)
+>>> copy2 = copy.deepcopy(origin)
+>>> copy1 is copy2
+False
+>>> origin[2][0] = "Hello, copy"
+>>> copy1
+[1, 2, ['Hello, copy', 4]]
+>>> copy2
+[1, 2, [3, 4]]
+```
+
+## pprint
+
+#### pprint
+
+```python
+>>> import pprint
+>>> strcmp = ("hello world", {"nick": 13, "ben": 12}, (1, 2, 3, 4), [5, 6, 7, 8], "Hello pprint")
+>>> pprint.pprint(strcmp)
+('hello world',
+ {'ben': 12, 'nick': 13},
+ (1, 2, 3, 4),
+ [5, 6, 7, 8],
+ 'Hello pprint')
+```
+
+## enum
+
+#### Enum, unique, auto
+
+```python
+>>> import enum
+>>> class Seasons(enum.Enum):
+...     Spring = 1
+...     Summer = 2
+...     Autumn = 3
+...     Winter = 4
+...
+>>> Seasons.Spring
+<Seasons.Spring: 1>
+>>> @enum.unique
+... class Unique(enum.Enum):
+...     Nick = 13
+...     Ben = 12
+...     Jack = 13
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "C:\Python38\lib\enum.py", line 860, in unique
+    raise ValueError('duplicate values found in %r: %s' %
+ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
+>>> class Auto(enum.Enum):
+...     VS = enum.auto()
+...     VSCode = enum.auto()
+...     Pycharm = enum.auto()
+...
+>>> list(Auto)
+[<Auto.VS: 1>, <Auto.VSCode: 2>, <Auto.Pycharm: 3>]
+```
+
+## math
+
+#### ceil, factorial, floor, modf, log, pow, sqrt, pi, e
+
+```python
+>>> import math
+>>> math.ceil(1.4)
+2
+>>> math.factorial(5)
+120
+>>> math.floor(1.6)
+1
+>>> math.modf(1.6)
+(0.6000000000000001, 1.0)
+>>> math.log(8)
+2.0794415416798357
+>>> math.pow(2,5)
+32.0
+>>> math.sqrt(9)
+3.0
+>>> math.pi
+3.141592653589793
+>>> math.e
+2.718281828459045
+```
+
+## cmath
+
+#### sin, tan, cos
+
+```python
+>>> import cmath
+>>> cmath.sin(7)
+(0.6569865987187891+0j)
+>>> cmath.tan(7)
+(0.8714479827243188+0j)
+>>> cmath.cos(7)
+(0.7539022543433046-0j)
+```
+
+## random
+
+#### random, uniform, randint, randrange
+
+```python
+>>> import random
+>>> random.random()
+0.6381052887323486
+>>> random.uniform(5,6)
+5.325285695528384
+>>> random.randint(6, 9)
+9
+>>> random.randrange(5, 10)
+9
+```
+
