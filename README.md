@@ -27,6 +27,8 @@ Depend on Python v3.8.0b2
 
 **Functional Programming(函数式编程)**: [``itertools``](#itertools), [``functools``](#functools)
 
+**Directory Access(目录访问)**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob)
+
 ## string
 
 #### Attributes
@@ -486,3 +488,49 @@ Hello Repeat!
 >>> functools.reduce(add, range(1,100))
 4950
 ```
+
+## pathlib
+
+#### Path
+
+```python
+>>> import pathlib
+>>> p = pathlib.Path(".")
+>>> list(p.glob('**/*.py'))
+[WindowsPath('GETREADME.py')]
+>>> p/"dir"
+WindowsPath('dir')
+>>> (p/"GETREADME.py").name
+'GETREADME.py'
+>>> p.is_absolute()
+False
+```
+
+## os.path
+
+#### exists, getsize, isfile, isdir, join
+
+```python
+>>> import os.path
+>>> os.path.exists(".")
+True
+>>> os.path.getsize("./README.md")
+11285
+>>> os.path.isfile("./README.md")
+True
+>>> os.path.isdir("./doc")
+False
+>>> os.path.join("./doc", "tutorial", "basic")
+'./doc\\tutorial\\basic'
+```
+
+## glob
+
+#### glob
+
+```python
+>>> import glob
+>>> glob.glob("*.md", recursive = True)
+['python-cheatsheet.md', 'README.md']
+```
+
