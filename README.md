@@ -1,24 +1,28 @@
 # Python Standard Libraries Cheatsheet
 
-Depend on Python v3.7.4
+Depend on Python v3.8.0b2
+使用Python v3.8.0b2
 
 **Notes**: 
 - **Every code snippet here can run independently**
 - **If you want to copy the code, use [command to code](https://pynickle.github.io/ctc.html)**
 
-## Contents
+**注意**:
+- **这里的每个代码片段都可以独立运行**
+- **如果你希望复制代码，请使用[command to code](https://pynickle.github.io/ctc.html)**
 
-**Text Processing**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
+## Contents(目录)
+
+**Text Processing(文本处理)**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
                  [``textwrap``](#textwrap), [``unicodedata``](#unicodedata)
 
-**Binary Data**: [``codecs``](#codecs)
+**Binary Data(二进制数据)**: [``codecs``](#codecs)
 
-**Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),
-           [``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
+**Data Type(数据类型)**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
      
-**Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)
+**Mathematical Modules(数学模块)**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)
 
-**Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
+**Functional Programming(函数式编程)**: [``itertools``](#itertools), [``functools``](#functools)
 
 ## string
 
