@@ -1,6 +1,6 @@
 # Python Standard Libraries Cheatsheet
 
-Depend on Python v3.8.0b2
+Depend on Python v3.7.4
 
 **Notes**: 
 - **Every code snippet here can run independently**
@@ -280,6 +280,7 @@ Mo Tu We Th Fr Sa Su
 15 16 17 18 19 20 21
 22 23 24 25 26 27 28
 29 30 31
+
 ```
 
 ## collections
@@ -490,7 +491,7 @@ Hello Repeat!
 >>> import pathlib
 >>> p = pathlib.Path(".")
 >>> list(p.glob('**/*.py'))
-[WindowsPath('GETREADME.py')]
+[WindowsPath('GETREADME.py'), WindowsPath('test.py')]
 >>> p/"dir"
 WindowsPath('dir')
 >>> (p/"GETREADME.py").name
@@ -507,8 +508,8 @@ False
 >>> import os.path
 >>> os.path.exists(".")
 True
->>> os.path.getsize("./README.md")
-11285
+>>> os.path.getsize("./LICENSE")
+466
 >>> os.path.isfile("./README.md")
 True
 >>> os.path.isdir("./doc")
@@ -524,6 +525,6 @@ False
 ```python
 >>> import glob
 >>> glob.glob("*.md", recursive = True)
-['python-cheatsheet.md', 'README.md']
+['python-cheatsheet.md', 'README-zh-cn.md', 'README.md']
 ```
 
