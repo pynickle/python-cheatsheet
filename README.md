@@ -2,6 +2,9 @@
 
 Depend on Python v3.7.4
 
+[中文](README-zh-cn.md)
+[English](README.md)
+
 **Notes**: 
 - **Every code snippet here can run independently**
 - **If you want to copy the code, use [command to code](https://pynickle.github.io/ctc.html)**
