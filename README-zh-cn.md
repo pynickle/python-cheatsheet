@@ -1,26 +1,26 @@
-# Python Standard Libraries Cheatsheet
+# Python标准库速查表
 
-Depend on Python v3.8.0b2
+使用Python v3.8.0b2
 
-**Notes**: 
-- **Every code snippet here can run independently**
-- **If you want to copy the code, use [command to code](https://pynickle.github.io/ctc.html)**
-- **You can use GETREADME.py to download README.md from the repository**
+**注意**:
+- **这里的每个代码片段都可以独立运行**
+- **如果你希望复制代码，请使用[command to code](https://pynickle.github.io/ctc.html)**
+- **你可以使用GETREADME.py来从仓库中下载README.md**
 
-## Contents(目录)
+## 目录
 
-**Text Processing**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
+**文本处理**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata)
 
-**Binary Data**: [``codecs``](#codecs)
+**二进制数据**: [``codecs``](#codecs)
 
-**Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
+**数据类型**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
      
-**Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)
+**数学模块**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)
 
-**Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
+**函数式编程**: [``itertools``](#itertools), [``functools``](#functools)
 
-**Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob)
+**目录访问**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob)
 
 ## string
 
