@@ -1,5 +1,9 @@
 import doctest
+import re
 
+
+NOTEST = ["random.random", "random.randint", "random.randrange",
+          "random.uniform", "codecs.getdecoder", "codecs.getencoder"]
 
 def main(file_name):
     status = None
@@ -9,14 +13,24 @@ def main(file_name):
         for i in r:
             if not status:
                 if i.strip().startswith("```"):
-                    status = 1
+                    status = "code"
                     continue
-            else:
-                if i.strip().startswith("```"):
-                    status = None
-                    continue
+            elif status == "notest":
+                if i.startswith(">>>"):
+                    status = "code"
                 else:
-                    code += i
+                    continue
+            if status == "code":
+                for item in NOTEST:
+                    if re.search(item, i):
+                        status = "notest"
+                        break
+                else:
+                    if i.strip().startswith("```"):
+                        status = None
+                        continue
+                    else:
+                        code += i
     return code
 
 if __name__ == "__main__":
