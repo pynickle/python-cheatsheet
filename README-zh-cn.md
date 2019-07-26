@@ -2,8 +2,8 @@
 
 使用Python v3.7.4
 
-[中文](README-zh-cn.md)
-[English](README.md)
+- [中文](README-zh-cn.md)
+- [English](README.md)
 
 **注意**:
 - **这里的每个代码片段都可以独立运行**

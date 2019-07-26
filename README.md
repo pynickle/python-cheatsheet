@@ -2,8 +2,8 @@
 
 Depend on Python v3.7.4
 
-[中文](README-zh-cn.md)
-[English](README.md)
+- [中文](README-zh-cn.md)
+- [English](README.md)
 
 **Notes**: 
 - **Every code snippet here can run independently**
