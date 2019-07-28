@@ -29,6 +29,8 @@ Depend on Python v3.7.4
 
 **Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma)
 
+**Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac)
+
 ## string
 
 #### Attributes
@@ -572,4 +574,40 @@ b'Hello World!'
 b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ"
 >>> lzma.decompress(b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ")
 b'Hello, python3!'
+```
+
+## hashlib
+
+#### md5
+
+```python
+>>> import hashlib
+>>> md5 = hashlib.md5()
+>>> md5.update(b"Hello World")
+>>> md5.block_size
+64
+>>> md5.digest_size
+16
+>>> md5.hexdigest()
+'b10a8db164e0754105b7a99be72e3fe5'
+>>> md5.digest()
+b'\xb1\n\x8d\xb1d\xe0uA\x05\xb7\xa9\x9b\xe7.?\xe5'
+```
+
+## hmac
+
+#### new, compare_digest
+
+```python
+>>> import hmac
+>>> msg = b"Hello World"
+>>> secret = b"key"
+>>> h = hmac.new(secret, msg, digestmod='md5')
+>>> h.hexdigest()
+'432c3ea3b9a503183f3d1258d9016a0c'
+>>> h.digest()
+b'C,>\xa3\xb9\xa5\x03\x18?=\x12X\xd9\x01j\x0c'
+>>> h2 = hmac.new(secret, b"Hello world", digestmod="md5")
+>>> hmac.compare_digest(h.digest(), h2.digest())
+False
 ```
