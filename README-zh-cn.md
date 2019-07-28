@@ -25,6 +25,8 @@
 
 **目录访问**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob)
 
+**数据持久化**: [``pickle``](#pickle)
+
 ## string
 
 #### Attributes
@@ -530,3 +532,17 @@ False
 ['python-cheatsheet.md', 'README.md']
 ```
 
+## pickle
+
+#### loads, dumps
+
+```python
+>>> import pickle
+>>> data = [[1, "first"],
+...         [2, "second"]]
+>>> dumps = pickle.dumps(data)
+>>> dumps
+b'\x80\x03]q\x00(]q\x01(K\x01X\x05\x00\x00\x00firstq\x02e]q\x03(K\x02X\x06\x00\x00\x00secondq\x04ee.'
+>>> pickle.loads(dumps)
+[[1, 'first'], [2, 'second']]
+```

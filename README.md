@@ -25,6 +25,10 @@ Depend on Python v3.7.4
 
 **Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob)
 
+**Data Persistence**: [``pickle``](#pickle)
+
+**Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma)
+
 ## string
 
 #### Attributes
@@ -530,18 +534,42 @@ False
 >>> glob.glob("*.md", recursive = True)
 ['python-cheatsheet.md', 'README-zh-cn.md', 'README.md']
 ```
+
 ## pickle
 
 #### loads, dumps
 
 ```python
 >>> import pickle
->>> data = [[1, "first"],                                                                                              
-...         [2, "second"]]                                                                                             
->>> dumps = pickle.dumps(data)                                                                                         
->>> dumps                                                                                                              
-b'\x80\x03]q\x00(]q\x01(K\x01X\x05\x00\x00\x00firstq\x02e]q\x03(K\x02X\x06\x00\x00\x00secondq\x04ee.'                  
->>> pickle.loads(dumps)                                                                                                
-[[1, 'first'], [2, 'second']]   
+>>> data = [[1, "first"],
+...         [2, "second"]]
+>>> dumps = pickle.dumps(data)
+>>> dumps
+b'\x80\x03]q\x00(]q\x01(K\x01X\x05\x00\x00\x00firstq\x02e]q\x03(K\x02X\x06\x00\x00\x00secondq\x04ee.'
+>>> pickle.loads(dumps)
+[[1, 'first'], [2, 'second']]
 ```
 
+## zlib
+
+#### compress, decompress
+
+```python
+>>> import zlib
+>>> zlib.compress(b"Hello World!", 5)
+b'x^\xf3H\xcd\xc9\xc9W\x08\xcf/\xcaIQ\x04\x00\x1cI\x04>'
+>>> zlib.decompress(b'x^\xf3H\xcd\xc9\xc9W\x08\xcf/\xcaIQ\x04\x00\x1cI\x04>')
+b'Hello World!'
+```
+
+## lzma
+
+#### compress, decompress
+
+```python
+>>> import lzma
+>>> lzma.compress(b"Hello, python3!")
+b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ"
+>>> lzma.decompress(b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ")
+b'Hello, python3!'
+```
