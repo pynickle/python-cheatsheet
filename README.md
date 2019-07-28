@@ -10,7 +10,7 @@ Depend on Python v3.7.4
 - **If you want to copy the code, use [command to code](https://pynickle.github.io/ctc.html)**
 - **You can use GETREADME.py to download README.md from the repository**
 
-## Contents(目录)
+## Contents
 
 **Text Processing**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata)
