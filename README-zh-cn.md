@@ -1,5 +1,7 @@
 # Python标准库速查表
 
+**PS**: **README.md为最新文档！**
+
 使用Python v3.7.4
 
 - [中文](README-zh-cn.md)

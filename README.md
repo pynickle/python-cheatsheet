@@ -18,7 +18,7 @@ Depend on Python v3.7.4
 **Binary Data**: [``codecs``](#codecs)
 
 **Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
-     
+
 **Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)
 
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
@@ -29,7 +29,9 @@ Depend on Python v3.7.4
 
 **Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma)
 
-**Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac)
+**Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
+
+**Operating System**: [``os``](#os), [``time``](#time)
 
 ## string
 
@@ -496,7 +498,7 @@ Hello Repeat!
 
 #### Path
 
-```python
+```python 
 >>> import pathlib
 >>> p = pathlib.Path(".")
 >>> list(p.glob('**/*.py'))
@@ -610,4 +612,47 @@ b'C,>\xa3\xb9\xa5\x03\x18?=\x12X\xd9\x01j\x0c'
 >>> h2 = hmac.new(secret, b"Hello world", digestmod="md5")
 >>> hmac.compare_digest(h.digest(), h2.digest())
 False
+```
+
+## secrets
+
+#### choice, token_bytes, token_hex
+
+```python
+>>> import secrets
+>>> secrets.choice("Hello World!")
+'d'
+>>> secrets.token_bytes(32)
+b'\xd7\x98\xba\xc5\x18[/\xeaLx\xdb\x962\x84\xff`(7&\xe6\xae\xd4\x17n,\xc3\x9e\xb0V\x1c\x1d\x99'
+>>> secrets.token_hex(16)
+'335f8df0cb6dd60a3c41fdba7ccd1a0b'
+```
+
+## os
+
+#### name, getcwd
+
+```python
+>>> import os
+>>> os.name
+'nt'
+>>> os.getcwd()
+'C:\\Users\\Nick'
+```
+
+## time
+
+#### localtime, ctime, perf_counter, sleep, strftime 
+
+```python
+>>> import time
+>>> time.localtime()
+time.struct_time(tm_year=2019, tm_mon=7, tm_mday=29, tm_hour=12, tm_min=18, tm_sec=57, tm_wday=0, tm_yday=210, tm_isdst=0)
+>>> time.ctime()
+'Mon Jul 29 12:19:40 2019'
+>>> time.perf_counter()
+174.1987535
+>>> time.sleep(1)
+>>> time.strftime("%d %b %Y")
+'29 Jul 2019'
 ```
