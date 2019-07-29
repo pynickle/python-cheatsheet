@@ -29,6 +29,12 @@
 
 **数据持久化**: [``pickle``](#pickle)
 
+**Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma)
+
+**Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
+
+**Operating System**: [``os``](#os), [``time``](#time), [``logging``](#logging)
+
 ## string
 
 #### Attributes
@@ -547,4 +553,128 @@ False
 b'\x80\x03]q\x00(]q\x01(K\x01X\x05\x00\x00\x00firstq\x02e]q\x03(K\x02X\x06\x00\x00\x00secondq\x04ee.'
 >>> pickle.loads(dumps)
 [[1, 'first'], [2, 'second']]
+```
+
+## zlib
+
+#### compress, decompress
+
+```python
+>>> import zlib
+>>> zlib.compress(b"Hello World!", 5)
+b'x^\xf3H\xcd\xc9\xc9W\x08\xcf/\xcaIQ\x04\x00\x1cI\x04>'
+>>> zlib.decompress(b'x^\xf3H\xcd\xc9\xc9W\x08\xcf/\xcaIQ\x04\x00\x1cI\x04>')
+b'Hello World!'
+```
+
+## lzma
+
+#### compress, decompress
+
+```python
+>>> import lzma
+>>> lzma.compress(b"Hello, python3!")
+b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ"
+>>> lzma.decompress(b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ")
+b'Hello, python3!'
+```
+
+## hashlib
+
+#### md5
+
+```python
+>>> import hashlib
+>>> md5 = hashlib.md5()
+>>> md5.update(b"Hello World")
+>>> md5.block_size
+64
+>>> md5.digest_size
+16
+>>> md5.hexdigest()
+'b10a8db164e0754105b7a99be72e3fe5'
+>>> md5.digest()
+b'\xb1\n\x8d\xb1d\xe0uA\x05\xb7\xa9\x9b\xe7.?\xe5'
+```
+
+## hmac
+
+#### new, compare_digest
+
+```python
+>>> import hmac
+>>> msg = b"Hello World"
+>>> secret = b"key"
+>>> h = hmac.new(secret, msg, digestmod='md5')
+>>> h.hexdigest()
+'432c3ea3b9a503183f3d1258d9016a0c'
+>>> h.digest()
+b'C,>\xa3\xb9\xa5\x03\x18?=\x12X\xd9\x01j\x0c'
+>>> h2 = hmac.new(secret, b"Hello world", digestmod="md5")
+>>> hmac.compare_digest(h.digest(), h2.digest())
+False
+```
+
+## secrets
+
+#### choice, token_bytes, token_hex
+
+```python
+>>> import secrets
+>>> secrets.choice("Hello World!")
+'d'
+>>> secrets.token_bytes(32)
+b'\xd7\x98\xba\xc5\x18[/\xeaLx\xdb\x962\x84\xff`(7&\xe6\xae\xd4\x17n,\xc3\x9e\xb0V\x1c\x1d\x99'
+>>> secrets.token_hex(16)
+'335f8df0cb6dd60a3c41fdba7ccd1a0b'
+```
+
+## os
+
+#### name, getcwd
+
+```python
+>>> import os
+>>> os.name
+'nt'
+>>> os.getcwd()
+'C:\\Users\\Nick'
+```
+
+## time
+
+#### localtime, ctime, perf_counter, sleep, strftime 
+
+```python
+>>> import time
+>>> time.localtime()
+time.struct_time(tm_year=2019, tm_mon=7, tm_mday=29, tm_hour=12, tm_min=18, tm_sec=57, tm_wday=0, tm_yday=210, tm_isdst=0)
+>>> time.ctime()
+'Mon Jul 29 12:19:40 2019'
+>>> time.perf_counter()
+174.1987535
+>>> time.sleep(1)
+>>> time.strftime("%d %b %Y")
+'29 Jul 2019'
+```
+
+## logging
+
+#### log, info, debug, warning, error, critical
+
+```python
+>>> import logging
+>>> logging.basicConfig(level = logging.INFO,format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+>>> logger = logging.getLogger(__name__)
+>>> logger.info("info")
+2019-07-29 12:29:59,363 - __main__ - INFO - info
+>>> logger.debug("debug")
+>>> logger.error("error")
+2019-07-29 12:30:26,729 - __main__ - ERROR - error
+>>> logger.critical("critical")
+2019-07-29 12:30:36,446 - __main__ - CRITICAL - critical
+>>> logger.warning("warning")
+2019-07-29 12:30:48,815 - __main__ - WARNING - warning
+>>> logger.log(35, "log")
+2019-07-29 12:31:59,758 - __main__ - Level 35 - log
 ```
