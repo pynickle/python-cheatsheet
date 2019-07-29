@@ -656,3 +656,24 @@ time.struct_time(tm_year=2019, tm_mon=7, tm_mday=29, tm_hour=12, tm_min=18, tm_s
 >>> time.strftime("%d %b %Y")
 '29 Jul 2019'
 ```
+
+## logging
+
+#### log, info, debug, warning, error, critical
+
+```python
+>>> import logging
+>>> logging.basicConfig(level = logging.INFO,format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+>>> logger = logging.getLogger(__name__)
+>>> logger.info("info")
+2019-07-29 12:29:59,363 - __main__ - INFO - info
+>>> logger.debug("debug")
+>>> logger.error("error")
+2019-07-29 12:30:26,729 - __main__ - ERROR - error
+>>> logger.critical("critical")
+2019-07-29 12:30:36,446 - __main__ - CRITICAL - critical
+>>> logger.warning("warning")
+2019-07-29 12:30:48,815 - __main__ - WARNING - warning
+>>> logger.log(35, "log")
+2019-07-29 12:31:59,758 - __main__ - Level 35 - log
+```
