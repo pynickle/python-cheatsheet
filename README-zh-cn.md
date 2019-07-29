@@ -29,11 +29,11 @@
 
 **数据持久化**: [``pickle``](#pickle)
 
-**Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma)
+**数据压缩**: [``zlib``](#zlib), [``lzma``](#lzma)
 
-**Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
+**加密服务**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
 
-**Operating System**: [``os``](#os), [``time``](#time), [``logging``](#logging)
+**操作系统**: [``os``](#os), [``time``](#time), [``logging``](#logging)
 
 ## string
 
