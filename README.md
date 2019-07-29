@@ -31,7 +31,7 @@ Depend on Python v3.7.4
 
 **Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
 
-**Operating System**: [``os``](#os), [``time``](#time)
+**Operating System**: [``os``](#os), [``time``](#time), [``logging``](#logging)
 
 ## string
 
