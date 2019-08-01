@@ -33,7 +33,14 @@
 
 **加密服务**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
 
-**操作系统**: [``os``](#os), [``time``](#time), [``logging``](#logging)
+**操作系统**: [``os``](#os), [``time``](#time), [``logging``](#logging),
+[``getpass``](#getpass),  [``platform``](#platform)
+
+**互联网数据**: [``json``](#json)
+
+**结构化标记**: [``html``](#html)
+
+**开发工具**: [``typing``](#typing)
 
 ## string
 
@@ -677,4 +684,91 @@ time.struct_time(tm_year=2019, tm_mon=7, tm_mday=29, tm_hour=12, tm_min=18, tm_s
 2019-07-29 12:30:48,815 - __main__ - WARNING - warning
 >>> logger.log(35, "log")
 2019-07-29 12:31:59,758 - __main__ - Level 35 - log
+```
+
+## getpass
+
+#### getpass, getuser
+
+```python
+>>> import getpass
+>>> password = getpass.getpass()
+Password:
+>>> password
+'xxx'
+>>> getpass.getuser()
+'Nick'
+```
+
+## platform
+
+#### machine, platform, python_compiler, python_version, system
+
+```python
+>>> import platform
+>>> platform.machine()
+'AMD64'
+>>> platform.platform()
+'Windows-10-10.0.18362-SP0'
+>>> platform.python_compiler()
+'MSC v.1916 64 bit (AMD64)'
+>>> platform.python_version()
+'3.7.4'
+>>> platform.system()
+'Windows'
+```
+
+## json
+
+#### dumps, loads
+
+```python
+>>> import json
+>>> x = json.dumps({"Nick": 13, "Ben": 10})
+>>> x
+'{"Nick": 13, "Ben": 10}'
+>>> json.loads(x)
+{'Nick': 13, 'Ben': 10}
+```
+
+## html
+
+#### escape, unescape
+
+```python
+>>> import html
+>>> html.escape("As we all know, 2>1")
+'As we all know, 2&gt;1'
+>>> html.unescape('As we all know, 2&gt;1')
+'As we all know, 2>1'
+```
+
+## webbrowser
+
+#### open
+
+```python
+>>> import webbrowser
+>>> webbrowser.open("https://www.baidu.com")
+True
+>>> webbrowser.open("www.baidu.com")
+True
+```
+
+## typing
+
+#### List, NewType
+
+```python
+>>> import typing
+>>> lst = typing.List[int]
+>>> float_lst = typing.List[float]
+>>> def foo(x: float, lst: lst)->float_lst:
+...     return [x*num for num in lst]
+...
+>>> foo(1.5, [3, 4, 5])
+[4.5, 6.0, 7.5]
+>>> ID = typing.NewType("ID", int)
+>>> ID(70)
+70
 ```
