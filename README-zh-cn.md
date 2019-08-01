@@ -42,6 +42,10 @@
 
 **开发工具**: [``typing``](#typing)
 
+**调试和分析**: [``timeit``](#timeit), [``pdb``](#pdb)
+
+**运行时服务**: [``sys``](#sys)
+
 ## string
 
 #### Attributes
@@ -771,4 +775,84 @@ True
 >>> ID = typing.NewType("ID", int)
 >>> ID(70)
 70
+```
+
+## timeit
+
+#### timeit, Timer
+
+```python
+>>> import timeit
+>>> timeit.timeit("[i for i in range(10000)]", number = 1000)
+1.0810747999999961
+>>> timeit.timeit("lst = []\nfor i in range(10000):\n    lst.append(i)", number = 1000)
+1.770644500000003
+>>> a = timeit.Timer("[i for i in range(10000)]")
+>>> a.timeit(number = 1000)
+0.9840328999999883
+```
+
+## pdb
+
+#### set_trace
+
+```python
+>>> import pdb
+>>> def foo():
+...     lst = []
+...     for i in range(2):
+...         pdb.set_trace()
+...         lst.append(i)
+...     return lst
+...
+>>> foo()
+> <stdin>(5)foo()
+(Pdb) p i
+0
+(Pdb) p lst
+[]
+(Pdb) n
+> <stdin>(3)foo()
+(Pdb) list
+[EOF]
+(Pdb) n
+> <stdin>(4)foo()
+(Pdb) r
+> <stdin>(5)foo()
+(Pdb) p i
+1
+(Pdb) p lst
+[0]
+(Pdb) q
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 5, in foo
+  File "<stdin>", line 5, in foo
+  File "C:\Python37\lib\bdb.py", line 88, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "C:\Python37\lib\bdb.py", line 113, in dispatch_line
+    if self.quitting: raise BdbQuit
+bdb.BdbQuit
+```
+
+## sys
+
+#### exc_info, implementation, maxsize, platform, version
+
+```python
+>>> import sys
+>>> try:
+...     1/0
+... except Exception:
+...     print(sys.exc_info())
+...
+(<class 'ZeroDivisionError'>, ZeroDivisionError('division by zero'), <traceback object at 0x000002D8BF38A248>)
+>>> sys.implementation
+namespace(cache_tag='cpython-37', hexversion=50791664, name='cpython', version=sys.version_info(major=3, minor=7, micro=4, releaselevel='final', serial=0))
+>>> sys.maxsize
+9223372036854775807
+>>> sys.platform
+'win32'
+>>> sys.version
+'3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 20:34:20) [MSC v.1916 64 bit (AMD64)]'
 ```
