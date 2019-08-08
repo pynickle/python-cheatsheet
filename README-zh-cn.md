@@ -44,7 +44,8 @@
 
 **调试和分析**: [``timeit``](#timeit), [``pdb``](#pdb)
 
-**运行时服务**: [``sys``](#sys)
+**运行时服务**: [``sys``](#sys), [``dataclasses``](#dataclasses),
+[``contextlib``](#contextlib), [``abc``](#abc)
 
 ## string
 
@@ -856,3 +857,93 @@ namespace(cache_tag='cpython-37', hexversion=50791664, name='cpython', version=s
 >>> sys.version
 '3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 20:34:20) [MSC v.1916 64 bit (AMD64)]'
 ```
+
+## dataclasses
+
+#### dataclass
+
+```python
+>>> import dataclasses
+>>> @dataclasses.dataclass
+... class User:
+...     name: str
+...     age: int
+...     def get_info(self):
+...         return self.name + " is " + str(self.age) + " years old."
+...
+>>> pynickle = User("pynickle", 14)
+>>> pynickle.get_info()
+'pynickle is 14 years old.'
+```
+
+## contextlib
+
+#### contextmanager
+
+```python
+>>> import contextlib
+>>> @contextlib.contextmanager
+... def cm(name):
+...     print("__enter__ cm")
+...     yield "Hello," + name
+...     print("__exit__ cm")
+...
+>>> with cm("pynickle") as value:
+...     print(value)
+...
+__enter__ cm
+Hello,pynickle
+__exit__ cm
+>>> with cm("pynickle") as a, cm("bob") as b:
+...     print(a, b)
+...
+__enter__ cm
+__enter__ cm
+Hello,pynickle Hello,bob
+__exit__ cm
+__exit__ cm
+```
+
+## abc
+
+#### ABCMeta, abstractmethod
+
+```python
+>>> import abc
+>>> class User(metaclass=abc.ABCMeta):
+...     def hello(self, name):
+...         print("Hello," + name)
+...     @abc.abstractmethod
+...     def unique_hello(self):
+...         self.hello()
+...     @property
+...     @abc.abstractmethod
+...     def age():
+...         pass
+...
+>>> class UserOne(User):
+...     def unique_hello(self):
+...         self.hello()
+...         print("l am coming!")
+...     def age():
+...         return "13"
+...
+>>> user1 = UserOne()
+>>> dir(user1)
+['__abstractmethods__', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_abc_impl', 'age', 'hello', 'unique_hello']
+>>> isinstance(user1, User)
+True
+>>> class UserTwo():
+...     pass
+...
+>>> User.register(UserTwo)   # register only made UserTwo subclass of Uuser, but none of the methods
+<class '__main__.UserTwo'>
+>>> user2 = UserTwo()
+>>> dir(user2)
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__']
+>>> issubclass(UserTwo, User)
+True
+```
+
+
+
