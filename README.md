@@ -113,11 +113,11 @@ Depend on Python v3.7.4
 >>> strcmp = "www.baidu.com"
 >>> re.match("www", strcmp).span()
 (0, 3)
->>> re.match("baidu", strcmp)
->>> re.search("baidu", strcmp).span()
+>>> re.match("baidu", strcmp)   # re.match only match from the beginning of the string
+>>> re.search("baidu", strcmp).span()   # re.search search from all string and return the first
 (4, 9)
 >>> strcmp = "baidu.com/runoob.com"
->>> re.findall("com", strcmp)
+>>> re.findall("com", strcmp)   # re.findall find all results and return
 ['com', 'com']
 >>> re.findall("b(.*?).", strcmp)
 ['', '']
@@ -131,7 +131,7 @@ Depend on Python v3.7.4
 >>> import re
 >>> re.split(r"\W", "hello,world")
 ['hello', 'world']
->>> re.sub(r"Boy|Girl", "Human", "boy and girl", flags = re.I)
+>>> re.sub(r"Boy|Girl", "Human", "boy and girl", flags = re.I)   # re.I means ignoring apitalization
 'Human and Human'
 >>> re.escape(r"#$&*+-.^|~")
 '\\#\\$\\&\\*\\+\\-\\.\\^\\|\\~'
