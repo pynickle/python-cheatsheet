@@ -465,7 +465,7 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 #### count, repeat, groupby
 
 ```python
->>> import itertools
+>>> import itertools   # itertools always return a iterator
 >>> for i in zip(itertools.count(1), ["A", "B", "C"]):
 ...     print(i)
 ...
@@ -490,7 +490,7 @@ Hello Repeat!
 
 ```python
 >>> import functools
->>> @functools.lru_cache(None)
+>>> @functools.lru_cache(None)   # None means the cache's upper limit is not limited
 ... def fibonacci(n):
 ...     if n<2:
 ...         return n
@@ -843,7 +843,7 @@ bdb.BdbQuit
 >>> try:
 ...     1/0
 ... except Exception:
-...     print(sys.exc_info())
+...     print(sys.exc_info())   # traceback.print_exc is a beautful version of sys.exc_info()
 ...
 (<class 'ZeroDivisionError'>, ZeroDivisionError('division by zero'), <traceback object at 0x000002D8BF38A248>)
 >>> sys.implementation
@@ -854,6 +854,7 @@ namespace(cache_tag='cpython-37', hexversion=50791664, name='cpython', version=s
 'win32'
 >>> sys.version
 '3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 20:34:20) [MSC v.1916 64 bit (AMD64)]'
+>>> sys.exit()
 ```
 
 
