@@ -46,6 +46,10 @@ Depend on Python v3.7.4
 [``contextlib``](#contextlib), [``abc``](#abc), [``traceback``](#traceback),
 [``__future__``](#__future__)
 
+**Importing Modules**: [``importlib``](#importlib)
+
+**Python Language Services**: [``ast``](#ast), [``keyword``](#keyword)
+
 ## string
 
 #### Attributes
@@ -970,4 +974,57 @@ ZeroDivisionError: division by zero
 >>> from __future__ import division, absolute_import, print_function, unicode_literals
 ```
 
+## importlib
 
+## __import__, reload
+
+```python
+>>> import importlib
+>>> sys = importlib.__import__("sys")   # equal to built in function __import__
+>>> importlib.reload(sys)
+<module 'sys' (built-in)>
+```
+
+## ast
+
+## literal_eval, parse, dump
+
+```python
+>>> import ast
+>>> ast.literal_eval("__import__('os')")   # safer than built in function eval
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib\ast.py", l
+ine 91, in literal_eval
+    return _convert(node_or_string)
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib\ast.py", l
+ine 90, in _convert
+    return _convert_signed_num(node)
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib\ast.py", l
+ine 63, in _convert_signed_num
+    return _convert_num(node)
+  File "C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib\ast.py", l
+ine 55, in _convert_num
+    raise ValueError('malformed node or string: ' + repr(node))
+ValueError: malformed node or string: <_ast.Call object at 0x00B11C50>
+>>> ast.literal_eval("[1, 2, 3]")
+[1, 2, 3]
+>>> hello_world = ast.parse("print('Hello World!')", "<string)", "exec")   # abstract syntax trees
+>>> ast.dump(hello_world)
+"Module(body=[Expr(value=Call(func=Name(id='print', ctx=Load()), args=[Str(s='He
+llo World!')], keywords=[]))])"
+```
+
+## keyword
+
+#### kwlist, iskeyword
+
+```python
+>>> import keyword
+>>> keyword.kwlist
+['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'de
+l', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'no
+nlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+>>> keyword.iskeyword("True")
+True
+```
