@@ -42,13 +42,15 @@ Depend on Python v3.7.4
 
 **Debugging Profiling**: [``timeit``](#timeit), [``pdb``](#pdb)
 
+**Software Packaging**: [``ensurepip``](#ensurepip)
+
 **Runtime Services**: [``sys``](#sys), [``dataclasses``](#dataclasses),
 [``contextlib``](#contextlib), [``abc``](#abc), [``traceback``](#traceback),
 [``__future__``](#__future__)
 
-**Importing Modules**: [``importlib``](#importlib)
+**Importing Modules**: [``zipimport``](#zipimport), [``importlib``](#importlib)
 
-**Python Language Services**: [``ast``](#ast), [``keyword``](#keyword)
+**Python Language Services**: [``ast``](#ast), [``keyword``](#keyword), [``dis``](#dis)
 
 ## string
 
@@ -840,6 +842,27 @@ Traceback (most recent call last):
 bdb.BdbQuit
 ```
 
+## ensurepip
+
+#### version, bootstrap
+
+```python
+>>> import ensurepip
+>>> ensurepip.version()
+'19.0.3'
+>>> ensurepip.bootstrap(upgrade=True)
+Looking in links: C:\Users\Nick\AppData\Local\Temp\tmpus54fm12
+Requirement already up-to-date: setuptools in c:\python37\lib\site-packages (41.2.0)
+Requirement already up-to-date: pip in c:\python37\lib\site-packages (19.2.3)
+```
+
+Run in bash:
+
+```bash
+python -m ensurepip   # download pip
+python -m ensurepip --upgrade   # upgrade pip
+```
+
 ## sys
 
 #### exc_info, implementation, maxsize, platform, version
@@ -974,6 +997,26 @@ ZeroDivisionError: division by zero
 >>> from __future__ import division, absolute_import, print_function, unicode_literals
 ```
 
+## zipimport
+
+#### importer
+
+```python
+>>> import zipimport
+>>> zip = zipimport.zipimporter("GETREADME.zip")
+>>> zip.archive
+'GETREADME.zip'
+>>>
+>>> getreadme = zip.load_module("GETREADME")
+>>> getreadme
+<module 'GETREADME' from 'GETREADME.zip\\GETREADME.py'>
+>>> getreadme.main(0)
+Requesting...
+Processing...
+Saving...
+Using: 0.98 s
+```
+
 ## importlib
 
 ## __import__, reload
@@ -1027,4 +1070,37 @@ l', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import'
 nlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
 >>> keyword.iskeyword("True")
 True
+```
+
+## dis
+
+#### dis, show_code, code_info
+
+```python
+>>> import dis
+>>> def func():
+...     print("Hello World")
+...
+>>> dis.dis(func)
+  2           0 LOAD_GLOBAL              0 (print)
+              2 LOAD_CONST               1 ('Hello World')
+              4 CALL_FUNCTION            1
+              6 POP_TOP
+              8 LOAD_CONST               0 (None)
+             10 RETURN_VALUE
+>>> dis.show_code(func)
+Name:              func
+Filename:          <stdin>
+Argument count:    0
+Kw-only arguments: 0
+Number of locals:  0
+Stack size:        2
+Flags:             OPTIMIZED, NEWLOCALS, NOFREE
+Constants:
+   0: None
+   1: 'Hello World'
+Names:
+   0: print
+>>> dis.code_info(func)
+"Name:              func\nFilename:          <stdin>\nArgument count:    0\nKw-only arguments: 0\nNumber of locals:  0\nStack size:        2\nFlags:             OPTIMIZED, NEWLOCALS, NOFREE\nConstants:\n   0: None\n   1: 'Hello World'\nNames:\n   0: print"
 ```
