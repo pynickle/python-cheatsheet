@@ -20,7 +20,7 @@ Depend on Python v3.7.4
 **Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
 
 **Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
-[``fractions``](#fractions)
+[``fractions``](#fractions), [``decimal``](#decimal)
 
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
 
@@ -488,6 +488,27 @@ Fraction(11, 10)
 >>> import math
 >>> math.floor(fractions.Fraction(5, 3))
 1
+```
+
+## decimal
+
+#### Decimal, getcontext
+
+```python
+>>> import decimal
+>>> decimal.Decimal(2)/decimal.Decimal(3)
+Decimal('0.6666666666666666666666666667')
+>>> context = decimal.getcontext()
+>>> context
+Context(prec=28, rounding=ROUND_HALF_EVEN, Emin=-999999, Emax=999999, capitals=1, clamp=0, flags=[Inexact, Rounded], traps=[InvalidOperation, DivisionByZero, Overflow])
+>>> context.prec = 5
+>>> x = decimal.Decimal(2)/decimal.Decimal(3)
+>>> x
+Decimal('0.66667')
+>>> x.sqrt()
+Decimal('0.81650')
+>>> x.log10()
+Decimal('-0.17609')
 ```
 
 ## itertools

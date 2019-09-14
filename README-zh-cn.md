@@ -21,7 +21,8 @@
 
 **数据类型**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
      
-**数学模块**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)
+**数学模块**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
+[``fractions``](#fractions), [``decimal``](#decimal)
 
 **函数式编程**: [``itertools``](#itertools), [``functools``](#functools)
 
@@ -44,12 +45,14 @@
 
 **调试和分析**: [``timeit``](#timeit), [``pdb``](#pdb)
 
+**软件打包与分发**: [``ensurepip``](#ensurepip)
+
 **运行时服务**: [``sys``](#sys), [``dataclasses``](#dataclasses),
 [``contextlib``](#contextlib), [``abc``](#abc)
 
-**导入模块**: [``importlib``](#importlib)
+**导入模块**: [``zipimport``](#zipimport), [``importlib``](#importlib)
 
-**Python 语言服务**: [``ast``](#ast), [``keyword``](#keyword)
+**Python 语言服务**: [``ast``](#ast), [``keyword``](#keyword), [``dis``](#dis)
 
 ## string
 
@@ -120,11 +123,11 @@
 >>> strcmp = "www.baidu.com"
 >>> re.match("www", strcmp).span()
 (0, 3)
->>> re.match("baidu", strcmp)
->>> re.search("baidu", strcmp).span()
+>>> re.match("baidu", strcmp)   # re.match only match from the beginning of the string
+>>> re.search("baidu", strcmp).span()   # re.search search from all string and return the first
 (4, 9)
 >>> strcmp = "baidu.com/runoob.com"
->>> re.findall("com", strcmp)
+>>> re.findall("com", strcmp)   # re.findall find all results and return
 ['com', 'com']
 >>> re.findall("b(.*?).", strcmp)
 ['', '']
@@ -138,7 +141,7 @@
 >>> import re
 >>> re.split(r"\W", "hello,world")
 ['hello', 'world']
->>> re.sub(r"Boy|Girl", "Human", "boy and girl", flags = re.I)
+>>> re.sub(r"Boy|Girl", "Human", "boy and girl", flags = re.I)   # re.I means ignoring apitalization
 'Human and Human'
 >>> re.escape(r"#$&*+-.^|~")
 '\\#\\$\\&\\*\\+\\-\\.\\^\\|\\~'
@@ -309,6 +312,7 @@ Mo Tu We Th Fr Sa Su
 15 16 17 18 19 20 21
 22 23 24 25 26 27 28
 29 30 31
+
 ```
 
 ## collections
@@ -466,12 +470,54 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 9
 ```
 
+## fractions
+
+#### Fraction, limit_denominator
+
+```python
+>>> import fractions
+>>> fractions.Fraction(16, -10)
+Fraction(-8, 5)
+>>> fractions.Fraction("-16/10")
+Fraction(-8, 5)
+>>> fractions.Fraction(8, 5) - fractions.Fraction(7, 5)
+Fraction(1, 5)
+>>> fractions.Fraction(1.1)
+Fraction(2476979795053773, 2251799813685248)
+>>> fractions.Fraction(1.1).limit_denominator()
+Fraction(11, 10)
+>>> import math
+>>> math.floor(fractions.Fraction(5, 3))
+1
+```
+
+## decimal
+
+#### Decimal, getcontext
+
+```python
+>>> import decimal
+>>> decimal.Decimal(2)/decimal.Decimal(3)
+Decimal('0.6666666666666666666666666667')
+>>> context = decimal.getcontext()
+>>> context
+Context(prec=28, rounding=ROUND_HALF_EVEN, Emin=-999999, Emax=999999, capitals=1, clamp=0, flags=[Inexact, Rounded], traps=[InvalidOperation, DivisionByZero, Overflow])
+>>> context.prec = 5
+>>> x = decimal.Decimal(2)/decimal.Decimal(3)
+>>> x
+Decimal('0.66667')
+>>> x.sqrt()
+Decimal('0.81650')
+>>> x.log10()
+Decimal('-0.17609')
+```
+
 ## itertools
 
 #### count, repeat, groupby
 
 ```python
->>> import itertools
+>>> import itertools   # itertools always return a iterator
 >>> for i in zip(itertools.count(1), ["A", "B", "C"]):
 ...     print(i)
 ...
@@ -496,7 +542,7 @@ Hello Repeat!
 
 ```python
 >>> import functools
->>> @functools.lru_cache(None)
+>>> @functools.lru_cache(None)   # None means the cache's upper limit is not limited
 ... def fibonacci(n):
 ...     if n<2:
 ...         return n
@@ -515,11 +561,11 @@ Hello Repeat!
 
 #### Path
 
-```python
+```python 
 >>> import pathlib
 >>> p = pathlib.Path(".")
 >>> list(p.glob('**/*.py'))
-[WindowsPath('GETREADME.py')]
+[WindowsPath('GETREADME.py'), WindowsPath('test.py')]
 >>> p/"dir"
 WindowsPath('dir')
 >>> (p/"GETREADME.py").name
@@ -536,8 +582,8 @@ False
 >>> import os.path
 >>> os.path.exists(".")
 True
->>> os.path.getsize("./README.md")
-11285
+>>> os.path.getsize("./LICENSE")
+466
 >>> os.path.isfile("./README.md")
 True
 >>> os.path.isdir("./doc")
@@ -553,7 +599,7 @@ False
 ```python
 >>> import glob
 >>> glob.glob("*.md", recursive = True)
-['python-cheatsheet.md', 'README.md']
+['python-cheatsheet.md', 'README-zh-cn.md', 'README.md']
 ```
 
 ## pickle
@@ -840,6 +886,27 @@ Traceback (most recent call last):
 bdb.BdbQuit
 ```
 
+## ensurepip
+
+#### version, bootstrap
+
+```python
+>>> import ensurepip
+>>> ensurepip.version()
+'19.0.3'
+>>> ensurepip.bootstrap(upgrade=True)
+Looking in links: C:\Users\Nick\AppData\Local\Temp\tmpus54fm12
+Requirement already up-to-date: setuptools in c:\python37\lib\site-packages (41.2.0)
+Requirement already up-to-date: pip in c:\python37\lib\site-packages (19.2.3)
+```
+
+Run in bash:
+
+```bash
+python -m ensurepip   # download pip
+python -m ensurepip --upgrade   # upgrade pip
+```
+
 ## sys
 
 #### exc_info, implementation, maxsize, platform, version
@@ -849,7 +916,7 @@ bdb.BdbQuit
 >>> try:
 ...     1/0
 ... except Exception:
-...     print(sys.exc_info())
+...     print(sys.exc_info())   # traceback.print_exc is a beautful version of sys.exc_info()
 ...
 (<class 'ZeroDivisionError'>, ZeroDivisionError('division by zero'), <traceback object at 0x000002D8BF38A248>)
 >>> sys.implementation
@@ -860,6 +927,7 @@ namespace(cache_tag='cpython-37', hexversion=50791664, name='cpython', version=s
 'win32'
 >>> sys.version
 '3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 20:34:20) [MSC v.1916 64 bit (AMD64)]'
+>>> sys.exit()
 ```
 
 ## dataclasses
@@ -949,6 +1017,61 @@ True
 True
 ```
 
+## traceback
+
+#### print_exc
+
+```python
+>>> import traceback
+>>> try:
+...     1/0
+... except Exception:
+...     traceback.print_exc()
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+ZeroDivisionError: division by zero
+```
+
+## __future__
+
+#### division, absolute_import, print_function, unicode_literals
+
+```python
+>>> from __future__ import division, absolute_import, print_function, unicode_literals
+```
+
+## zipimport
+
+#### importer
+
+```python
+>>> import zipimport
+>>> zip = zipimport.zipimporter("GETREADME.zip")
+>>> zip.archive
+'GETREADME.zip'
+>>>
+>>> getreadme = zip.load_module("GETREADME")
+>>> getreadme
+<module 'GETREADME' from 'GETREADME.zip\\GETREADME.py'>
+>>> getreadme.main(0)
+Requesting...
+Processing...
+Saving...
+Using: 0.98 s
+```
+
+## importlib
+
+## __import__, reload
+
+```python
+>>> import importlib
+>>> sys = importlib.__import__("sys")   # equal to built in function __import__
+>>> importlib.reload(sys)
+<module 'sys' (built-in)>
+```
+
 ## ast
 
 ## literal_eval, parse, dump
@@ -993,3 +1116,35 @@ nlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield'
 True
 ```
 
+## dis
+
+#### dis, show_code, code_info
+
+```python
+>>> import dis
+>>> def func():
+...     print("Hello World")
+...
+>>> dis.dis(func)
+  2           0 LOAD_GLOBAL              0 (print)
+              2 LOAD_CONST               1 ('Hello World')
+              4 CALL_FUNCTION            1
+              6 POP_TOP
+              8 LOAD_CONST               0 (None)
+             10 RETURN_VALUE
+>>> dis.show_code(func)
+Name:              func
+Filename:          <stdin>
+Argument count:    0
+Kw-only arguments: 0
+Number of locals:  0
+Stack size:        2
+Flags:             OPTIMIZED, NEWLOCALS, NOFREE
+Constants:
+   0: None
+   1: 'Hello World'
+Names:
+   0: print
+>>> dis.code_info(func)
+"Name:              func\nFilename:          <stdin>\nArgument count:    0\nKw-only arguments: 0\nNumber of locals:  0\nStack size:        2\nFlags:             OPTIMIZED, NEWLOCALS, NOFREE\nConstants:\n   0: None\n   1: 'Hello World'\nNames:\n   0: print"
+```
