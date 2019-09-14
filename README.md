@@ -19,7 +19,8 @@ Depend on Python v3.7.4
 
 **Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
 
-**Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)
+**Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
+[``fractions``](#fractions)
 
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
 
@@ -466,6 +467,27 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 9
 >>> random.randrange(5, 10)
 9
+```
+
+## fractions
+
+#### Fraction, limit_denominator
+
+```python
+>>> import fractions
+>>> fractions.Fraction(16, -10)
+Fraction(-8, 5)
+>>> fractions.Fraction("-16/10")
+Fraction(-8, 5)
+>>> fractions.Fraction(8, 5) - fractions.Fraction(7, 5)
+Fraction(1, 5)
+>>> fractions.Fraction(1.1)
+Fraction(2476979795053773, 2251799813685248)
+>>> fractions.Fraction(1.1).limit_denominator()
+Fraction(11, 10)
+>>> import math
+>>> math.floor(fractions.Fraction(5, 3))
+1
 ```
 
 ## itertools
