@@ -17,7 +17,7 @@ Depend on Python v3.7.4
 
 **Binary Data**: [``codecs``](#codecs)
 
-**Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
+**Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect)
 
 **Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
 [``fractions``](#fractions), [``decimal``](#decimal)
@@ -411,6 +411,30 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 ...
 >>> list(Auto)
 [<Auto.VS: 1>, <Auto.VSCode: 2>, <Auto.Pycharm: 3>]
+```
+
+## bisect
+
+## bisect, bisect_left, bisect_right, insort, insort_left, insort_right
+
+```python
+>>> import bisect
+>>> a = [1, 2, 4, 5]
+>>> bisect.bisect_left(a, 1)
+0
+>>> bisect.bisect_right(a, 1)
+1
+>>> bisect.bisect(a, 1)
+1
+>>> bisect.insort(a, 1)
+>>> a
+[1, 1, 2, 4, 5]
+>>> bisect.insort_left(a, 2)
+>>> a
+[1, 1, 2, 2, 4, 5]
+>>> bisect.insort_right(a, 4)
+>>> a
+[1, 1, 2, 2, 4, 4, 5]
 ```
 
 ## math
