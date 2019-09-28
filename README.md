@@ -20,7 +20,7 @@ Depend on Python v3.7.4
 **Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect)
 
 **Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
-[``fractions``](#fractions), [``decimal``](#decimal)
+[``fractions``](#fractions), [``decimal``](#decimal), [``statistics``](#statistics)
 
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
 
@@ -533,6 +533,24 @@ Decimal('0.66667')
 Decimal('0.81650')
 >>> x.log10()
 Decimal('-0.17609')
+```
+
+## statistics
+
+#### mean, harmonic_mean, median, median_low, median_high
+
+```python
+>>> import statistics
+>>> statistics.mean([1, 2, 3])
+2
+>>> statistics.harmonic_mean([2, 5, 10])
+3.75
+>>> statistics.median([2, 3, 5, 6])
+4.0
+>>> statistics.median_low([2, 3, 5, 6])
+3
+>>> statistics.median_high([2, 3, 5, 6])
+5
 ```
 
 ## itertools
