@@ -22,7 +22,7 @@ Depend on Python v3.7.4
 **Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
 [``fractions``](#fractions), [``decimal``](#decimal), [``statistics``](#statistics)
 
-**Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
+**Functional Programming**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
 
 **Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile)
 
@@ -596,6 +596,38 @@ Hello Repeat!
 ...
 >>> functools.reduce(add, range(1,100))
 4950
+```
+
+## operator
+
+#### lt, eq, le, ne, gt, ge, abs, pow, concat, contains, indexOf, add
+
+```python
+>>> import operator
+>>> operator.lt(3, 4)   # 3<4
+True
+>>> operator.eq(3, 4)   # 3=4
+False
+>>> operator.le(3, 4)   # 3<=4
+True
+>>> operator.ne(3, 4)   # 3!=4
+True
+>>> operator.gt(3, 4)   # 3>4
+False
+>>> operator.ge(3, 4)   # 3>=4
+False
+>>> operator.abs(-10)
+10
+>>> operator.pow(10, 2)
+100
+>>> operator.concat("a", "b")
+'ab'
+>>> operator.contains([1, 2, 3], 2)
+True
+>>> operator.indexOf([1, 2, 3, 2, 1], 2)
+1
+>>> operator.add(1, 2)
+3
 ```
 
 ## pathlib
