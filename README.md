@@ -24,7 +24,7 @@ Depend on Python v3.7.4
 
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools)
 
-**Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob)
+**Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile)
 
 **Data Persistence**: [``pickle``](#pickle)
 
@@ -641,6 +641,39 @@ False
 >>> import glob
 >>> glob.glob("*.md", recursive = True)
 ['python-cheatsheet.md', 'README-zh-cn.md', 'README.md']
+```
+
+## tempfile
+
+#### TemporaryFile, mkstemp, mkdtemp
+
+```python
+>>> import tempfile
+>>> with tempfile.TemporaryFile() as f:
+	f.write(b"Hello tempfile")
+	f.seek(0)
+	f.read()
+
+	
+14
+0
+b'Hello tempfile'
+>>> name = tempfile.mkstemp()
+>>> name
+(3, 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp___ejm5a')
+>>> with open(name[1], "w", encoding="utf-8") as f:
+	f.write("Hello tempfile!")
+
+	
+15
+>>> name = tempfile.mkdtemp()
+>>> name
+'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp5mqb0bxz'
+>>> with open(name + "\\temp.txt", "w", encoding="utf-8") as f:
+	f.write("Hello tempfile!")
+
+	
+15
 ```
 
 ## pickle
