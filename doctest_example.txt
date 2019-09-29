@@ -1,0 +1,5 @@
+>>> from doctest_example import factorial
+>>> [factorial(n) for n in range(6)]
+[1, 1, 2, 6, 24, 120]
+>>> factorial(30)
+265252859812191058636308480000000
