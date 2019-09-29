@@ -34,7 +34,7 @@ Depend on Python v3.7.4
 **Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
 
 **Operating System**: [``os``](#os), [``time``](#time), [``logging``](#logging),
-[``getpass``](#getpass),  [``platform``](#platform)
+[``getpass``](#getpass),  [``platform``](#platform), [``argparse``](#argparse)
 
 **Internet Data**: [``json``](#json)
 
@@ -925,6 +925,36 @@ Password:
 '3.7.4'
 >>> platform.system()
 'Windows'
+```
+
+## argparse
+
+####
+
+```python
+>>> import os
+>>> def cmd(command):
+...     res = os.popen(command)
+...     print(res.read())
+...
+>>> cmd("python argparse_example.py -a 1 -b 2 --sum 1 2 3 4 -r 10 -t")
+Namespace(a=1, b=2, required='10', sum=[1, 2, 3, 4], true=True)
+3
+10
+
+>>> cmd("python argparse_example.py --help")
+usage: argparse_example.py [-h] [-a A] [-b B] [-s SUM [SUM ...]] -r REQUIRED
+                           [-t]
+
+the example parser for argparse
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a A                  the a number for adding
+  -b B                  the b number for adding
+  -s SUM [SUM ...], --sum SUM [SUM ...]
+  -r REQUIRED, --required REQUIRED
+  -t, --true
 ```
 
 ## json
