@@ -52,7 +52,7 @@ Depend on Python v3.7.4
 
 **Runtime Services**: [``sys``](#sys), [``dataclasses``](#dataclasses),
 [``contextlib``](#contextlib), [``abc``](#abc), [``traceback``](#traceback),
-[``__future__``](#__future__)
+[``__future__``](#__future__), [``atexit``](#atexit)
 
 **Importing Modules**: [``zipimport``](#zipimport), [``importlib``](#importlib)
 
@@ -1221,6 +1221,21 @@ ZeroDivisionError: division by zero
 
 ```python
 >>> from __future__ import division, absolute_import, print_function, unicode_literals
+```
+
+## atexit
+
+#### register
+
+```python
+>>> import atexit
+>>> def bye():
+...     print("bye!")
+...
+>>> atexit.register(bye)
+<function bye at 0x004B0858>
+>>> exit()
+bye!
 ```
 
 ## zipimport
