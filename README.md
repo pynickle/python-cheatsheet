@@ -31,6 +31,8 @@ Depend on Python v3.7.4
 
 **Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma), [``zipfile``](#zipfile)
 
+**File Formats**: [``configparser``](#configparser)
+
 **Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
 
 **Operating System**: [``os``](#os), [``time``](#time), [``logging``](#logging),
@@ -42,7 +44,7 @@ Depend on Python v3.7.4
 
 **Internet Protocols**: [``webbrowser``](#webbrowser)
 
-**Multimedia Services**: [``wave``](#wave)
+**Multimedia Services**: [``wave``](#wave), [``sndhdr``](#sndhdr), [``imghdr``](#imghdr)
 
 **Program Frameworks**: [``turtle``](#turtle)
 
@@ -797,6 +799,23 @@ b'Hello, python3!'
 ...
 ```
 
+## configparser
+
+#### ConfigParser
+
+```python
+>>> import configparser
+>>> config = configparser.ConfigParser()
+>>> config.read("config.ini")
+['config.ini']
+>>> config.sections()
+['python', 'java']
+>>> config["python"]["type"]
+'programming language'
+>>> config["java"]["popular"]
+'1'
+```
+
 ## hashlib
 
 #### md5
@@ -1007,6 +1026,26 @@ True
 >>> f = wave.open("song.wav", "rb")
 >>> f.getparams()
 _wave_params(nchannels=2, sampwidth=2, framerate=44100, nframes=442368, comptype='NONE', compname='not compressed')
+```
+
+## sndhdr
+
+#### what
+
+```python
+>>> import sndhdr
+>>> sndhdr.what("song.wav")
+SndHeaders(filetype='wav', framerate=44100, nchannels=2, nframes=442368, sampwidth=16)
+```
+
+## imghdr
+
+#### what
+
+```python
+>>> import imghdr
+>>> imghdr.what("china.jpg")
+'jpeg'
 ```
 
 ## turtle
