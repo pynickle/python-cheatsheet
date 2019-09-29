@@ -40,6 +40,8 @@ Depend on Python v3.7.4
 
 **Structured Markup**: [``html``](#html)
 
+**Internet Protocols**: [``webbrowser``](#webbrowser)
+
 **Development Tools**: [``typing``](#typing)
 
 **Debugging Profiling**: [``timeit``](#timeit), [``pdb``](#pdb)
@@ -931,13 +933,15 @@ Password:
 
 ## webbrowser
 
-#### open
+#### open, open_new, open_new_tab
 
 ```python
 >>> import webbrowser
->>> webbrowser.open("https://www.baidu.com")
-True
 >>> webbrowser.open("www.baidu.com")
+True
+>>> webbrowser.open_new("www.baidu.com")
+True
+>>> webbrowser.open_new_tab("www.baidu.com")
 True
 ```
 
