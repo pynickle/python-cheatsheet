@@ -42,6 +42,8 @@ Depend on Python v3.7.4
 
 **Internet Protocols**: [``webbrowser``](#webbrowser)
 
+**Program Frameworks**: [``turtle``](#turtle)
+
 **Development Tools**: [``typing``](#typing)
 
 **Debugging Profiling**: [``timeit``](#timeit), [``pdb``](#pdb)
@@ -943,6 +945,22 @@ True
 True
 >>> webbrowser.open_new_tab("www.baidu.com")
 True
+```
+
+## turtle
+
+#### pensize, pencolor, begin_fill, forward, right, end_fill
+
+```python
+>>> import turtle
+>>> turtle.pensize(5)
+>>> turtle.pencolor("yellow")
+>>> turtle.begin_fill()
+>>> for _ in range(5):
+...     turtle.forward(200)
+...     turtle.right(144)
+...
+>>> turtle.end_fill()
 ```
 
 ## typing
