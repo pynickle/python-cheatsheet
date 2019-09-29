@@ -19,7 +19,7 @@ Depend on Python v3.7.4
 
 **Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect)
 
-**Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
+**Mathematical Modules**: [``math``](#math), [``cmath``](#cmath), [``random``](#random),
 [``fractions``](#fractions), [``decimal``](#decimal), [``statistics``](#statistics)
 
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
