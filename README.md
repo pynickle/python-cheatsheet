@@ -25,7 +25,7 @@ Depend on Python v3.7.4
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
 
 **Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile),
-[``filecmp``](#filecmp)
+[``filecmp``](#filecmp), [``fileinput``](#fileinput)
 
 **Data Persistence**: [``pickle``](#pickle)
 
@@ -584,7 +584,7 @@ Hello Repeat!
 
 ## functools
 
-####
+#### lru_cache, reduce
 
 ```python
 >>> import functools
@@ -721,6 +721,25 @@ b'Hello tempfile'
 >>> import filecmp
 >>> filecmp.cmp("cmp1.txt", "cmp2.txt")
 True
+```
+
+## fileinput
+
+#### input
+
+```python
+>>> import os
+>>> cmd = os.popen("python fileinput_example.py cmp1.txt")
+>>> print(cmd.read())
+cmp1.txt | Line Number: 1 |:  1
+
+cmp1.txt | Line Number: 2 |:  2
+
+cmp1.txt | Line Number: 3 |:  3
+
+cmp1.txt | Line Number: 4 |:  4
+
+cmp1.txt | Line Number: 5 |:  5
 ```
 
 ## pickle
