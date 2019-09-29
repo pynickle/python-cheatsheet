@@ -29,7 +29,7 @@ Depend on Python v3.7.4
 
 **Data Persistence**: [``pickle``](#pickle)
 
-**Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma)
+**Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma), [``zipfile``](#zipfile)
 
 **Cryptographic Services**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
 
@@ -756,6 +756,20 @@ b'Hello World!'
 b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ"
 >>> lzma.decompress(b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ")
 b'Hello, python3!'
+```
+
+## zipfile
+
+#### ZipFile
+
+```python
+>>> import zipfile
+>>> with zipfile.ZipFile("README.zip") as f:
+...     f.extractall()
+...
+>>> with zipfile.ZipFile("LICENSE.zip", "a") as zip:
+...     zip.write("LICENSE")
+...
 ```
 
 ## hashlib
