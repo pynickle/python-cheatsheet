@@ -44,7 +44,7 @@ Depend on Python v3.7.4
 
 **Program Frameworks**: [``turtle``](#turtle)
 
-**Development Tools**: [``typing``](#typing)
+**Development Tools**: [``typing``](#typing), [``doctest``](#doctest)
 
 **Debugging Profiling**: [``timeit``](#timeit), [``pdb``](#pdb)
 
@@ -979,6 +979,35 @@ True
 >>> ID = typing.NewType("ID", int)
 >>> ID(70)
 70
+```
+
+## doctest
+
+#### testfile
+
+```python
+>>> import doctest
+>>> doctest.testfile("doctest_example.txt", verbose=True)
+Trying:
+    from doctest_example import factorial
+Expecting nothing
+ok
+Trying:
+    [factorial(n) for n in range(6)]
+Expecting:
+    [1, 1, 2, 6, 24, 120]
+ok
+Trying:
+    factorial(30)
+Expecting:
+    265252859812191058636308480000000
+ok
+1 items passed all tests:
+   3 tests in doctest_example.txt
+3 tests in 1 items.
+3 passed and 0 failed.
+Test passed.
+TestResults(failed=0, attempted=3)
 ```
 
 ## timeit
