@@ -42,6 +42,8 @@ Depend on Python v3.7.4
 
 **Internet Protocols**: [``webbrowser``](#webbrowser)
 
+**Multimedia Services**: [``wave``](#wave)
+
 **Program Frameworks**: [``turtle``](#turtle)
 
 **Development Tools**: [``typing``](#typing), [``doctest``](#doctest)
@@ -994,6 +996,17 @@ True
 True
 >>> webbrowser.open_new_tab("www.baidu.com")
 True
+```
+
+## wave
+
+#### open
+
+```python
+>>> import wave
+>>> f = wave.open("song.wav", "rb")
+>>> f.getparams()
+_wave_params(nchannels=2, sampwidth=2, framerate=44100, nframes=442368, comptype='NONE', compname='not compressed')
 ```
 
 ## turtle
