@@ -24,7 +24,8 @@ Depend on Python v3.7.4
 
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
 
-**Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile)
+**Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile),
+[``filecmp``](#filecmp)
 
 **Data Persistence**: [``pickle``](#pickle)
 
@@ -690,7 +691,7 @@ False
 14
 0
 b'Hello tempfile'
->>> name = tempfile.mkstemp()
+>>> name = tempfile.mkstemp()   # for temporary file
 >>> name
 (3, 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp___ejm5a')
 >>> with open(name[1], "w", encoding="utf-8") as f:
@@ -698,7 +699,7 @@ b'Hello tempfile'
 
 	
 15
->>> name = tempfile.mkdtemp()
+>>> name = tempfile.mkdtemp()   # for temporary dir
 >>> name
 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp5mqb0bxz'
 >>> with open(name + "\\temp.txt", "w", encoding="utf-8") as f:
@@ -706,6 +707,16 @@ b'Hello tempfile'
 
 	
 15
+```
+
+## filecmp
+
+#### cmp
+
+```python
+>>> import filecmp
+>>> filecmp.cmp("cmp1.txt", "cmp2.txt")
+True
 ```
 
 ## pickle
