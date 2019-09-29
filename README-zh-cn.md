@@ -8,7 +8,7 @@
 - [English](README.md)
 
 **注意**:
-- **这里的每个代码片段都可以独立运行**
+- **这里的每个代码片段都可以独立运行 （一些需要这个库提供的文件）**
 - **如果你希望复制代码，请使用[command to code](https://pynickle.github.io/ctc.html)**
 - **你可以使用GETREADME.py来从仓库中下载README.md**
 
@@ -19,27 +19,32 @@
 
 **二进制数据**: [``codecs``](#codecs)
 
-**数据类型**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum)
+**数据类型**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect)
      
 **数学模块**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
-[``fractions``](#fractions), [``decimal``](#decimal)
+[``fractions``](#fractions), [``decimal``](#decimal), [``statistics``](#statistics)
 
-**函数式编程**: [``itertools``](#itertools), [``functools``](#functools)
+**函数式编程**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
 
-**目录访问**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob)
+**目录访问**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile),
+[``filecmp``](#filecmp), [``fileinput``](#fileinput)
 
 **数据持久化**: [``pickle``](#pickle)
 
-**数据压缩**: [``zlib``](#zlib), [``lzma``](#lzma)
+**数据压缩**: [``zlib``](#zlib), [``lzma``](#lzma), [``zipfile``](#zipfile)
 
 **加密服务**: [``hashlib``](#hashlib), [``hmac``](#hmac), [``secrets``](#secrets)
 
 **操作系统**: [``os``](#os), [``time``](#time), [``logging``](#logging),
-[``getpass``](#getpass),  [``platform``](#platform)
+[``getpass``](#getpass),  [``platform``](#platform), [``argparse``](#argparse)
 
 **互联网数据**: [``json``](#json)
 
 **结构化标记**: [``html``](#html)
+
+**互联网协议**: [``webbrowser``](#webbrowser)
+
+**程序框架**: [``turtle``](#turtle)
 
 **开发工具**: [``typing``](#typing)
 
@@ -48,7 +53,8 @@
 **软件打包与分发**: [``ensurepip``](#ensurepip)
 
 **运行时服务**: [``sys``](#sys), [``dataclasses``](#dataclasses),
-[``contextlib``](#contextlib), [``abc``](#abc)
+[``contextlib``](#contextlib), [``abc``](#abc), [``traceback``](#traceback),
+[``__future__``](#__future__), [``atexit``](#atexit)
 
 **导入模块**: [``zipimport``](#zipimport), [``importlib``](#importlib)
 
@@ -414,6 +420,30 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 [<Auto.VS: 1>, <Auto.VSCode: 2>, <Auto.Pycharm: 3>]
 ```
 
+## bisect
+
+## bisect, bisect_left, bisect_right, insort, insort_left, insort_right
+
+```python
+>>> import bisect
+>>> a = [1, 2, 4, 5]
+>>> bisect.bisect_left(a, 1)
+0
+>>> bisect.bisect_right(a, 1)
+1
+>>> bisect.bisect(a, 1)
+1
+>>> bisect.insort(a, 1)
+>>> a
+[1, 1, 2, 4, 5]
+>>> bisect.insort_left(a, 2)
+>>> a
+[1, 1, 2, 2, 4, 5]
+>>> bisect.insort_right(a, 4)
+>>> a
+[1, 1, 2, 2, 4, 4, 5]
+```
+
 ## math
 
 #### ceil, factorial, floor, modf, log, pow, sqrt, pi, e
@@ -512,6 +542,24 @@ Decimal('0.81650')
 Decimal('-0.17609')
 ```
 
+## statistics
+
+#### mean, harmonic_mean, median, median_low, median_high
+
+```python
+>>> import statistics
+>>> statistics.mean([1, 2, 3])
+2
+>>> statistics.harmonic_mean([2, 5, 10])
+3.75
+>>> statistics.median([2, 3, 5, 6])
+4.0
+>>> statistics.median_low([2, 3, 5, 6])
+3
+>>> statistics.median_high([2, 3, 5, 6])
+5
+```
+
 ## itertools
 
 #### count, repeat, groupby
@@ -538,7 +586,7 @@ Hello Repeat!
 
 ## functools
 
-####
+#### lru_cache, reduce
 
 ```python
 >>> import functools
@@ -555,6 +603,38 @@ Hello Repeat!
 ...
 >>> functools.reduce(add, range(1,100))
 4950
+```
+
+## operator
+
+#### lt, eq, le, ne, gt, ge, abs, pow, concat, contains, indexOf, add
+
+```python
+>>> import operator
+>>> operator.lt(3, 4)   # 3<4
+True
+>>> operator.eq(3, 4)   # 3=4
+False
+>>> operator.le(3, 4)   # 3<=4
+True
+>>> operator.ne(3, 4)   # 3!=4
+True
+>>> operator.gt(3, 4)   # 3>4
+False
+>>> operator.ge(3, 4)   # 3>=4
+False
+>>> operator.abs(-10)
+10
+>>> operator.pow(10, 2)
+100
+>>> operator.concat("a", "b")
+'ab'
+>>> operator.contains([1, 2, 3], 2)
+True
+>>> operator.indexOf([1, 2, 3, 2, 1], 2)
+1
+>>> operator.add(1, 2)
+3
 ```
 
 ## pathlib
@@ -602,6 +682,68 @@ False
 ['python-cheatsheet.md', 'README-zh-cn.md', 'README.md']
 ```
 
+## tempfile
+
+#### TemporaryFile, mkstemp, mkdtemp
+
+```python
+>>> import tempfile
+>>> with tempfile.TemporaryFile() as f:
+	f.write(b"Hello tempfile")
+	f.seek(0)
+	f.read()
+
+	
+14
+0
+b'Hello tempfile'
+>>> name = tempfile.mkstemp()   # for temporary file
+>>> name
+(3, 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp___ejm5a')
+>>> with open(name[1], "w", encoding="utf-8") as f:
+	f.write("Hello tempfile!")
+
+	
+15
+>>> name = tempfile.mkdtemp()   # for temporary dir
+>>> name
+'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp5mqb0bxz'
+>>> with open(name + "\\temp.txt", "w", encoding="utf-8") as f:
+	f.write("Hello tempfile!")
+
+	
+15
+```
+
+## filecmp
+
+#### cmp
+
+```python
+>>> import filecmp
+>>> filecmp.cmp("cmp1.txt", "cmp2.txt")
+True
+```
+
+## fileinput
+
+#### input
+
+```python
+>>> import os
+>>> cmd = os.popen("python fileinput_example.py cmp1.txt")
+>>> print(cmd.read())
+cmp1.txt | Line Number: 1 |:  1
+
+cmp1.txt | Line Number: 2 |:  2
+
+cmp1.txt | Line Number: 3 |:  3
+
+cmp1.txt | Line Number: 4 |:  4
+
+cmp1.txt | Line Number: 5 |:  5
+```
+
 ## pickle
 
 #### loads, dumps
@@ -639,6 +781,20 @@ b'Hello World!'
 b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ"
 >>> lzma.decompress(b"\xfd7zXZ\x00\x00\x04\xe6\xd6\xb4F\x02\x00!\x01\x16\x00\x00\x00t/\xe5\xa3\x01\x00\x0eHello, python3!\x00\x00(\x92K\xe6\x9b\xe7r&\x00\x01'\x0f\xdf\x1a\xfcj\x1f\xb6\xf3}\x01\x00\x00\x00\x00\x04YZ")
 b'Hello, python3!'
+```
+
+## zipfile
+
+#### ZipFile
+
+```python
+>>> import zipfile
+>>> with zipfile.ZipFile("README.zip") as f:
+...     f.extractall()
+...
+>>> with zipfile.ZipFile("LICENSE.zip", "a") as zip:
+...     zip.write("LICENSE")
+...
 ```
 
 ## hashlib
@@ -773,6 +929,36 @@ Password:
 'Windows'
 ```
 
+## argparse
+
+####
+
+```python
+>>> import os
+>>> def cmd(command):
+...     res = os.popen(command)
+...     print(res.read())
+...
+>>> cmd("python argparse_example.py -a 1 -b 2 --sum 1 2 3 4 -r 10 -t")
+Namespace(a=1, b=2, required='10', sum=[1, 2, 3, 4], true=True)
+3
+10
+
+>>> cmd("python argparse_example.py --help")
+usage: argparse_example.py [-h] [-a A] [-b B] [-s SUM [SUM ...]] -r REQUIRED
+                           [-t]
+
+the example parser for argparse
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a A                  the a number for adding
+  -b B                  the b number for adding
+  -s SUM [SUM ...], --sum SUM [SUM ...]
+  -r REQUIRED, --required REQUIRED
+  -t, --true
+```
+
 ## json
 
 #### dumps, loads
@@ -800,14 +986,32 @@ Password:
 
 ## webbrowser
 
-#### open
+#### open, open_new, open_new_tab
 
 ```python
 >>> import webbrowser
->>> webbrowser.open("https://www.baidu.com")
-True
 >>> webbrowser.open("www.baidu.com")
 True
+>>> webbrowser.open_new("www.baidu.com")
+True
+>>> webbrowser.open_new_tab("www.baidu.com")
+True
+```
+
+## turtle
+
+#### pensize, pencolor, begin_fill, forward, right, end_fill
+
+```python
+>>> import turtle
+>>> turtle.pensize(5)
+>>> turtle.pencolor("yellow")
+>>> turtle.begin_fill()
+>>> for _ in range(5):
+...     turtle.forward(200)
+...     turtle.right(144)
+...
+>>> turtle.end_fill()
 ```
 
 ## typing
@@ -826,6 +1030,35 @@ True
 >>> ID = typing.NewType("ID", int)
 >>> ID(70)
 70
+```
+
+## doctest
+
+#### testfile
+
+```python
+>>> import doctest
+>>> doctest.testfile("doctest_example.txt", verbose=True)
+Trying:
+    from doctest_example import factorial
+Expecting nothing
+ok
+Trying:
+    [factorial(n) for n in range(6)]
+Expecting:
+    [1, 1, 2, 6, 24, 120]
+ok
+Trying:
+    factorial(30)
+Expecting:
+    265252859812191058636308480000000
+ok
+1 items passed all tests:
+   3 tests in doctest_example.txt
+3 tests in 1 items.
+3 passed and 0 failed.
+Test passed.
+TestResults(failed=0, attempted=3)
 ```
 
 ## timeit
@@ -1039,6 +1272,21 @@ ZeroDivisionError: division by zero
 
 ```python
 >>> from __future__ import division, absolute_import, print_function, unicode_literals
+```
+
+## atexit
+
+#### register
+
+```python
+>>> import atexit
+>>> def bye():
+...     print("bye!")
+...
+>>> atexit.register(bye)
+<function bye at 0x004B0858>
+>>> exit()
+bye!
 ```
 
 ## zipimport

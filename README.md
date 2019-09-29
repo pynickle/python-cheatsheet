@@ -6,7 +6,7 @@ Depend on Python v3.7.4
 - [English](README.md)
 
 **Notes**: 
-- **Every code snippet here can run independently**
+- **Every code snippet here can run independently (some needs the files that ropo provides)**
 - **If you want to copy the code, use [command to code](https://pynickle.github.io/ctc.html)**
 - **You can use GETREADME.py to download README.md from the repository**
 
