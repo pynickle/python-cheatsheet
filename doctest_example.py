@@ -1,5 +1,6 @@
 import math
 
+
 def factorial(n):
     result = 1
     factor = 2
