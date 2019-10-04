@@ -56,13 +56,13 @@
 
 **调试和分析**: [``timeit``](#timeit), [``pdb``](#pdb)
 
-**软件打包与分发**: [``ensurepip``](#ensurepip)
+**软件打包与分发**: [``ensurepip``](#ensurepip), [``zipapp``](#zipapp)
 
 **运行时服务**: [``sys``](#sys), [``dataclasses``](#dataclasses),
 [``contextlib``](#contextlib), [``abc``](#abc), [``traceback``](#traceback),
 [``__future__``](#__future__), [``atexit``](#atexit)
 
-**导入模块**: [``zipimport``](#zipimport), [``importlib``](#importlib)
+**导入模块**: [``zipimport``](#zipimport), [``importlib``](#importlib), [``runpy``](#runpy)
 
 **Python 语言服务**: [``ast``](#ast), [``keyword``](#keyword), [``dis``](#dis)
 
