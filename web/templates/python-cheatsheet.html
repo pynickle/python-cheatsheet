@@ -1,0 +1,1181 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>python-cheatsheet by pynickle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='github.css') }}">
+    <script src="{{ url_for('static', filename='highlight.pack.js') }}"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<h1 id="python-standard-libraries-cheatsheet">Python Standard Libraries Cheatsheet</h1>
+<p>Depend on Python v3.7.4</p>
+<ul>
+<li><a href="README-zh-cn.md">中文</a></li>
+<li><a href="README.md">English</a></li>
+</ul>
+<p><strong>Notes</strong>: - <strong>Every code snippet here can run independently (some needs the files that ropo provides)</strong> - <strong>If you want to copy the code, use <a href="https://pynickle.github.io/ctc.html">command to code</a></strong> - <strong>You can use GETREADME.py to download README.md from the repository</strong></p>
+<h2 id="contents">Contents</h2>
+<p><strong>Text Processing</strong>: <a href="#string"><code>string</code></a>, <a href="#re"><code>re</code></a>, <a href="#difflib"><code>difflib</code></a>, <a href="#textwrap"><code>textwrap</code></a>, <a href="#unicodedata"><code>unicodedata</code></a></p>
+<p><strong>Binary Data</strong>: <a href="#codecs"><code>codecs</code></a></p>
+<p><strong>Data Type</strong>: <a href="#datetime"><code>datetime</code></a>, <a href="#calendar"><code>calendar</code></a>, <a href="#collections"><code>collections</code></a>,<a href="#copy"><code>copy</code></a>, <a href="#pprint"><code>pprint</code></a>, <a href="#enum"><code>enum</code></a>, <a href="#bisect"><code>bisect</code></a>, <a href="#heapq"><code>heapq</code></a></p>
+<p><strong>Mathematical Modules</strong>: <a href="#math"><code>math</code></a>, <a href="#cmath"><code>cmath</code></a>, <a href="#random"><code>random</code></a>, <a href="#fractions"><code>fractions</code></a>, <a href="#decimal"><code>decimal</code></a>, <a href="#statistics"><code>statistics</code></a></p>
+<p><strong>Functional Programming</strong>: <a href="#itertools"><code>itertools</code></a>, <a href="#functools"><code>functools</code></a>, <a href="#operator"><code>operator</code></a></p>
+<p><strong>Directory Access</strong>: <a href="#pathlib"><code>pathlib</code></a>, <a href="#os.path"><code>os.path</code></a>, <a href="#glob"><code>glob</code></a>, <a href="#tempfile"><code>tempfile</code></a>, <a href="#filecmp"><code>filecmp</code></a>, <a href="#fileinput"><code>fileinput</code></a></p>
+<p><strong>Data Persistence</strong>: <a href="#pickle"><code>pickle</code></a></p>
+<p><strong>Data Compression</strong>: <a href="#zlib"><code>zlib</code></a>, <a href="#lzma"><code>lzma</code></a>, <a href="#zipfile"><code>zipfile</code></a></p>
+<p><strong>File Formats</strong>: <a href="#configparser"><code>configparser</code></a></p>
+<p><strong>Cryptographic Services</strong>: <a href="#hashlib"><code>hashlib</code></a>, <a href="#hmac"><code>hmac</code></a>, <a href="#secrets"><code>secrets</code></a></p>
+<p><strong>Operating System</strong>: <a href="#os"><code>os</code></a>, <a href="#time"><code>time</code></a>, <a href="#logging"><code>logging</code></a>, <a href="#getpass"><code>getpass</code></a>, <a href="#platform"><code>platform</code></a>, <a href="#argparse"><code>argparse</code></a></p>
+<p><strong>Internet Data</strong>: <a href="#json"><code>json</code></a></p>
+<p><strong>Structured Markup</strong>: <a href="#html"><code>html</code></a></p>
+<p><strong>Internet Protocols</strong>: <a href="#webbrowser"><code>webbrowser</code></a></p>
+<p><strong>Multimedia Services</strong>: <a href="#wave"><code>wave</code></a>, <a href="#sndhdr"><code>sndhdr</code></a>, <a href="#imghdr"><code>imghdr</code></a>, <a href="#colorsys"><code>colorsys</code></a></p>
+<p><strong>Program Frameworks</strong>: <a href="#turtle"><code>turtle</code></a></p>
+<p><strong>Development Tools</strong>: <a href="#typing"><code>typing</code></a>, <a href="#doctest"><code>doctest</code></a></p>
+<p><strong>Debugging Profiling</strong>: <a href="#timeit"><code>timeit</code></a>, <a href="#pdb"><code>pdb</code></a></p>
+<p><strong>Software Packaging</strong>: <a href="#ensurepip"><code>ensurepip</code></a>, <a href="#zipapp"><code>zipapp</code></a></p>
+<p><strong>Runtime Services</strong>: <a href="#sys"><code>sys</code></a>, <a href="#dataclasses"><code>dataclasses</code></a>, <a href="#contextlib"><code>contextlib</code></a>, <a href="#abc"><code>abc</code></a>, <a href="#traceback"><code>traceback</code></a>, <a href="#__future__"><code>__future__</code></a>, <a href="#atexit"><code>atexit</code></a></p>
+<p><strong>Importing Modules</strong>: <a href="#zipimport"><code>zipimport</code></a>, <a href="#importlib"><code>importlib</code></a>, <a href="#runpy"><code>runpy</code></a></p>
+<p><strong>Language Services</strong>: <a href="#ast"><code>ast</code></a>, <a href="#keyword"><code>keyword</code></a>, <a href="#dis"><code>dis</code></a></p>
+<p><strong>Bonus Scene</strong>: <a href="#this"><code>this</code></a>, <a href="#antigravity"><code>antigravity</code></a></p>
+<h2 id="string">string</h2>
+<h4 id="attributes">Attributes</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> string
+<span class="op">&gt;&gt;&gt;</span> string.ascii_letters
+<span class="co">&#39;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> string.ascii_lowercase
+<span class="co">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> string.ascii_uppercase
+<span class="co">&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> string.digits
+<span class="co">&#39;0123456789&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> string.hexdigits
+<span class="co">&#39;0123456789abcdefABCDEF&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> string.octdigits
+<span class="co">&#39;01234567&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> string.punctuation
+<span class="co">&#39;!&quot;#$%&amp;\&#39;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> string.printable
+<span class="co">&#39;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!&quot;#$%&amp;\&#39;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~ \t\n\r\x0b\x0c&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> string.whitespace
+<span class="co">&#39; \t\n\r\x0b\x0c&#39;</span></code></pre></div>
+<h4 id="formatter">Formatter</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> string
+<span class="op">&gt;&gt;&gt;</span> formatter <span class="op">=</span> string.Formatter()
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;my name is </span><span class="sc">{name}</span><span class="st">&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> dct <span class="op">=</span> {<span class="st">&quot;name&quot;</span>: <span class="st">&quot;nick&quot;</span>}
+<span class="op">&gt;&gt;&gt;</span> formatter.<span class="bu">format</span>(strcmp, <span class="op">**</span>dct)
+<span class="co">&#39;my name is nick&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> data <span class="op">=</span> (<span class="st">&quot;3&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;pi is about </span><span class="sc">{}</span><span class="st">&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> formatter.<span class="bu">format</span>(strcmp, <span class="op">*</span>data)
+<span class="co">&#39;pi is about 3&#39;</span></code></pre></div>
+<h4 id="template">Template</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> string
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;Hello $World&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> t <span class="op">=</span> string.Template(strcmp)
+<span class="op">&gt;&gt;&gt;</span> t.substitute({<span class="st">&quot;World&quot;</span>: <span class="st">&quot;nick&quot;</span>})
+<span class="co">&#39;Hello nick&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> t.substitute(World <span class="op">=</span> <span class="st">&quot;nick&quot;</span>)
+<span class="co">&#39;Hello nick&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> MyTemplate(string.Template):
+...     delimiter <span class="op">=</span> <span class="st">&quot;^&quot;</span>
+...
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;Hello ^World&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> mytemplate <span class="op">=</span> MyTemplate(strcmp)
+<span class="op">&gt;&gt;&gt;</span> mytemplate.substitute(World <span class="op">=</span> <span class="st">&quot;nick&quot;</span>)
+<span class="co">&#39;Hello nick&#39;</span></code></pre></div>
+<h2 id="re">re</h2>
+<h4 id="match-search-findall">match, search, findall</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> re
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;www.baidu.com&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> re.match(<span class="st">&quot;www&quot;</span>, strcmp).span()
+(<span class="dv">0</span>, <span class="dv">3</span>)
+<span class="op">&gt;&gt;&gt;</span> re.match(<span class="st">&quot;baidu&quot;</span>, strcmp)   <span class="co"># re.match only match from the beginning of the string</span>
+<span class="op">&gt;&gt;&gt;</span> re.search(<span class="st">&quot;baidu&quot;</span>, strcmp).span()   <span class="co"># re.search search from all string and return the first</span>
+(<span class="dv">4</span>, <span class="dv">9</span>)
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;baidu.com/runoob.com&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> re.findall(<span class="st">&quot;com&quot;</span>, strcmp)   <span class="co"># re.findall find all results and return</span>
+[<span class="st">&#39;com&#39;</span>, <span class="st">&#39;com&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> re.findall(<span class="st">&quot;b(.*?).&quot;</span>, strcmp)
+[<span class="st">&#39;&#39;</span>, <span class="st">&#39;&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> re.findall(<span class="st">&quot;b(.*?)c&quot;</span>, strcmp)
+[<span class="st">&#39;aidu.&#39;</span>, <span class="st">&#39;.&#39;</span>]</code></pre></div>
+<h4 id="split-sub-escape">split, sub, escape</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> re
+<span class="op">&gt;&gt;&gt;</span> re.split(<span class="vs">r&quot;\W&quot;</span>, <span class="st">&quot;hello,world&quot;</span>)
+[<span class="st">&#39;hello&#39;</span>, <span class="st">&#39;world&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> re.sub(<span class="vs">r&quot;Boy|Girl&quot;</span>, <span class="st">&quot;Human&quot;</span>, <span class="st">&quot;boy and girl&quot;</span>, flags <span class="op">=</span> re.I)   <span class="co"># re.I means ignoring apitalization</span>
+<span class="co">&#39;Human and Human&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> re.escape(<span class="vs">r&quot;#$&amp;*+-.^|~&quot;</span>)
+<span class="co">&#39;\\#\\$\\&amp;\\*\\+\\-\\.\\^\\|\\~&#39;</span></code></pre></div>
+<h2 id="difflib">difflib</h2>
+<h4 id="differ">Differ</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> difflib
+<span class="op">&gt;&gt;&gt;</span> d <span class="op">=</span> difflib.Differ()
+<span class="op">&gt;&gt;&gt;</span> text1 <span class="op">=</span> <span class="st">&quot;&quot;&quot;difflib</span>
+<span class="st">... python version 3.7.4</span>
+<span class="st">... difflib version 3.7.4</span>
+<span class="st">... this is difflib document</span>
+<span class="st">... &quot;&quot;&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> text2 <span class="op">=</span> <span class="st">&quot;&quot;&quot;difflib</span>
+<span class="st">... python version 3.7.3</span>
+<span class="st">... this is difflib document</span>
+<span class="st">... feature: diff in linux</span>
+<span class="st">... &quot;&quot;&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> text1_lines <span class="op">=</span> text1.splitlines()
+<span class="op">&gt;&gt;&gt;</span> text2_lines <span class="op">=</span> text2.splitlines()
+<span class="op">&gt;&gt;&gt;</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">list</span>(d.compare(text1_lines, text2_lines))
+[<span class="st">&#39;  difflib&#39;</span>, <span class="st">&#39;- python version 3.7.4&#39;</span>, <span class="st">&#39;?                    ^</span><span class="ch">\n</span><span class="st">&#39;</span>, <span class="st">&#39;+ python version 3.7.3&#39;</span>, <span class="st">&#39;?                    ^</span><span class="ch">\n</span><span class="st">&#39;</span>, <span class="st">&#39;- difflib version 3.7.4&#39;</span>, <span class="st">&#39;  this is difflib document&#39;</span>, <span class="st">&#39;+ feature: diff in linux&#39;</span>]</code></pre></div>
+<h4 id="htmldiff">HtmlDiff</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> difflib
+<span class="op">&gt;&gt;&gt;</span> d <span class="op">=</span> difflib.HtmlDiff()
+<span class="op">&gt;&gt;&gt;</span> text1 <span class="op">=</span> <span class="st">&quot;&quot;&quot;difflib</span>
+<span class="st">... python version 3.7.4</span>
+<span class="st">... difflib version 3.7.4</span>
+<span class="st">... this is difflib document</span>
+<span class="st">... &quot;&quot;&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> text2 <span class="op">=</span> <span class="st">&quot;&quot;&quot;difflib</span>
+<span class="st">... python version 3.7.3</span>
+<span class="st">... this is difflib document</span>
+<span class="st">... feature: diff in linux</span>
+<span class="st">... &quot;&quot;&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> text1_lines <span class="op">=</span> text1.splitlines()
+<span class="op">&gt;&gt;&gt;</span> text2_lines <span class="op">=</span> text2.splitlines()
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;HtmlDiff.html&quot;</span>, <span class="st">&quot;w&quot;</span>, encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>) <span class="im">as</span> f:
+...     HtmlDiff <span class="op">=</span> d.make_file(text1_lines, text2_lines)
+...     f.write(HtmlDiff)
+...
+<span class="dv">3331</span></code></pre></div>
+<h4 id="sequencematcher">SequenceMatcher</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> difflib
+<span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> difflib.SequenceMatcher(<span class="va">None</span>, <span class="st">&quot; abcd&quot;</span>, <span class="st">&quot;abcd abcd&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> s.find_longest_match(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">9</span>)
+Match(a<span class="op">=</span><span class="dv">0</span>, b<span class="op">=</span><span class="dv">4</span>, size<span class="op">=</span><span class="dv">5</span>)
+<span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> difflib.SequenceMatcher(<span class="kw">lambda</span> x: x<span class="op">==</span><span class="st">&quot; &quot;</span>, <span class="st">&quot; abcd&quot;</span>, <span class="st">&quot;abcd abcd&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> s.find_longest_match(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">0</span>, <span class="dv">9</span>)
+Match(a<span class="op">=</span><span class="dv">1</span>, b<span class="op">=</span><span class="dv">0</span>, size<span class="op">=</span><span class="dv">4</span>)
+<span class="op">&gt;&gt;&gt;</span> s <span class="op">=</span> difflib.SequenceMatcher(<span class="va">None</span>, <span class="st">&quot;abcd&quot;</span>, <span class="st">&quot;abd&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> s.get_matching_blocks()
+[Match(a<span class="op">=</span><span class="dv">0</span>, b<span class="op">=</span><span class="dv">0</span>, size<span class="op">=</span><span class="dv">2</span>), Match(a<span class="op">=</span><span class="dv">3</span>, b<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span><span class="dv">1</span>), Match(a<span class="op">=</span><span class="dv">4</span>, b<span class="op">=</span><span class="dv">3</span>, size<span class="op">=</span><span class="dv">0</span>)]</code></pre></div>
+<h2 id="textwrap">textwrap</h2>
+<h4 id="wrap-fill-shorten-dedent-indent">wrap, fill, shorten, dedent, indent</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> textwrap
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;Hello,World! My name is nick, l am 14 years old&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> textwrap.wrap(strcmp, width <span class="op">=</span> <span class="dv">10</span>)
+[<span class="st">&#39;Hello,Worl&#39;</span>, <span class="st">&#39;d! My name&#39;</span>, <span class="st">&#39;is nick, l&#39;</span>, <span class="st">&#39;am 14&#39;</span>, <span class="st">&#39;years old&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> textwrap.fill(strcmp, width <span class="op">=</span> <span class="dv">10</span>)
+<span class="co">&#39;Hello,Worl\nd! My name\nis nick, l\nam 14\nyears old&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> textwrap.shorten(strcmp, width <span class="op">=</span> <span class="dv">45</span>)
+<span class="co">&#39;Hello,World! My name is nick, l am 14 [...]&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> textwrap.shorten(strcmp, width <span class="op">=</span> <span class="dv">45</span>, placeholder <span class="op">=</span> <span class="st">&quot;...&quot;</span>)
+<span class="co">&#39;Hello,World! My name is nick, l am 14...&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span>
+<span class="st">...     hello world!</span>
+<span class="st">... &quot;&quot;&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> textwrap.dedent(strcmp)
+<span class="co">&#39;\nhello world!\n&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> <span class="st">&quot;&quot;&quot;Hello World!</span>
+<span class="st">... l am nick.</span>
+<span class="st">... l am 14 years old.</span>
+<span class="st">... &quot;&quot;&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> textwrap.indent(strcmp, <span class="st">&quot; + &quot;</span>, <span class="kw">lambda</span> line: <span class="va">True</span>)
+<span class="co">&#39; + Hello World!\n + l am nick.\n + l am 14 years old.\n&#39;</span></code></pre></div>
+<h2 id="unicodedata">unicodedata</h2>
+<h4 id="lookup-name-unidata_version">lookup, name, unidata_version</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> unicodedata
+<span class="op">&gt;&gt;&gt;</span> unicodedata.lookup(<span class="st">&#39;LEFT CURLY BRACKET&#39;</span>)
+<span class="co">&#39;{&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> unicodedata.name(<span class="st">&quot;(&quot;</span>)
+<span class="co">&#39;LEFT PARENTHESIS&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> unicodedata.unidata_version
+<span class="co">&#39;11.0.0&#39;</span></code></pre></div>
+<h2 id="codecs">codecs</h2>
+<h4 id="encode-decode-getencoder-getdecoder">encode, decode, getencoder, getdecoder</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> codecs
+<span class="op">&gt;&gt;&gt;</span> codecs.encode(<span class="st">&quot;你好&quot;</span>)
+b<span class="st">&#39;</span><span class="ch">\xe4\xbd\xa0\xe5\xa5\xbd</span><span class="st">&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> codecs.decode(b<span class="st">&quot;</span><span class="ch">\xe4\xbd\xa0\xe5\xa5\xbd</span><span class="st">&quot;</span>)
+<span class="co">&#39;你好&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> codecs.getencoder(<span class="st">&quot;utf-8&quot;</span>)
+<span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function utf_8_encode<span class="op">&gt;</span>
+<span class="op">&gt;&gt;&gt;</span> codecs.getdecoder(<span class="st">&quot;gbk&quot;</span>)
+<span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> method decode of MultibyteCodec <span class="bu">object</span> at <span class="bn">0x0000019E080AA078</span><span class="op">&gt;</span></code></pre></div>
+<h2 id="datetime">datetime</h2>
+<h4 id="minyear-maxyear-date">MINYEAR, MAXYEAR, date</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> datetime
+<span class="op">&gt;&gt;&gt;</span> datetime.MINYEAR
+<span class="dv">1</span>
+<span class="op">&gt;&gt;&gt;</span> datetime.MAXYEAR
+<span class="dv">9999</span>
+<span class="op">&gt;&gt;&gt;</span> date <span class="op">=</span> datetime.date
+<span class="op">&gt;&gt;&gt;</span> date.today()
+datetime.date(<span class="dv">2019</span>, <span class="dv">7</span>, <span class="dv">21</span>)
+<span class="op">&gt;&gt;&gt;</span> date <span class="op">=</span> datetime.date(<span class="dv">2019</span>, <span class="dv">7</span>, <span class="dv">21</span>)
+<span class="op">&gt;&gt;&gt;</span> date.today()
+datetime.date(<span class="dv">2019</span>, <span class="dv">7</span>, <span class="dv">21</span>)
+<span class="op">&gt;&gt;&gt;</span> date.weekday()
+<span class="dv">6</span>
+<span class="op">&gt;&gt;&gt;</span> date.isocalendar()
+(<span class="dv">2019</span>, <span class="dv">29</span>, <span class="dv">7</span>)
+<span class="op">&gt;&gt;&gt;</span> date.ctime()
+<span class="co">&#39;Sun Jul 21 00:00:00 2019&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> date.strftime(<span class="st">&quot;%Y </span><span class="sc">%d</span><span class="st"> %y, %H:%M:%S&quot;</span>)
+<span class="co">&#39;2019 21 19, 00:00:00&#39;</span></code></pre></div>
+<h2 id="calendar">calendar</h2>
+<h4 id="isleap-firstweekday-month">isleap, firstweekday, month</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> calendar
+<span class="op">&gt;&gt;&gt;</span> calendar.isleap(<span class="dv">2000</span>)
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> calendar.firstweekday()
+<span class="dv">0</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(calendar.month(<span class="dv">2019</span>, <span class="dv">7</span>))
+     July <span class="dv">2019</span>
+Mo Tu We Th Fr Sa Su
+ <span class="dv">1</span>  <span class="dv">2</span>  <span class="dv">3</span>  <span class="dv">4</span>  <span class="dv">5</span>  <span class="dv">6</span>  <span class="dv">7</span>
+ <span class="dv">8</span>  <span class="dv">9</span> <span class="dv">10</span> <span class="dv">11</span> <span class="dv">12</span> <span class="dv">13</span> <span class="dv">14</span>
+<span class="dv">15</span> <span class="dv">16</span> <span class="dv">17</span> <span class="dv">18</span> <span class="dv">19</span> <span class="dv">20</span> <span class="dv">21</span>
+<span class="dv">22</span> <span class="dv">23</span> <span class="dv">24</span> <span class="dv">25</span> <span class="dv">26</span> <span class="dv">27</span> <span class="dv">28</span>
+<span class="dv">29</span> <span class="dv">30</span> <span class="dv">31</span></code></pre></div>
+<h2 id="collections">collections</h2>
+<h4 id="namedtuple-deque-defaultdict-ordereddict-counter">namedtuple, deque, defaultdict, OrderedDict, Counter</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> collections
+<span class="op">&gt;&gt;&gt;</span> point <span class="op">=</span> collections.namedtuple(<span class="st">&quot;point&quot;</span>, [<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>])
+<span class="op">&gt;&gt;&gt;</span> p <span class="op">=</span> point(<span class="dv">2</span>, <span class="dv">1</span>)
+<span class="op">&gt;&gt;&gt;</span> p.x, p.y
+(<span class="dv">2</span>, <span class="dv">1</span>)
+<span class="op">&gt;&gt;&gt;</span> deque <span class="op">=</span> collections.deque([<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>])
+<span class="op">&gt;&gt;&gt;</span> deque.appendleft(<span class="st">&quot;a&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> deque.append(<span class="st">&quot;e&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> deque
+deque([<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>])
+<span class="op">&gt;&gt;&gt;</span> dd <span class="op">=</span> collections.defaultdict(<span class="kw">lambda</span>: <span class="st">&quot;None&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> dd [<span class="st">&quot;key-1&quot;</span>] <span class="op">=</span> <span class="st">&quot;value-1&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> dd[<span class="st">&quot;key-1&quot;</span>]
+<span class="co">&#39;value-1&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> dd[<span class="st">&quot;key-2&quot;</span>]
+<span class="co">&#39;None&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> od <span class="op">=</span> collections.OrderedDict([(<span class="st">&quot;a&quot;</span>, <span class="dv">1</span>), (<span class="st">&quot;b&quot;</span>, <span class="dv">2</span>)])
+<span class="op">&gt;&gt;&gt;</span> od
+OrderedDict([(<span class="st">&#39;a&#39;</span>, <span class="dv">1</span>), (<span class="st">&#39;b&#39;</span>, <span class="dv">2</span>)])
+<span class="op">&gt;&gt;&gt;</span> c <span class="op">=</span> collections.Counter()
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="st">&quot;Hello, World&quot;</span>:
+...     c[i] <span class="op">=</span> c[i] <span class="op">+</span> <span class="dv">1</span>
+...
+<span class="op">&gt;&gt;&gt;</span> c
+Counter({<span class="st">&#39;l&#39;</span>: <span class="dv">3</span>, <span class="st">&#39;o&#39;</span>: <span class="dv">2</span>, <span class="st">&#39;H&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;e&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;,&#39;</span>: <span class="dv">1</span>, <span class="st">&#39; &#39;</span>: <span class="dv">1</span>, <span class="st">&#39;W&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;r&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;d&#39;</span>: <span class="dv">1</span>})</code></pre></div>
+<h2 id="copy">copy</h2>
+<h4 id="copy-deepcopy">copy, deepcopy</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> copy
+<span class="op">&gt;&gt;&gt;</span> origin <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, [<span class="dv">3</span>, <span class="dv">4</span>]]
+<span class="op">&gt;&gt;&gt;</span> copy1 <span class="op">=</span> copy.copy(origin)
+<span class="op">&gt;&gt;&gt;</span> copy2 <span class="op">=</span> copy.deepcopy(origin)
+<span class="op">&gt;&gt;&gt;</span> copy1 <span class="kw">is</span> copy2
+<span class="va">False</span>
+<span class="op">&gt;&gt;&gt;</span> origin[<span class="dv">2</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="st">&quot;Hello, copy&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> copy1
+[<span class="dv">1</span>, <span class="dv">2</span>, [<span class="st">&#39;Hello, copy&#39;</span>, <span class="dv">4</span>]]
+<span class="op">&gt;&gt;&gt;</span> copy2
+[<span class="dv">1</span>, <span class="dv">2</span>, [<span class="dv">3</span>, <span class="dv">4</span>]]</code></pre></div>
+<h2 id="pprint">pprint</h2>
+<h4 id="pprint-1">pprint</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pprint
+<span class="op">&gt;&gt;&gt;</span> strcmp <span class="op">=</span> (<span class="st">&quot;hello world&quot;</span>, {<span class="st">&quot;nick&quot;</span>: <span class="dv">13</span>, <span class="st">&quot;ben&quot;</span>: <span class="dv">12</span>}, (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>], <span class="st">&quot;Hello pprint&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> pprint.pprint(strcmp)
+(<span class="st">&#39;hello world&#39;</span>,
+ {<span class="st">&#39;ben&#39;</span>: <span class="dv">12</span>, <span class="st">&#39;nick&#39;</span>: <span class="dv">13</span>},
+ (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),
+ [<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>],
+ <span class="st">&#39;Hello pprint&#39;</span>)</code></pre></div>
+<h2 id="enum">enum</h2>
+<h4 id="enum-unique-auto">Enum, unique, auto</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> enum
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Seasons(enum.Enum):
+...     Spring <span class="op">=</span> <span class="dv">1</span>
+...     Summer <span class="op">=</span> <span class="dv">2</span>
+...     Autumn <span class="op">=</span> <span class="dv">3</span>
+...     Winter <span class="op">=</span> <span class="dv">4</span>
+...
+<span class="op">&gt;&gt;&gt;</span> Seasons.Spring
+<span class="op">&lt;</span>Seasons.Spring: <span class="dv">1</span><span class="op">&gt;</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="op">@</span>enum.unique
+... <span class="kw">class</span> Unique(enum.Enum):
+...     Nick <span class="op">=</span> <span class="dv">13</span>
+...     Ben <span class="op">=</span> <span class="dv">12</span>
+...     Jack <span class="op">=</span> <span class="dv">13</span>
+...
+Traceback (most recent call last):
+  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">2</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span>
+  File <span class="st">&quot;C:\Python38\lib\enum.py&quot;</span>, line <span class="dv">860</span>, <span class="kw">in</span> unique
+    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;duplicate values found in </span><span class="sc">%r</span><span class="st">: </span><span class="sc">%s</span><span class="st">&#39;</span> <span class="op">%</span>
+<span class="pp">ValueError</span>: duplicate values found <span class="kw">in</span> <span class="op">&lt;</span>enum <span class="st">&#39;Unique&#39;</span><span class="op">&gt;</span>: Jack <span class="op">-&gt;</span> Nick
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Auto(enum.Enum):
+...     VS <span class="op">=</span> enum.auto()
+...     VSCode <span class="op">=</span> enum.auto()
+...     Pycharm <span class="op">=</span> enum.auto()
+...
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">list</span>(Auto)
+[<span class="op">&lt;</span>Auto.VS: <span class="dv">1</span><span class="op">&gt;</span>, <span class="op">&lt;</span>Auto.VSCode: <span class="dv">2</span><span class="op">&gt;</span>, <span class="op">&lt;</span>Auto.Pycharm: <span class="dv">3</span><span class="op">&gt;</span>]</code></pre></div>
+<h2 id="bisect">bisect</h2>
+<h2 id="bisect-bisect_left-bisect_right-insort-insort_left-insort_right">bisect, bisect_left, bisect_right, insort, insort_left, insort_right</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> bisect
+<span class="op">&gt;&gt;&gt;</span> a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>]
+<span class="op">&gt;&gt;&gt;</span> bisect.bisect_left(a, <span class="dv">1</span>)
+<span class="dv">0</span>
+<span class="op">&gt;&gt;&gt;</span> bisect.bisect_right(a, <span class="dv">1</span>)
+<span class="dv">1</span>
+<span class="op">&gt;&gt;&gt;</span> bisect.bisect(a, <span class="dv">1</span>)
+<span class="dv">1</span>
+<span class="op">&gt;&gt;&gt;</span> bisect.insort(a, <span class="dv">1</span>)
+<span class="op">&gt;&gt;&gt;</span> a
+[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>]
+<span class="op">&gt;&gt;&gt;</span> bisect.insort_left(a, <span class="dv">2</span>)
+<span class="op">&gt;&gt;&gt;</span> a
+[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>]
+<span class="op">&gt;&gt;&gt;</span> bisect.insort_right(a, <span class="dv">4</span>)
+<span class="op">&gt;&gt;&gt;</span> a
+[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>]</code></pre></div>
+<h2 id="heapq">heapq</h2>
+<h4 id="heappush-heappop">heappush, heappop</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> heapq
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> heapsort(iterable):
+...     h <span class="op">=</span> []
+...     <span class="cf">for</span> i <span class="kw">in</span> iterable:
+...         heapq.heappush(h, i)
+...     <span class="cf">return</span> [heapq.heappop(h) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(h))]
+... 
+<span class="op">&gt;&gt;&gt;</span> heapsort([<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">7</span>])
+[<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">9</span>]</code></pre></div>
+<h2 id="weakref">weakref</h2>
+<h4 id="ref">ref</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> weakref
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> A:   
+...     <span class="kw">def</span> method():
+...         <span class="bu">print</span>(<span class="st">&quot;A&quot;</span>)
+... 
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> b(reference):
+...     <span class="bu">print</span>(reference)
+... 
+<span class="op">&gt;&gt;&gt;</span> c <span class="op">=</span> A()
+<span class="op">&gt;&gt;&gt;</span> d <span class="op">=</span> weakref.ref(c, b)
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">del</span> c
+<span class="op">&lt;</span>weakref at <span class="bn">0x000001C94E12F778</span><span class="op">;</span> dead<span class="op">&gt;</span></code></pre></div>
+<h2 id="math">math</h2>
+<h4 id="ceil-factorial-floor-modf-log-pow-sqrt-pi-e">ceil, factorial, floor, modf, log, pow, sqrt, pi, e</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> math
+<span class="op">&gt;&gt;&gt;</span> math.ceil(<span class="fl">1.4</span>)
+<span class="dv">2</span>
+<span class="op">&gt;&gt;&gt;</span> math.factorial(<span class="dv">5</span>)
+<span class="dv">120</span>
+<span class="op">&gt;&gt;&gt;</span> math.floor(<span class="fl">1.6</span>)
+<span class="dv">1</span>
+<span class="op">&gt;&gt;&gt;</span> math.modf(<span class="fl">1.6</span>)
+(<span class="fl">0.6000000000000001</span>, <span class="fl">1.0</span>)
+<span class="op">&gt;&gt;&gt;</span> math.log(<span class="dv">8</span>)
+<span class="fl">2.0794415416798357</span>
+<span class="op">&gt;&gt;&gt;</span> math.<span class="bu">pow</span>(<span class="dv">2</span>,<span class="dv">5</span>)
+<span class="fl">32.0</span>
+<span class="op">&gt;&gt;&gt;</span> math.sqrt(<span class="dv">9</span>)
+<span class="fl">3.0</span>
+<span class="op">&gt;&gt;&gt;</span> math.pi
+<span class="fl">3.141592653589793</span>
+<span class="op">&gt;&gt;&gt;</span> math.e
+<span class="fl">2.718281828459045</span></code></pre></div>
+<h2 id="cmath">cmath</h2>
+<h4 id="sin-tan-cos">sin, tan, cos</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> cmath
+<span class="op">&gt;&gt;&gt;</span> cmath.sin(<span class="dv">7</span>)
+(<span class="fl">0.6569865987187891</span><span class="op">+</span>0j)
+<span class="op">&gt;&gt;&gt;</span> cmath.tan(<span class="dv">7</span>)
+(<span class="fl">0.8714479827243188</span><span class="op">+</span>0j)
+<span class="op">&gt;&gt;&gt;</span> cmath.cos(<span class="dv">7</span>)
+(<span class="fl">0.7539022543433046</span><span class="op">-</span>0j)</code></pre></div>
+<h2 id="random">random</h2>
+<h4 id="random-uniform-randint-randrange">random, uniform, randint, randrange</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> random
+<span class="op">&gt;&gt;&gt;</span> random.random()
+<span class="fl">0.6381052887323486</span>
+<span class="op">&gt;&gt;&gt;</span> random.uniform(<span class="dv">5</span>,<span class="dv">6</span>)
+<span class="fl">5.325285695528384</span>
+<span class="op">&gt;&gt;&gt;</span> random.randint(<span class="dv">6</span>, <span class="dv">9</span>)
+<span class="dv">9</span>
+<span class="op">&gt;&gt;&gt;</span> random.randrange(<span class="dv">5</span>, <span class="dv">10</span>)
+<span class="dv">9</span></code></pre></div>
+<h2 id="fractions">fractions</h2>
+<h4 id="fraction-limit_denominator">Fraction, limit_denominator</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> fractions
+<span class="op">&gt;&gt;&gt;</span> fractions.Fraction(<span class="dv">16</span>, <span class="op">-</span><span class="dv">10</span>)
+Fraction(<span class="op">-</span><span class="dv">8</span>, <span class="dv">5</span>)
+<span class="op">&gt;&gt;&gt;</span> fractions.Fraction(<span class="st">&quot;-16/10&quot;</span>)
+Fraction(<span class="op">-</span><span class="dv">8</span>, <span class="dv">5</span>)
+<span class="op">&gt;&gt;&gt;</span> fractions.Fraction(<span class="dv">8</span>, <span class="dv">5</span>) <span class="op">-</span> fractions.Fraction(<span class="dv">7</span>, <span class="dv">5</span>)
+Fraction(<span class="dv">1</span>, <span class="dv">5</span>)
+<span class="op">&gt;&gt;&gt;</span> fractions.Fraction(<span class="fl">1.1</span>)
+Fraction(<span class="dv">2476979795053773</span>, <span class="dv">2251799813685248</span>)
+<span class="op">&gt;&gt;&gt;</span> fractions.Fraction(<span class="fl">1.1</span>).limit_denominator()
+Fraction(<span class="dv">11</span>, <span class="dv">10</span>)
+<span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> math
+<span class="op">&gt;&gt;&gt;</span> math.floor(fractions.Fraction(<span class="dv">5</span>, <span class="dv">3</span>))
+<span class="dv">1</span></code></pre></div>
+<h2 id="decimal">decimal</h2>
+<h4 id="decimal-getcontext">Decimal, getcontext</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> decimal
+<span class="op">&gt;&gt;&gt;</span> decimal.Decimal(<span class="dv">2</span>)<span class="op">/</span>decimal.Decimal(<span class="dv">3</span>)
+Decimal(<span class="st">&#39;0.6666666666666666666666666667&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> context <span class="op">=</span> decimal.getcontext()
+<span class="op">&gt;&gt;&gt;</span> context
+Context(prec<span class="op">=</span><span class="dv">28</span>, rounding<span class="op">=</span>ROUND_HALF_EVEN, Emin<span class="op">=-</span><span class="dv">999999</span>, Emax<span class="op">=</span><span class="dv">999999</span>, capitals<span class="op">=</span><span class="dv">1</span>, clamp<span class="op">=</span><span class="dv">0</span>, flags<span class="op">=</span>[Inexact, Rounded], traps<span class="op">=</span>[InvalidOperation, DivisionByZero, Overflow])
+<span class="op">&gt;&gt;&gt;</span> context.prec <span class="op">=</span> <span class="dv">5</span>
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> decimal.Decimal(<span class="dv">2</span>)<span class="op">/</span>decimal.Decimal(<span class="dv">3</span>)
+<span class="op">&gt;&gt;&gt;</span> x
+Decimal(<span class="st">&#39;0.66667&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> x.sqrt()
+Decimal(<span class="st">&#39;0.81650&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> x.log10()
+Decimal(<span class="st">&#39;-0.17609&#39;</span>)</code></pre></div>
+<h2 id="statistics">statistics</h2>
+<h4 id="mean-harmonic_mean-median-median_low-median_high">mean, harmonic_mean, median, median_low, median_high</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> statistics
+<span class="op">&gt;&gt;&gt;</span> statistics.mean([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])
+<span class="dv">2</span>
+<span class="op">&gt;&gt;&gt;</span> statistics.harmonic_mean([<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">10</span>])
+<span class="fl">3.75</span>
+<span class="op">&gt;&gt;&gt;</span> statistics.median([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>])
+<span class="fl">4.0</span>
+<span class="op">&gt;&gt;&gt;</span> statistics.median_low([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>])
+<span class="dv">3</span>
+<span class="op">&gt;&gt;&gt;</span> statistics.median_high([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">6</span>])
+<span class="dv">5</span></code></pre></div>
+<h2 id="itertools">itertools</h2>
+<h4 id="count-repeat-groupby">count, repeat, groupby</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> itertools   <span class="co"># itertools always return a iterator</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">zip</span>(itertools.count(<span class="dv">1</span>), [<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>]):
+...     <span class="bu">print</span>(i)
+...
+(<span class="dv">1</span>, <span class="st">&#39;A&#39;</span>)
+(<span class="dv">2</span>, <span class="st">&#39;B&#39;</span>)
+(<span class="dv">3</span>, <span class="st">&#39;C&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">for</span> i <span class="kw">in</span> itertools.repeat(<span class="st">&quot;Hello Repeat!&quot;</span>, <span class="dv">5</span>):
+...     <span class="bu">print</span>(i)
+...
+Hello Repeat<span class="op">!</span>
+Hello Repeat<span class="op">!</span>
+Hello Repeat<span class="op">!</span>
+Hello Repeat<span class="op">!</span>
+Hello Repeat<span class="op">!</span>
+<span class="op">&gt;&gt;&gt;</span> [<span class="bu">list</span>(g) <span class="cf">for</span> k, g <span class="kw">in</span> itertools.groupby(<span class="st">&#39;AAAABBBCCD&#39;</span>)]
+[[<span class="st">&#39;A&#39;</span>, <span class="st">&#39;A&#39;</span>, <span class="st">&#39;A&#39;</span>, <span class="st">&#39;A&#39;</span>], [<span class="st">&#39;B&#39;</span>, <span class="st">&#39;B&#39;</span>, <span class="st">&#39;B&#39;</span>], [<span class="st">&#39;C&#39;</span>, <span class="st">&#39;C&#39;</span>], [<span class="st">&#39;D&#39;</span>]]</code></pre></div>
+<h2 id="functools">functools</h2>
+<h4 id="lru_cache-reduce">lru_cache, reduce</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> functools
+<span class="op">&gt;&gt;&gt;</span> <span class="op">@</span>functools.lru_cache(<span class="va">None</span>)   <span class="co"># None means the cache&#39;s upper limit is not limited</span>
+... <span class="kw">def</span> fibonacci(n):
+...     <span class="cf">if</span> n<span class="op">&lt;</span><span class="dv">2</span>:
+...         <span class="cf">return</span> n
+...     <span class="cf">return</span> fibonacci(n<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> fibonacci(n<span class="op">-</span><span class="dv">2</span>)
+...
+<span class="op">&gt;&gt;&gt;</span> fibonacci(<span class="dv">10</span>)
+<span class="dv">55</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> add(a, b):
+...     <span class="cf">return</span> a<span class="op">+</span>b
+...
+<span class="op">&gt;&gt;&gt;</span> functools.<span class="bu">reduce</span>(add, <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">100</span>))
+<span class="dv">4950</span></code></pre></div>
+<h2 id="operator">operator</h2>
+<h4 id="lt-eq-le-ne-gt-ge-abs-pow-concat-contains-indexof-add">lt, eq, le, ne, gt, ge, abs, pow, concat, contains, indexOf, add</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> operator
+<span class="op">&gt;&gt;&gt;</span> operator.lt(<span class="dv">3</span>, <span class="dv">4</span>)   <span class="co"># 3&lt;4</span>
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> operator.eq(<span class="dv">3</span>, <span class="dv">4</span>)   <span class="co"># 3=4</span>
+<span class="va">False</span>
+<span class="op">&gt;&gt;&gt;</span> operator.le(<span class="dv">3</span>, <span class="dv">4</span>)   <span class="co"># 3&lt;=4</span>
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> operator.ne(<span class="dv">3</span>, <span class="dv">4</span>)   <span class="co"># 3!=4</span>
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> operator.gt(<span class="dv">3</span>, <span class="dv">4</span>)   <span class="co"># 3&gt;4</span>
+<span class="va">False</span>
+<span class="op">&gt;&gt;&gt;</span> operator.ge(<span class="dv">3</span>, <span class="dv">4</span>)   <span class="co"># 3&gt;=4</span>
+<span class="va">False</span>
+<span class="op">&gt;&gt;&gt;</span> operator.<span class="bu">abs</span>(<span class="op">-</span><span class="dv">10</span>)
+<span class="dv">10</span>
+<span class="op">&gt;&gt;&gt;</span> operator.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="dv">2</span>)
+<span class="dv">100</span>
+<span class="op">&gt;&gt;&gt;</span> operator.concat(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>)
+<span class="co">&#39;ab&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> operator.contains([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], <span class="dv">2</span>)
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> operator.indexOf([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>], <span class="dv">2</span>)
+<span class="dv">1</span>
+<span class="op">&gt;&gt;&gt;</span> operator.add(<span class="dv">1</span>, <span class="dv">2</span>)
+<span class="dv">3</span></code></pre></div>
+<h2 id="pathlib">pathlib</h2>
+<h4 id="path">Path</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pathlib
+<span class="op">&gt;&gt;&gt;</span> p <span class="op">=</span> pathlib.Path(<span class="st">&quot;.&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">list</span>(p.glob(<span class="st">&#39;**/*.py&#39;</span>))
+[WindowsPath(<span class="st">&#39;GETREADME.py&#39;</span>), WindowsPath(<span class="st">&#39;test.py&#39;</span>)]
+<span class="op">&gt;&gt;&gt;</span> p<span class="op">/</span><span class="st">&quot;dir&quot;</span>
+WindowsPath(<span class="st">&#39;dir&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> (p<span class="op">/</span><span class="st">&quot;GETREADME.py&quot;</span>).name
+<span class="co">&#39;GETREADME.py&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> p.is_absolute()
+<span class="va">False</span></code></pre></div>
+<h2 id="os.path">os.path</h2>
+<h4 id="exists-getsize-isfile-isdir-join">exists, getsize, isfile, isdir, join</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> os.path
+<span class="op">&gt;&gt;&gt;</span> os.path.exists(<span class="st">&quot;.&quot;</span>)
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> os.path.getsize(<span class="st">&quot;./LICENSE&quot;</span>)
+<span class="dv">466</span>
+<span class="op">&gt;&gt;&gt;</span> os.path.isfile(<span class="st">&quot;./README.md&quot;</span>)
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> os.path.isdir(<span class="st">&quot;./doc&quot;</span>)
+<span class="va">False</span>
+<span class="op">&gt;&gt;&gt;</span> os.path.join(<span class="st">&quot;./doc&quot;</span>, <span class="st">&quot;tutorial&quot;</span>, <span class="st">&quot;basic&quot;</span>)
+<span class="co">&#39;./doc\\tutorial\\basic&#39;</span></code></pre></div>
+<h2 id="glob">glob</h2>
+<h4 id="glob-1">glob</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> glob
+<span class="op">&gt;&gt;&gt;</span> glob.glob(<span class="st">&quot;*.md&quot;</span>, recursive <span class="op">=</span> <span class="va">True</span>)
+[<span class="st">&#39;python-cheatsheet.md&#39;</span>, <span class="st">&#39;README-zh-cn.md&#39;</span>, <span class="st">&#39;README.md&#39;</span>]</code></pre></div>
+<h2 id="tempfile">tempfile</h2>
+<h4 id="temporaryfile-mkstemp-mkdtemp">TemporaryFile, mkstemp, mkdtemp</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> tempfile
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> tempfile.TemporaryFile() <span class="im">as</span> f:
+    f.write(b<span class="st">&quot;Hello tempfile&quot;</span>)
+    f.seek(<span class="dv">0</span>)
+    f.read()
+
+    
+<span class="dv">14</span>
+<span class="dv">0</span>
+b<span class="st">&#39;Hello tempfile&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> name <span class="op">=</span> tempfile.mkstemp()   <span class="co"># for temporary file</span>
+<span class="op">&gt;&gt;&gt;</span> name
+(<span class="dv">3</span>, <span class="st">&#39;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">ADMINI~1</span><span class="ch">\\</span><span class="st">AppData</span><span class="ch">\\</span><span class="st">Local</span><span class="ch">\\</span><span class="st">Temp</span><span class="ch">\\</span><span class="st">tmp___ejm5a&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> <span class="bu">open</span>(name[<span class="dv">1</span>], <span class="st">&quot;w&quot;</span>, encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>) <span class="im">as</span> f:
+    f.write(<span class="st">&quot;Hello tempfile!&quot;</span>)
+
+    
+<span class="dv">15</span>
+<span class="op">&gt;&gt;&gt;</span> name <span class="op">=</span> tempfile.mkdtemp()   <span class="co"># for temporary dir</span>
+<span class="op">&gt;&gt;&gt;</span> name
+<span class="co">&#39;C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp5mqb0bxz&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> <span class="bu">open</span>(name <span class="op">+</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">temp.txt&quot;</span>, <span class="st">&quot;w&quot;</span>, encoding<span class="op">=</span><span class="st">&quot;utf-8&quot;</span>) <span class="im">as</span> f:
+    f.write(<span class="st">&quot;Hello tempfile!&quot;</span>)
+
+    
+<span class="dv">15</span></code></pre></div>
+<h2 id="filecmp">filecmp</h2>
+<h4 id="cmp">cmp</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> filecmp
+<span class="op">&gt;&gt;&gt;</span> filecmp.<span class="bu">cmp</span>(<span class="st">&quot;cmp1.txt&quot;</span>, <span class="st">&quot;cmp2.txt&quot;</span>)
+<span class="va">True</span></code></pre></div>
+<h2 id="fileinput">fileinput</h2>
+<h4 id="input">input</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> os
+<span class="op">&gt;&gt;&gt;</span> cmd <span class="op">=</span> os.popen(<span class="st">&quot;python fileinput_example.py cmp1.txt&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(cmd.read())
+cmp1.txt <span class="op">|</span> Line Number: <span class="dv">1</span> <span class="op">|</span>:  <span class="dv">1</span>
+
+cmp1.txt <span class="op">|</span> Line Number: <span class="dv">2</span> <span class="op">|</span>:  <span class="dv">2</span>
+
+cmp1.txt <span class="op">|</span> Line Number: <span class="dv">3</span> <span class="op">|</span>:  <span class="dv">3</span>
+
+cmp1.txt <span class="op">|</span> Line Number: <span class="dv">4</span> <span class="op">|</span>:  <span class="dv">4</span>
+
+cmp1.txt <span class="op">|</span> Line Number: <span class="dv">5</span> <span class="op">|</span>:  <span class="dv">5</span></code></pre></div>
+<h2 id="pickle">pickle</h2>
+<h4 id="loads-dumps">loads, dumps</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pickle
+<span class="op">&gt;&gt;&gt;</span> data <span class="op">=</span> [[<span class="dv">1</span>, <span class="st">&quot;first&quot;</span>],
+...         [<span class="dv">2</span>, <span class="st">&quot;second&quot;</span>]]
+<span class="op">&gt;&gt;&gt;</span> dumps <span class="op">=</span> pickle.dumps(data)
+<span class="op">&gt;&gt;&gt;</span> dumps
+b<span class="st">&#39;</span><span class="ch">\x80\x03</span><span class="st">]q</span><span class="ch">\x00</span><span class="st">(]q</span><span class="ch">\x01</span><span class="st">(K</span><span class="ch">\x01</span><span class="st">X</span><span class="ch">\x05\x00\x00\x00</span><span class="st">firstq</span><span class="ch">\x02</span><span class="st">e]q</span><span class="ch">\x03</span><span class="st">(K</span><span class="ch">\x02</span><span class="st">X</span><span class="ch">\x06\x00\x00\x00</span><span class="st">secondq</span><span class="ch">\x04</span><span class="st">ee.&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> pickle.loads(dumps)
+[[<span class="dv">1</span>, <span class="st">&#39;first&#39;</span>], [<span class="dv">2</span>, <span class="st">&#39;second&#39;</span>]]</code></pre></div>
+<h2 id="zlib">zlib</h2>
+<h4 id="compress-decompress">compress, decompress</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> zlib
+<span class="op">&gt;&gt;&gt;</span> zlib.compress(b<span class="st">&quot;Hello World!&quot;</span>, <span class="dv">5</span>)
+b<span class="st">&#39;x^</span><span class="ch">\xf3</span><span class="st">H</span><span class="ch">\xcd\xc9\xc9</span><span class="st">W</span><span class="ch">\x08\xcf</span><span class="st">/</span><span class="ch">\xca</span><span class="st">IQ</span><span class="ch">\x04\x00\x1c</span><span class="st">I</span><span class="ch">\x04</span><span class="st">&gt;&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> zlib.decompress(b<span class="st">&#39;x^</span><span class="ch">\xf3</span><span class="st">H</span><span class="ch">\xcd\xc9\xc9</span><span class="st">W</span><span class="ch">\x08\xcf</span><span class="st">/</span><span class="ch">\xca</span><span class="st">IQ</span><span class="ch">\x04\x00\x1c</span><span class="st">I</span><span class="ch">\x04</span><span class="st">&gt;&#39;</span>)
+b<span class="st">&#39;Hello World!&#39;</span></code></pre></div>
+<h2 id="lzma">lzma</h2>
+<h4 id="compress-decompress-1">compress, decompress</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> lzma
+<span class="op">&gt;&gt;&gt;</span> lzma.compress(b<span class="st">&quot;Hello, python3!&quot;</span>)
+b<span class="st">&quot;</span><span class="ch">\xfd</span><span class="st">7zXZ</span><span class="ch">\x00\x00\x04\xe6\xd6\xb4</span><span class="st">F</span><span class="ch">\x02\x00</span><span class="st">!</span><span class="ch">\x01\x16\x00\x00\x00</span><span class="st">t/</span><span class="ch">\xe5\xa3\x01\x00\x0e</span><span class="st">Hello, python3!</span><span class="ch">\x00\x00</span><span class="st">(</span><span class="ch">\x92</span><span class="st">K</span><span class="ch">\xe6\x9b\xe7</span><span class="st">r&amp;</span><span class="ch">\x00\x01</span><span class="st">&#39;</span><span class="ch">\x0f\xdf\x1a\xfc</span><span class="st">j</span><span class="ch">\x1f\xb6\xf3</span><span class="st">}</span><span class="ch">\x01\x00\x00\x00\x00\x04</span><span class="st">YZ&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> lzma.decompress(b<span class="st">&quot;</span><span class="ch">\xfd</span><span class="st">7zXZ</span><span class="ch">\x00\x00\x04\xe6\xd6\xb4</span><span class="st">F</span><span class="ch">\x02\x00</span><span class="st">!</span><span class="ch">\x01\x16\x00\x00\x00</span><span class="st">t/</span><span class="ch">\xe5\xa3\x01\x00\x0e</span><span class="st">Hello, python3!</span><span class="ch">\x00\x00</span><span class="st">(</span><span class="ch">\x92</span><span class="st">K</span><span class="ch">\xe6\x9b\xe7</span><span class="st">r&amp;</span><span class="ch">\x00\x01</span><span class="st">&#39;</span><span class="ch">\x0f\xdf\x1a\xfc</span><span class="st">j</span><span class="ch">\x1f\xb6\xf3</span><span class="st">}</span><span class="ch">\x01\x00\x00\x00\x00\x04</span><span class="st">YZ&quot;</span>)
+b<span class="st">&#39;Hello, python3!&#39;</span></code></pre></div>
+<h2 id="zipfile">zipfile</h2>
+<h4 id="zipfile-1">ZipFile</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> zipfile
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> zipfile.ZipFile(<span class="st">&quot;README.zip&quot;</span>) <span class="im">as</span> f:
+...     f.extractall()
+...
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> zipfile.ZipFile(<span class="st">&quot;LICENSE.zip&quot;</span>, <span class="st">&quot;a&quot;</span>) <span class="im">as</span> <span class="bu">zip</span>:
+...     <span class="bu">zip</span>.write(<span class="st">&quot;LICENSE&quot;</span>)
+...</code></pre></div>
+<h2 id="configparser">configparser</h2>
+<h4 id="configparser-1">ConfigParser</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> configparser
+<span class="op">&gt;&gt;&gt;</span> config <span class="op">=</span> configparser.ConfigParser()
+<span class="op">&gt;&gt;&gt;</span> config.read(<span class="st">&quot;config.ini&quot;</span>)
+[<span class="st">&#39;config.ini&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> config.sections()
+[<span class="st">&#39;python&#39;</span>, <span class="st">&#39;java&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> config[<span class="st">&quot;python&quot;</span>][<span class="st">&quot;type&quot;</span>]
+<span class="co">&#39;programming language&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> config[<span class="st">&quot;java&quot;</span>][<span class="st">&quot;popular&quot;</span>]
+<span class="co">&#39;1&#39;</span></code></pre></div>
+<h2 id="hashlib">hashlib</h2>
+<h4 id="md5">md5</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> hashlib
+<span class="op">&gt;&gt;&gt;</span> md5 <span class="op">=</span> hashlib.md5()
+<span class="op">&gt;&gt;&gt;</span> md5.update(b<span class="st">&quot;Hello World&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> md5.block_size
+<span class="dv">64</span>
+<span class="op">&gt;&gt;&gt;</span> md5.digest_size
+<span class="dv">16</span>
+<span class="op">&gt;&gt;&gt;</span> md5.hexdigest()
+<span class="co">&#39;b10a8db164e0754105b7a99be72e3fe5&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> md5.digest()
+b<span class="st">&#39;</span><span class="ch">\xb1\n\x8d\xb1</span><span class="st">d</span><span class="ch">\xe0</span><span class="st">uA</span><span class="ch">\x05\xb7\xa9\x9b\xe7</span><span class="st">.?</span><span class="ch">\xe5</span><span class="st">&#39;</span></code></pre></div>
+<h2 id="hmac">hmac</h2>
+<h4 id="new-compare_digest">new, compare_digest</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> hmac
+<span class="op">&gt;&gt;&gt;</span> msg <span class="op">=</span> b<span class="st">&quot;Hello World&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> secret <span class="op">=</span> b<span class="st">&quot;key&quot;</span>
+<span class="op">&gt;&gt;&gt;</span> h <span class="op">=</span> hmac.new(secret, msg, digestmod<span class="op">=</span><span class="st">&#39;md5&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> h.hexdigest()
+<span class="co">&#39;432c3ea3b9a503183f3d1258d9016a0c&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> h.digest()
+b<span class="st">&#39;C,&gt;</span><span class="ch">\xa3\xb9\xa5\x03\x18</span><span class="st">?=</span><span class="ch">\x12</span><span class="st">X</span><span class="ch">\xd9\x01</span><span class="st">j</span><span class="ch">\x0c</span><span class="st">&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> h2 <span class="op">=</span> hmac.new(secret, b<span class="st">&quot;Hello world&quot;</span>, digestmod<span class="op">=</span><span class="st">&quot;md5&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> hmac.compare_digest(h.digest(), h2.digest())
+<span class="va">False</span></code></pre></div>
+<h2 id="secrets">secrets</h2>
+<h4 id="choice-token_bytes-token_hex">choice, token_bytes, token_hex</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> secrets
+<span class="op">&gt;&gt;&gt;</span> secrets.choice(<span class="st">&quot;Hello World!&quot;</span>)
+<span class="co">&#39;d&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> secrets.token_bytes(<span class="dv">32</span>)
+b<span class="st">&#39;</span><span class="ch">\xd7\x98\xba\xc5\x18</span><span class="st">[/</span><span class="ch">\xea</span><span class="st">Lx</span><span class="ch">\xdb\x96</span><span class="st">2</span><span class="ch">\x84\xff</span><span class="st">`(7&amp;</span><span class="ch">\xe6\xae\xd4\x17</span><span class="st">n,</span><span class="ch">\xc3\x9e\xb0</span><span class="st">V</span><span class="ch">\x1c\x1d\x99</span><span class="st">&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> secrets.token_hex(<span class="dv">16</span>)
+<span class="co">&#39;335f8df0cb6dd60a3c41fdba7ccd1a0b&#39;</span></code></pre></div>
+<h2 id="os">os</h2>
+<h4 id="name-getcwd">name, getcwd</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> os
+<span class="op">&gt;&gt;&gt;</span> os.name
+<span class="co">&#39;nt&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> os.getcwd()
+<span class="co">&#39;C:\\Users\\Nick&#39;</span></code></pre></div>
+<h2 id="time">time</h2>
+<h4 id="localtime-ctime-perf_counter-sleep-strftime">localtime, ctime, perf_counter, sleep, strftime</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> time
+<span class="op">&gt;&gt;&gt;</span> time.localtime()
+time.struct_time(tm_year<span class="op">=</span><span class="dv">2019</span>, tm_mon<span class="op">=</span><span class="dv">7</span>, tm_mday<span class="op">=</span><span class="dv">29</span>, tm_hour<span class="op">=</span><span class="dv">12</span>, tm_min<span class="op">=</span><span class="dv">18</span>, tm_sec<span class="op">=</span><span class="dv">57</span>, tm_wday<span class="op">=</span><span class="dv">0</span>, tm_yday<span class="op">=</span><span class="dv">210</span>, tm_isdst<span class="op">=</span><span class="dv">0</span>)
+<span class="op">&gt;&gt;&gt;</span> time.ctime()
+<span class="co">&#39;Mon Jul 29 12:19:40 2019&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> time.perf_counter()
+<span class="fl">174.1987535</span>
+<span class="op">&gt;&gt;&gt;</span> time.sleep(<span class="dv">1</span>)
+<span class="op">&gt;&gt;&gt;</span> time.strftime(<span class="st">&quot;</span><span class="sc">%d</span><span class="st"> %b %Y&quot;</span>)
+<span class="co">&#39;29 Jul 2019&#39;</span></code></pre></div>
+<h2 id="logging">logging</h2>
+<h4 id="log-info-debug-warning-error-critical">log, info, debug, warning, error, critical</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> logging
+<span class="op">&gt;&gt;&gt;</span> logging.basicConfig(level <span class="op">=</span> logging.INFO,<span class="bu">format</span> <span class="op">=</span> <span class="st">&#39;</span><span class="sc">%(asctime)s</span><span class="st"> - </span><span class="sc">%(name)s</span><span class="st"> - </span><span class="sc">%(levelname)s</span><span class="st"> - </span><span class="sc">%(message)s</span><span class="st">&#39;</span>)
+<span class="op">&gt;&gt;&gt;</span> logger <span class="op">=</span> logging.getLogger(<span class="va">__name__</span>)
+<span class="op">&gt;&gt;&gt;</span> logger.info(<span class="st">&quot;info&quot;</span>)
+<span class="dv">2019</span><span class="op">-</span><span class="dv">07</span><span class="op">-</span><span class="dv">29</span> <span class="dv">12</span>:<span class="dv">29</span>:<span class="dv">59</span>,<span class="dv">363</span> <span class="op">-</span> __main__ <span class="op">-</span> INFO <span class="op">-</span> info
+<span class="op">&gt;&gt;&gt;</span> logger.debug(<span class="st">&quot;debug&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> logger.error(<span class="st">&quot;error&quot;</span>)
+<span class="dv">2019</span><span class="op">-</span><span class="dv">07</span><span class="op">-</span><span class="dv">29</span> <span class="dv">12</span>:<span class="dv">30</span>:<span class="dv">26</span>,<span class="dv">729</span> <span class="op">-</span> __main__ <span class="op">-</span> ERROR <span class="op">-</span> error
+<span class="op">&gt;&gt;&gt;</span> logger.critical(<span class="st">&quot;critical&quot;</span>)
+<span class="dv">2019</span><span class="op">-</span><span class="dv">07</span><span class="op">-</span><span class="dv">29</span> <span class="dv">12</span>:<span class="dv">30</span>:<span class="dv">36</span>,<span class="dv">446</span> <span class="op">-</span> __main__ <span class="op">-</span> CRITICAL <span class="op">-</span> critical
+<span class="op">&gt;&gt;&gt;</span> logger.warning(<span class="st">&quot;warning&quot;</span>)
+<span class="dv">2019</span><span class="op">-</span><span class="dv">07</span><span class="op">-</span><span class="dv">29</span> <span class="dv">12</span>:<span class="dv">30</span>:<span class="dv">48</span>,<span class="dv">815</span> <span class="op">-</span> __main__ <span class="op">-</span> WARNING <span class="op">-</span> warning
+<span class="op">&gt;&gt;&gt;</span> logger.log(<span class="dv">35</span>, <span class="st">&quot;log&quot;</span>)
+<span class="dv">2019</span><span class="op">-</span><span class="dv">07</span><span class="op">-</span><span class="dv">29</span> <span class="dv">12</span>:<span class="dv">31</span>:<span class="dv">59</span>,<span class="dv">758</span> <span class="op">-</span> __main__ <span class="op">-</span> Level <span class="dv">35</span> <span class="op">-</span> log</code></pre></div>
+<h2 id="getpass">getpass</h2>
+<h4 id="getpass-getuser">getpass, getuser</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> getpass
+<span class="op">&gt;&gt;&gt;</span> password <span class="op">=</span> getpass.getpass()
+Password:
+<span class="op">&gt;&gt;&gt;</span> password
+<span class="co">&#39;xxx&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> getpass.getuser()
+<span class="co">&#39;Nick&#39;</span></code></pre></div>
+<h2 id="platform">platform</h2>
+<h4 id="machine-platform-python_compiler-python_version-system">machine, platform, python_compiler, python_version, system</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> platform
+<span class="op">&gt;&gt;&gt;</span> platform.machine()
+<span class="co">&#39;AMD64&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> platform.platform()
+<span class="co">&#39;Windows-10-10.0.18362-SP0&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> platform.python_compiler()
+<span class="co">&#39;MSC v.1916 64 bit (AMD64)&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> platform.python_version()
+<span class="co">&#39;3.7.4&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> platform.system()
+<span class="co">&#39;Windows&#39;</span></code></pre></div>
+<h2 id="argparse">argparse</h2>
+<h4 id="section"></h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> os
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> cmd(command):
+...     res <span class="op">=</span> os.popen(command)
+...     <span class="bu">print</span>(res.read())
+...
+<span class="op">&gt;&gt;&gt;</span> cmd(<span class="st">&quot;python argparse_example.py -a 1 -b 2 --sum 1 2 3 4 -r 10 -t&quot;</span>)
+Namespace(a<span class="op">=</span><span class="dv">1</span>, b<span class="op">=</span><span class="dv">2</span>, required<span class="op">=</span><span class="st">&#39;10&#39;</span>, <span class="bu">sum</span><span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], true<span class="op">=</span><span class="va">True</span>)
+<span class="dv">3</span>
+<span class="dv">10</span>
+
+<span class="op">&gt;&gt;&gt;</span> cmd(<span class="st">&quot;python argparse_example.py --help&quot;</span>)
+usage: argparse_example.py [<span class="op">-</span>h] [<span class="op">-</span>a A] [<span class="op">-</span>b B] [<span class="op">-</span>s SUM [SUM ...]] <span class="op">-</span>r REQUIRED
+                           [<span class="op">-</span>t]
+
+the example parser <span class="cf">for</span> argparse
+
+optional arguments:
+  <span class="op">-</span>h, <span class="op">--</span><span class="bu">help</span>            show this <span class="bu">help</span> message <span class="kw">and</span> exit
+  <span class="op">-</span>a A                  the a number <span class="cf">for</span> adding
+  <span class="op">-</span>b B                  the b number <span class="cf">for</span> adding
+  <span class="op">-</span>s SUM [SUM ...], <span class="op">--</span><span class="bu">sum</span> SUM [SUM ...]
+  <span class="op">-</span>r REQUIRED, <span class="op">--</span>required REQUIRED
+  <span class="op">-</span>t, <span class="op">--</span>true</code></pre></div>
+<h2 id="json">json</h2>
+<h4 id="dumps-loads">dumps, loads</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> json
+<span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> json.dumps({<span class="st">&quot;Nick&quot;</span>: <span class="dv">13</span>, <span class="st">&quot;Ben&quot;</span>: <span class="dv">10</span>})
+<span class="op">&gt;&gt;&gt;</span> x
+<span class="co">&#39;{&quot;Nick&quot;: 13, &quot;Ben&quot;: 10}&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> json.loads(x)
+{<span class="st">&#39;Nick&#39;</span>: <span class="dv">13</span>, <span class="st">&#39;Ben&#39;</span>: <span class="dv">10</span>}</code></pre></div>
+<h2 id="html">html</h2>
+<h4 id="escape-unescape">escape, unescape</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> html
+<span class="op">&gt;&gt;&gt;</span> html.escape(<span class="st">&quot;As we all know, 2&gt;1&quot;</span>)
+<span class="co">&#39;As we all know, 2&amp;gt;1&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> html.unescape(<span class="st">&#39;As we all know, 2&amp;gt;1&#39;</span>)
+<span class="co">&#39;As we all know, 2&gt;1&#39;</span></code></pre></div>
+<h2 id="webbrowser">webbrowser</h2>
+<h4 id="open-open_new-open_new_tab">open, open_new, open_new_tab</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> webbrowser
+<span class="op">&gt;&gt;&gt;</span> webbrowser.<span class="bu">open</span>(<span class="st">&quot;www.baidu.com&quot;</span>)
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> webbrowser.open_new(<span class="st">&quot;www.baidu.com&quot;</span>)
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> webbrowser.open_new_tab(<span class="st">&quot;www.baidu.com&quot;</span>)
+<span class="va">True</span></code></pre></div>
+<h2 id="wave">wave</h2>
+<h4 id="open">open</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> wave
+<span class="op">&gt;&gt;&gt;</span> f <span class="op">=</span> wave.<span class="bu">open</span>(<span class="st">&quot;song.wav&quot;</span>, <span class="st">&quot;rb&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> f.getparams()
+_wave_params(nchannels<span class="op">=</span><span class="dv">2</span>, sampwidth<span class="op">=</span><span class="dv">2</span>, framerate<span class="op">=</span><span class="dv">44100</span>, nframes<span class="op">=</span><span class="dv">442368</span>, comptype<span class="op">=</span><span class="st">&#39;NONE&#39;</span>, compname<span class="op">=</span><span class="st">&#39;not compressed&#39;</span>)</code></pre></div>
+<h2 id="sndhdr">sndhdr</h2>
+<h4 id="what">what</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> sndhdr
+<span class="op">&gt;&gt;&gt;</span> sndhdr.what(<span class="st">&quot;song.wav&quot;</span>)
+SndHeaders(filetype<span class="op">=</span><span class="st">&#39;wav&#39;</span>, framerate<span class="op">=</span><span class="dv">44100</span>, nchannels<span class="op">=</span><span class="dv">2</span>, nframes<span class="op">=</span><span class="dv">442368</span>, sampwidth<span class="op">=</span><span class="dv">16</span>)</code></pre></div>
+<h2 id="imghdr">imghdr</h2>
+<h4 id="what-1">what</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> imghdr
+<span class="op">&gt;&gt;&gt;</span> imghdr.what(<span class="st">&quot;china.jpg&quot;</span>)
+<span class="co">&#39;jpeg&#39;</span></code></pre></div>
+<h2 id="colorsys">colorsys</h2>
+<h4 id="rgb_to_yiq-rgb_to_hls-rgb_to_hsv">rgb_to_yiq, rgb_to_hls, rgb_to_hsv</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> colorsys
+<span class="op">&gt;&gt;&gt;</span> colorsys.rgb_to_yiq(<span class="dv">128</span>, <span class="dv">128</span>, <span class="dv">0</span>)
+(<span class="fl">113.91999999999999</span>, <span class="fl">41.177600000000005</span>, <span class="op">-</span><span class="fl">39.948799999999984</span>)
+<span class="op">&gt;&gt;&gt;</span> colorsys.rgb_to_hls(<span class="dv">128</span>, <span class="dv">128</span>, <span class="dv">0</span>)
+(<span class="fl">0.16666666666666666</span>, <span class="fl">64.0</span>, <span class="op">-</span><span class="fl">1.0158730158730158</span>)
+<span class="op">&gt;&gt;&gt;</span> colorsys.rgb_to_hsv(<span class="dv">128</span>, <span class="dv">128</span>, <span class="dv">0</span>)
+(<span class="fl">0.16666666666666666</span>, <span class="fl">1.0</span>, <span class="dv">128</span>)</code></pre></div>
+<h2 id="turtle">turtle</h2>
+<h4 id="pensize-pencolor-begin_fill-forward-right-end_fill">pensize, pencolor, begin_fill, forward, right, end_fill</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> turtle
+<span class="op">&gt;&gt;&gt;</span> turtle.pensize(<span class="dv">5</span>)
+<span class="op">&gt;&gt;&gt;</span> turtle.pencolor(<span class="st">&quot;yellow&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> turtle.begin_fill()
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):
+...     turtle.forward(<span class="dv">200</span>)
+...     turtle.right(<span class="dv">144</span>)
+...
+<span class="op">&gt;&gt;&gt;</span> turtle.end_fill()</code></pre></div>
+<h2 id="typing">typing</h2>
+<h4 id="list-newtype">List, NewType</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> typing
+<span class="op">&gt;&gt;&gt;</span> lst <span class="op">=</span> typing.List[<span class="bu">int</span>]
+<span class="op">&gt;&gt;&gt;</span> float_lst <span class="op">=</span> typing.List[<span class="bu">float</span>]
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> foo(x: <span class="bu">float</span>, lst: lst)<span class="op">-&gt;</span>float_lst:
+...     <span class="cf">return</span> [x<span class="op">*</span>num <span class="cf">for</span> num <span class="kw">in</span> lst]
+...
+<span class="op">&gt;&gt;&gt;</span> foo(<span class="fl">1.5</span>, [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])
+[<span class="fl">4.5</span>, <span class="fl">6.0</span>, <span class="fl">7.5</span>]
+<span class="op">&gt;&gt;&gt;</span> ID <span class="op">=</span> typing.NewType(<span class="st">&quot;ID&quot;</span>, <span class="bu">int</span>)
+<span class="op">&gt;&gt;&gt;</span> ID(<span class="dv">70</span>)
+<span class="dv">70</span></code></pre></div>
+<h2 id="doctest">doctest</h2>
+<h4 id="testfile">testfile</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> doctest
+<span class="op">&gt;&gt;&gt;</span> doctest.testfile(<span class="st">&quot;doctest_example.txt&quot;</span>, verbose<span class="op">=</span><span class="va">True</span>)
+Trying:
+    <span class="im">from</span> doctest_example <span class="im">import</span> factorial
+Expecting nothing
+ok
+Trying:
+    [factorial(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>)]
+Expecting:
+    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">24</span>, <span class="dv">120</span>]
+ok
+Trying:
+    factorial(<span class="dv">30</span>)
+Expecting:
+    <span class="dv">265252859812191058636308480000000</span>
+ok
+<span class="dv">1</span> items passed <span class="bu">all</span> tests:
+   <span class="dv">3</span> tests <span class="kw">in</span> doctest_example.txt
+<span class="dv">3</span> tests <span class="kw">in</span> <span class="dv">1</span> items.
+<span class="dv">3</span> passed <span class="kw">and</span> <span class="dv">0</span> failed.
+Test passed.
+TestResults(failed<span class="op">=</span><span class="dv">0</span>, attempted<span class="op">=</span><span class="dv">3</span>)</code></pre></div>
+<h2 id="timeit">timeit</h2>
+<h4 id="timeit-timer">timeit, Timer</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> timeit
+<span class="op">&gt;&gt;&gt;</span> timeit.timeit(<span class="st">&quot;[i for i in range(10000)]&quot;</span>, number <span class="op">=</span> <span class="dv">1000</span>)
+<span class="fl">1.0810747999999961</span>
+<span class="op">&gt;&gt;&gt;</span> timeit.timeit(<span class="st">&quot;lst = []</span><span class="ch">\n</span><span class="st">for i in range(10000):</span><span class="ch">\n</span><span class="st">    lst.append(i)&quot;</span>, number <span class="op">=</span> <span class="dv">1000</span>)
+<span class="fl">1.770644500000003</span>
+<span class="op">&gt;&gt;&gt;</span> a <span class="op">=</span> timeit.Timer(<span class="st">&quot;[i for i in range(10000)]&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> a.timeit(number <span class="op">=</span> <span class="dv">1000</span>)
+<span class="fl">0.9840328999999883</span></code></pre></div>
+<h2 id="pdb">pdb</h2>
+<h4 id="set_trace">set_trace</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pdb
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> foo():
+...     lst <span class="op">=</span> []
+...     <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>):
+...         pdb.set_trace()
+...         lst.append(i)
+...     <span class="cf">return</span> lst
+...
+<span class="op">&gt;&gt;&gt;</span> foo()
+<span class="op">&gt;</span> <span class="op">&lt;</span>stdin<span class="op">&gt;</span>(<span class="dv">5</span>)foo()
+(Pdb) p i
+<span class="dv">0</span>
+(Pdb) p lst
+[]
+(Pdb) n
+<span class="op">&gt;</span> <span class="op">&lt;</span>stdin<span class="op">&gt;</span>(<span class="dv">3</span>)foo()
+(Pdb) <span class="bu">list</span>
+[EOF]
+(Pdb) n
+<span class="op">&gt;</span> <span class="op">&lt;</span>stdin<span class="op">&gt;</span>(<span class="dv">4</span>)foo()
+(Pdb) r
+<span class="op">&gt;</span> <span class="op">&lt;</span>stdin<span class="op">&gt;</span>(<span class="dv">5</span>)foo()
+(Pdb) p i
+<span class="dv">1</span>
+(Pdb) p lst
+[<span class="dv">0</span>]
+(Pdb) q
+Traceback (most recent call last):
+  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span>
+  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">5</span>, <span class="kw">in</span> foo
+  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">5</span>, <span class="kw">in</span> foo
+  File <span class="st">&quot;C:\Python37\lib</span><span class="ch">\b</span><span class="st">db.py&quot;</span>, line <span class="dv">88</span>, <span class="kw">in</span> trace_dispatch
+    <span class="cf">return</span> <span class="va">self</span>.dispatch_line(frame)
+  File <span class="st">&quot;C:\Python37\lib</span><span class="ch">\b</span><span class="st">db.py&quot;</span>, line <span class="dv">113</span>, <span class="kw">in</span> dispatch_line
+    <span class="cf">if</span> <span class="va">self</span>.quitting: <span class="cf">raise</span> BdbQuit
+bdb.BdbQuit</code></pre></div>
+<h2 id="ensurepip">ensurepip</h2>
+<h4 id="version-bootstrap">version, bootstrap</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> ensurepip
+<span class="op">&gt;&gt;&gt;</span> ensurepip.version()
+<span class="co">&#39;19.0.3&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> ensurepip.bootstrap(upgrade<span class="op">=</span><span class="va">True</span>)
+Looking <span class="kw">in</span> links: C:<span class="op">\</span>Users<span class="op">\</span>Nick<span class="op">\</span>AppData<span class="op">\</span>Local<span class="op">\</span>Temp<span class="op">\</span>tmpus54fm12
+Requirement already up<span class="op">-</span>to<span class="op">-</span>date: setuptools <span class="kw">in</span> c:<span class="op">\</span>python37<span class="op">\</span>lib<span class="op">\</span>site<span class="op">-</span>packages (<span class="fl">41.2</span>.<span class="dv">0</span>)
+Requirement already up<span class="op">-</span>to<span class="op">-</span>date: pip <span class="kw">in</span> c:<span class="op">\</span>python37<span class="op">\</span>lib<span class="op">\</span>site<span class="op">-</span>packages (<span class="fl">19.2</span>.<span class="dv">3</span>)</code></pre></div>
+<p>Run in bash:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">python</span> -m ensurepip   # download pip
+<span class="ex">python</span> -m ensurepip --upgrade   # upgrade pip</code></pre></div>
+<h2 id="zipapp">zipapp</h2>
+<h4 id="create_archive">create_archive</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> zipapp
+<span class="op">&gt;&gt;&gt;</span> zipapp.create_archive(<span class="st">&quot;myapp&quot;</span>, <span class="st">&quot;myapp.pyz&quot;</span>, main<span class="op">=</span><span class="st">&quot;app:main&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">__import__</span>(<span class="st">&quot;os&quot;</span>).popen(<span class="st">&quot;python myapp.pyz&quot;</span>).read()
+<span class="co">&#39;Hello, zipapp!\n&#39;</span></code></pre></div>
+<h2 id="sys">sys</h2>
+<h4 id="exc_info-implementation-maxsize-platform-version">exc_info, implementation, maxsize, platform, version</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> sys
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">try</span>:
+...     <span class="dv">1</span><span class="op">/</span><span class="dv">0</span>
+... <span class="cf">except</span> <span class="pp">Exception</span>:
+...     <span class="bu">print</span>(sys.exc_info())   <span class="co"># traceback.print_exc is a beautful version of sys.exc_info()</span>
+...
+(<span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ZeroDivisionError&#39;</span><span class="op">&gt;</span>, <span class="pp">ZeroDivisionError</span>(<span class="st">&#39;division by zero&#39;</span>), <span class="op">&lt;</span>traceback <span class="bu">object</span> at <span class="bn">0x000002D8BF38A248</span><span class="op">&gt;</span>)
+<span class="op">&gt;&gt;&gt;</span> sys.implementation
+namespace(cache_tag<span class="op">=</span><span class="st">&#39;cpython-37&#39;</span>, hexversion<span class="op">=</span><span class="dv">50791664</span>, name<span class="op">=</span><span class="st">&#39;cpython&#39;</span>, version<span class="op">=</span>sys.version_info(major<span class="op">=</span><span class="dv">3</span>, minor<span class="op">=</span><span class="dv">7</span>, micro<span class="op">=</span><span class="dv">4</span>, releaselevel<span class="op">=</span><span class="st">&#39;final&#39;</span>, serial<span class="op">=</span><span class="dv">0</span>))
+<span class="op">&gt;&gt;&gt;</span> sys.maxsize
+<span class="dv">9223372036854775807</span>
+<span class="op">&gt;&gt;&gt;</span> sys.platform
+<span class="co">&#39;win32&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> sys.version
+<span class="co">&#39;3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 20:34:20) [MSC v.1916 64 bit (AMD64)]&#39;</span>
+<span class="op">&gt;&gt;&gt;</span> sys.exit()</code></pre></div>
+<h2 id="dataclasses">dataclasses</h2>
+<h4 id="dataclass">dataclass</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> dataclasses
+<span class="op">&gt;&gt;&gt;</span> <span class="op">@</span>dataclasses.dataclass
+... <span class="kw">class</span> User:
+...     name: <span class="bu">str</span>
+...     age: <span class="bu">int</span>
+...     <span class="kw">def</span> get_info(<span class="va">self</span>):
+...         <span class="cf">return</span> <span class="va">self</span>.name <span class="op">+</span> <span class="st">&quot; is &quot;</span> <span class="op">+</span> <span class="bu">str</span>(<span class="va">self</span>.age) <span class="op">+</span> <span class="st">&quot; years old.&quot;</span>
+...
+<span class="op">&gt;&gt;&gt;</span> pynickle <span class="op">=</span> User(<span class="st">&quot;pynickle&quot;</span>, <span class="dv">14</span>)
+<span class="op">&gt;&gt;&gt;</span> pynickle.get_info()
+<span class="co">&#39;pynickle is 14 years old.&#39;</span></code></pre></div>
+<h2 id="contextlib">contextlib</h2>
+<h4 id="contextmanager">contextmanager</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> contextlib
+<span class="op">&gt;&gt;&gt;</span> <span class="op">@</span>contextlib.contextmanager
+... <span class="kw">def</span> cm(name):
+...     <span class="bu">print</span>(<span class="st">&quot;__enter__ cm&quot;</span>)
+...     <span class="cf">yield</span> <span class="st">&quot;Hello,&quot;</span> <span class="op">+</span> name
+...     <span class="bu">print</span>(<span class="st">&quot;__exit__ cm&quot;</span>)
+...
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> cm(<span class="st">&quot;pynickle&quot;</span>) <span class="im">as</span> value:
+...     <span class="bu">print</span>(value)
+...
+<span class="fu">__enter__</span> cm
+Hello,pynickle
+<span class="fu">__exit__</span> cm
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">with</span> cm(<span class="st">&quot;pynickle&quot;</span>) <span class="im">as</span> a, cm(<span class="st">&quot;bob&quot;</span>) <span class="im">as</span> b:
+...     <span class="bu">print</span>(a, b)
+...
+<span class="fu">__enter__</span> cm
+<span class="fu">__enter__</span> cm
+Hello,pynickle Hello,bob
+<span class="fu">__exit__</span> cm
+<span class="fu">__exit__</span> cm</code></pre></div>
+<h2 id="abc">abc</h2>
+<h4 id="abcmeta-abstractmethod">ABCMeta, abstractmethod</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> abc
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> User(metaclass<span class="op">=</span>abc.ABCMeta):
+...     <span class="kw">def</span> hello(<span class="va">self</span>, name):
+...         <span class="bu">print</span>(<span class="st">&quot;Hello,&quot;</span> <span class="op">+</span> name)
+...     <span class="op">@</span>abc.abstractmethod
+...     <span class="kw">def</span> unique_hello(<span class="va">self</span>):
+...         <span class="va">self</span>.hello()
+...     <span class="op">@</span>property
+...     <span class="op">@</span>abc.abstractmethod
+...     <span class="kw">def</span> age():
+...         <span class="cf">pass</span>
+...
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> UserOne(User):
+...     <span class="kw">def</span> unique_hello(<span class="va">self</span>):
+...         <span class="va">self</span>.hello()
+...         <span class="bu">print</span>(<span class="st">&quot;l am coming!&quot;</span>)
+...     <span class="kw">def</span> age():
+...         <span class="cf">return</span> <span class="st">&quot;13&quot;</span>
+...
+<span class="op">&gt;&gt;&gt;</span> user1 <span class="op">=</span> UserOne()
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">dir</span>(user1)
+[<span class="st">&#39;__abstractmethods__&#39;</span>, <span class="st">&#39;__class__&#39;</span>, <span class="st">&#39;__delattr__&#39;</span>, <span class="st">&#39;__dict__&#39;</span>, <span class="st">&#39;__dir__&#39;</span>, <span class="st">&#39;__doc__&#39;</span>, <span class="st">&#39;__eq__&#39;</span>, <span class="st">&#39;__format__&#39;</span>, <span class="st">&#39;__ge__&#39;</span>, <span class="st">&#39;__getattribute__&#39;</span>, <span class="st">&#39;__gt__&#39;</span>, <span class="st">&#39;__hash__&#39;</span>, <span class="st">&#39;__init__&#39;</span>, <span class="st">&#39;__init_subclass__&#39;</span>, <span class="st">&#39;__le__&#39;</span>, <span class="st">&#39;__lt__&#39;</span>, <span class="st">&#39;__module__&#39;</span>, <span class="st">&#39;__ne__&#39;</span>, <span class="st">&#39;__new__&#39;</span>, <span class="st">&#39;__reduce__&#39;</span>, <span class="st">&#39;__reduce_ex__&#39;</span>, <span class="st">&#39;__repr__&#39;</span>, <span class="st">&#39;__setattr__&#39;</span>, <span class="st">&#39;__sizeof__&#39;</span>, <span class="st">&#39;__str__&#39;</span>, <span class="st">&#39;__subclasshook__&#39;</span>, <span class="st">&#39;__weakref__&#39;</span>, <span class="st">&#39;_abc_impl&#39;</span>, <span class="st">&#39;age&#39;</span>, <span class="st">&#39;hello&#39;</span>, <span class="st">&#39;unique_hello&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">isinstance</span>(user1, User)
+<span class="va">True</span>
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> UserTwo():
+...     <span class="cf">pass</span>
+...
+<span class="op">&gt;&gt;&gt;</span> User.register(UserTwo)   <span class="co"># register only made UserTwo subclass of Uuser, but none of the methods</span>
+<span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;__main__.UserTwo&#39;</span><span class="op">&gt;</span>
+<span class="op">&gt;&gt;&gt;</span> user2 <span class="op">=</span> UserTwo()
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">dir</span>(user2)
+[<span class="st">&#39;__class__&#39;</span>, <span class="st">&#39;__delattr__&#39;</span>, <span class="st">&#39;__dict__&#39;</span>, <span class="st">&#39;__dir__&#39;</span>, <span class="st">&#39;__doc__&#39;</span>, <span class="st">&#39;__eq__&#39;</span>, <span class="st">&#39;__format__&#39;</span>, <span class="st">&#39;__ge__&#39;</span>, <span class="st">&#39;__getattribute__&#39;</span>, <span class="st">&#39;__gt__&#39;</span>, <span class="st">&#39;__hash__&#39;</span>, <span class="st">&#39;__init__&#39;</span>, <span class="st">&#39;__init_subclass__&#39;</span>, <span class="st">&#39;__le__&#39;</span>, <span class="st">&#39;__lt__&#39;</span>, <span class="st">&#39;__module__&#39;</span>, <span class="st">&#39;__ne__&#39;</span>, <span class="st">&#39;__new__&#39;</span>, <span class="st">&#39;__reduce__&#39;</span>, <span class="st">&#39;__reduce_ex__&#39;</span>, <span class="st">&#39;__repr__&#39;</span>, <span class="st">&#39;__setattr__&#39;</span>, <span class="st">&#39;__sizeof__&#39;</span>, <span class="st">&#39;__str__&#39;</span>, <span class="st">&#39;__subclasshook__&#39;</span>, <span class="st">&#39;__weakref__&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">issubclass</span>(UserTwo, User)
+<span class="va">True</span></code></pre></div>
+<h2 id="traceback">traceback</h2>
+<h4 id="print_exc">print_exc</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> traceback
+<span class="op">&gt;&gt;&gt;</span> <span class="cf">try</span>:
+...     <span class="dv">1</span><span class="op">/</span><span class="dv">0</span>
+... <span class="cf">except</span> <span class="pp">Exception</span>:
+...     traceback.print_exc()
+...
+Traceback (most recent call last):
+  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">2</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span>
+<span class="pp">ZeroDivisionError</span>: division by zero</code></pre></div>
+<h2 id="future"><strong>future</strong></h2>
+<h4 id="division-absolute_import-print_function-unicode_literals">division, absolute_import, print_function, unicode_literals</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> __future__ <span class="im">import</span> division, absolute_import, print_function, unicode_literals</code></pre></div>
+<h2 id="atexit">atexit</h2>
+<h4 id="register">register</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> atexit
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> bye():
+...     <span class="bu">print</span>(<span class="st">&quot;bye!&quot;</span>)
+...
+<span class="op">&gt;&gt;&gt;</span> atexit.register(bye)
+<span class="op">&lt;</span>function bye at <span class="bn">0x004B0858</span><span class="op">&gt;</span>
+<span class="op">&gt;&gt;&gt;</span> exit()
+bye<span class="op">!</span></code></pre></div>
+<h2 id="zipimport">zipimport</h2>
+<h4 id="importer">importer</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> zipimport
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">zip</span> <span class="op">=</span> zipimport.zipimporter(<span class="st">&quot;GETREADME.zip&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> <span class="bu">zip</span>.archive
+<span class="co">&#39;GETREADME.zip&#39;</span>
+<span class="op">&gt;&gt;&gt;</span>
+<span class="op">&gt;&gt;&gt;</span> getreadme <span class="op">=</span> <span class="bu">zip</span>.load_module(<span class="st">&quot;GETREADME&quot;</span>)
+<span class="op">&gt;&gt;&gt;</span> getreadme
+<span class="op">&lt;</span>module <span class="st">&#39;GETREADME&#39;</span> <span class="im">from</span> <span class="st">&#39;GETREADME.zip</span><span class="ch">\\</span><span class="st">GETREADME.py&#39;</span><span class="op">&gt;</span>
+<span class="op">&gt;&gt;&gt;</span> getreadme.main(<span class="dv">0</span>)
+Requesting...
+Processing...
+Saving...
+Using: <span class="fl">0.98</span> s</code></pre></div>
+<h2 id="importlib">importlib</h2>
+<h2 id="import-reload"><strong>import</strong>, reload</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> importlib
+<span class="op">&gt;&gt;&gt;</span> sys <span class="op">=</span> importlib.<span class="bu">__import__</span>(<span class="st">&quot;sys&quot;</span>)   <span class="co"># equal to built in function __import__</span>
+<span class="op">&gt;&gt;&gt;</span> importlib.<span class="bu">reload</span>(sys)
+<span class="op">&lt;</span>module <span class="st">&#39;sys&#39;</span> (built<span class="op">-</span><span class="kw">in</span>)<span class="op">&gt;</span></code></pre></div>
+<h2 id="runpy">runpy</h2>
+<h4 id="run_module-run_path">run_module, run_path</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> runpy.run_module(<span class="st">&quot;app&quot;</span>)
+{<span class="st">&#39;__name__&#39;</span>: <span class="st">&#39;app&#39;</span>, <span class="st">&#39;__file__&#39;</span>: <span class="st">&#39;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">Nick</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">my-github</span><span class="ch">\\</span><span class="st">python-cheatsheet</span><span class="ch">\\</span><span class="st">app.py&#39;</span>, <span class="st">&#39;__cached__&#39;</span>: <span class="st">&#39;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">Nick</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">my-github</span><span class="ch">\\</span><span class="st">python-cheatsheet</span><span class="ch">\\</span><span class="st">__pycache__</span><span class="ch">\\</span><span class="st">app.cpython-37.pyc&#39;</span>, <span class="st">&#39;__doc__&#39;</span>: <span class="va">None</span>, <span class="st">&#39;__loader__&#39;</span>: <span class="op">&lt;</span>_frozen_importlib_external.SourceFileLoader <span class="bu">object</span> at <span class="bn">0x000001AF031DFE88</span><span class="op">&gt;</span>, <span class="st">&#39;__package__&#39;</span>: <span class="st">&#39;&#39;</span>, <span class="st">&#39;__spec__&#39;</span>: ModuleSpec(name<span class="op">=</span><span class="st">&#39;app&#39;</span>, loader<span class="op">=&lt;</span>_frozen_importlib_external.SourceFileLoader <span class="bu">object</span> at <span class="bn">0x000001AF031DFE88</span><span class="op">&gt;</span>, origin<span class="op">=</span><span class="st">&#39;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">Nick</span><span class="ch">\\</span><span class="st">Desktop</span><span class="ch">\\</span><span class="st">my-github</span><span class="ch">\\</span><span class="st">python-cheatsheet</span><span class="ch">\\</span><span class="st">app.py&#39;</span>), <span class="st">&#39;__builtins__&#39;</span>: {<span class="st">&#39;__name__&#39;</span>: <span class="st">&#39;builtins&#39;</span>, <span class="st">&#39;__doc__&#39;</span>: <span class="st">&quot;Built-in functions, exceptions, and other objects.</span><span class="ch">\n\n</span><span class="st">Noteworthy: None is the `nil&#39; object; Ellipsis represents `...&#39; in slices.&quot;</span>, <span class="st">&#39;__package__&#39;</span>: <span class="st">&#39;&#39;</span>, <span class="st">&#39;__loader__&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;_frozen_importlib.BuiltinImporter&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;__spec__&#39;</span>: ModuleSpec(name<span class="op">=</span><span class="st">&#39;builtins&#39;</span>, loader<span class="op">=&lt;</span><span class="kw">class</span> <span class="st">&#39;_frozen_importlib.BuiltinImporter&#39;</span><span class="op">&gt;</span>), <span class="st">&#39;__build_class__&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function __build_class__<span class="op">&gt;</span>, <span class="st">&#39;__import__&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">__import__</span><span class="op">&gt;</span>, <span class="st">&#39;abs&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">abs</span><span class="op">&gt;</span>, <span class="st">&#39;all&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">all</span><span class="op">&gt;</span>, <span class="st">&#39;any&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">any</span><span class="op">&gt;</span>, <span class="st">&#39;ascii&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">ascii</span><span class="op">&gt;</span>, <span class="st">&#39;bin&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">bin</span><span class="op">&gt;</span>, <span class="st">&#39;breakpoint&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function breakpoint<span class="op">&gt;</span>, <span class="st">&#39;callable&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">callable</span><span class="op">&gt;</span>, <span class="st">&#39;chr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">chr</span><span class="op">&gt;</span>, <span class="st">&#39;compile&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">compile</span><span class="op">&gt;</span>, <span class="st">&#39;delattr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">delattr</span><span class="op">&gt;</span>, <span class="st">&#39;dir&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">dir</span><span class="op">&gt;</span>, <span class="st">&#39;divmod&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">divmod</span><span class="op">&gt;</span>, <span class="st">&#39;eval&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">eval</span><span class="op">&gt;</span>, <span class="st">&#39;exec&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">exec</span><span class="op">&gt;</span>, <span class="st">&#39;format&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> 
+function <span class="bu">format</span><span class="op">&gt;</span>, <span class="st">&#39;getattr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">getattr</span><span class="op">&gt;</span>, <span class="st">&#39;globals&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">globals</span><span class="op">&gt;</span>, <span class="st">&#39;hasattr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">hasattr</span><span class="op">&gt;</span>, <span class="st">&#39;hash&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">hash</span><span class="op">&gt;</span>, <span class="st">&#39;hex&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">hex</span><span class="op">&gt;</span>, <span class="st">&#39;id&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">id</span><span class="op">&gt;</span>, <span class="st">&#39;input&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">input</span><span class="op">&gt;</span>, <span class="st">&#39;isinstance&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">isinstance</span><span class="op">&gt;</span>, <span class="st">&#39;issubclass&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">issubclass</span><span class="op">&gt;</span>, <span class="st">&#39;iter&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">iter</span><span class="op">&gt;</span>, <span class="st">&#39;len&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">len</span><span class="op">&gt;</span>, <span class="st">&#39;locals&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">locals</span><span class="op">&gt;</span>, <span class="st">&#39;max&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">max</span><span class="op">&gt;</span>, <span class="st">&#39;min&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">min</span><span class="op">&gt;</span>, <span class="st">&#39;next&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">next</span><span class="op">&gt;</span>, <span class="st">&#39;oct&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">oct</span><span class="op">&gt;</span>, <span class="st">&#39;ord&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">ord</span><span class="op">&gt;</span>, <span class="st">&#39;pow&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">pow</span><span class="op">&gt;</span>, <span class="st">&#39;print&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">print</span><span class="op">&gt;</span>, <span class="st">&#39;repr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">repr</span><span class="op">&gt;</span>, <span class="st">&#39;round&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">round</span><span class="op">&gt;</span>, <span class="st">&#39;setattr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">setattr</span><span class="op">&gt;</span>, <span class="st">&#39;sorted&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">sorted</span><span class="op">&gt;</span>, <span class="st">&#39;sum&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">sum</span><span class="op">&gt;</span>, <span class="st">&#39;vars&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">vars</span><span class="op">&gt;</span>, <span class="st">&#39;None&#39;</span>: <span class="va">None</span>, <span class="st">&#39;Ellipsis&#39;</span>: <span class="va">Ellipsis</span>, <span class="st">&#39;NotImplemented&#39;</span>: <span class="va">NotImplemented</span>, <span class="st">&#39;False&#39;</span>: <span class="va">False</span>, <span class="st">&#39;True&#39;</span>: <span class="va">True</span>, <span class="st">&#39;bool&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;bool&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;memoryview&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;memoryview&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;bytearray&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;bytearray&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;bytes&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;bytes&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;classmethod&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;classmethod&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;complex&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;complex&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;dict&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;dict&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;enumerate&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;enumerate&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;filter&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;filter&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;float&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;float&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;frozenset&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;frozenset&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;property&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;property&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;int&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;list&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;list&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;map&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;map&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;object&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;object&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;range&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;range&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;reversed&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;reversed&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;set&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;set&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;slice&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;slice&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;staticmethod&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;staticmethod&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;str&#39;</span>: 
+<span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;str&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;super&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;super&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;tuple&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;tuple&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;type&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;type&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;zip&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;zip&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;__debug__&#39;</span>: <span class="va">True</span>, <span class="st">&#39;BaseException&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BaseException&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;Exception&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;Exception&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;TypeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;TypeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;StopAsyncIteration&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;StopAsyncIteration&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;StopIteration&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;StopIteration&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;GeneratorExit&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;GeneratorExit&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;SystemExit&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;SystemExit&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;KeyboardInterrupt&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;KeyboardInterrupt&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ImportError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ImportError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ModuleNotFoundError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ModuleNotFoundError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;OSError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OSError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;EnvironmentError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OSError&#39;</span><span class="op">&gt;</span>, 
+<span class="st">&#39;IOError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OSError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;WindowsError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OSError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;EOFError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;EOFError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;RuntimeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;RuntimeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;RecursionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;RecursionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;NotImplementedError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;NotImplementedError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;NameError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;NameError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnboundLocalError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnboundLocalError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;AttributeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;AttributeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;SyntaxError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;SyntaxError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;IndentationError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;IndentationError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;TabError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;TabError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;LookupError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;LookupError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;IndexError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;IndexError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;KeyError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;KeyError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ValueError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ValueError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeEncodeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeEncodeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeDecodeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeDecodeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeTranslateError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeTranslateError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;AssertionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;AssertionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ArithmeticError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ArithmeticError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;FloatingPointError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;FloatingPointError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;OverflowError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OverflowError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ZeroDivisionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ZeroDivisionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;SystemError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;SystemError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ReferenceError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ReferenceError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;MemoryError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;MemoryError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;BufferError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BufferError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;Warning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;Warning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UserWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UserWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;DeprecationWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;DeprecationWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;PendingDeprecationWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;PendingDeprecationWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;SyntaxWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;SyntaxWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;RuntimeWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;RuntimeWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;FutureWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;FutureWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ImportWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ImportWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;BytesWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BytesWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ResourceWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ResourceWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ConnectionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ConnectionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;BlockingIOError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BlockingIOError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;BrokenPipeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BrokenPipeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ChildProcessError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ChildProcessError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ConnectionAbortedError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ConnectionAbortedError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ConnectionRefusedError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ConnectionRefusedError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ConnectionResetError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ConnectionResetError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;FileExistsError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;FileExistsError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;FileNotFoundError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;FileNotFoundError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;IsADirectoryError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;IsADirectoryError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;NotADirectoryError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;NotADirectoryError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;InterruptedError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;InterruptedError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;PermissionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;PermissionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ProcessLookupError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ProcessLookupError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;TimeoutError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;TimeoutError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;open&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">open</span><span class="op">&gt;</span>, <span class="st">&#39;quit&#39;</span>: Use quit() <span class="kw">or</span> Ctrl<span class="op">-</span>Z plus Return to exit, <span class="st">&#39;exit&#39;</span>: Use exit() <span class="kw">or</span> Ctrl<span class="op">-</span>Z plus Return to exit, <span class="st">&#39;copyright&#39;</span>: Copyright (c) <span class="dv">2001</span><span class="op">-</span><span class="dv">2019</span> Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) <span class="dv">2000</span> BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) <span class="dv">1995</span><span class="op">-</span><span class="dv">2001</span> Corporation <span class="cf">for</span> National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) <span class="dv">1991</span><span class="op">-</span><span class="dv">1995</span> Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., <span class="st">&#39;credits&#39;</span>:     Thanks to CWI, CNRI, BeOpen.com, Zope Corporation <span class="kw">and</span> a cast of thousands
+    <span class="cf">for</span> supporting Python development.  See www.python.org <span class="cf">for</span> more information., <span class="st">&#39;license&#39;</span>: Type license() to see the full license text, <span class="st">&#39;help&#39;</span>: Type <span class="bu">help</span>() <span class="cf">for</span> interactive <span class="bu">help</span>, <span class="kw">or</span> <span class="bu">help</span>(<span class="bu">object</span>) <span class="cf">for</span> <span class="bu">help</span> about <span class="bu">object</span>., <span class="st">&#39;_&#39;</span>: <span class="va">None</span>}}
+<span class="op">&gt;&gt;&gt;</span> runpy.run_path(<span class="st">&quot;myapp&quot;</span>)
+Hello, runpy<span class="op">!</span>
+{<span class="st">&#39;__name__&#39;</span>: <span class="st">&#39;&lt;run_path&gt;&#39;</span>, <span class="st">&#39;__doc__&#39;</span>: <span class="va">None</span>, <span class="st">&#39;__package__&#39;</span>: <span class="st">&#39;&#39;</span>, <span class="st">&#39;__loader__&#39;</span>: <span class="op">&lt;</span>_frozen_importlib_external.SourceFileLoader <span class="bu">object</span> at <span class="bn">0x000001AF031A5B88</span><span class="op">&gt;</span>, <span class="st">&#39;__spec__&#39;</span>: ModuleSpec(name<span class="op">=</span><span class="st">&#39;__main__&#39;</span>, loader<span class="op">=&lt;</span>_frozen_importlib_external.SourceFileLoader <span class="bu">object</span> at <span class="bn">0x000001AF031A5B88</span><span class="op">&gt;</span>, origin<span class="op">=</span><span class="st">&#39;myapp</span><span class="ch">\\</span><span class="st">__main__.py&#39;</span>), <span class="st">&#39;__file__&#39;</span>: <span class="st">&#39;myapp</span><span class="ch">\\</span><span class="st">__main__.py&#39;</span>, <span class="st">&#39;__cached__&#39;</span>: <span class="st">&#39;myapp</span><span class="ch">\\</span><span class="st">__pycache__</span><span class="ch">\\</span><span class="st">__main__.cpython-37.pyc&#39;</span>, <span class="st">&#39;__builtins__&#39;</span>: {<span class="st">&#39;__name__&#39;</span>: <span class="st">&#39;builtins&#39;</span>, <span class="st">&#39;__doc__&#39;</span>: <span class="st">&quot;Built-in functions, exceptions, and other objects.</span><span class="ch">\n\n</span><span class="st">Noteworthy: None is the `nil&#39; object; Ellipsis represents `...&#39; in slices.&quot;</span>, <span class="st">&#39;__package__&#39;</span>: <span class="st">&#39;&#39;</span>, <span class="st">&#39;__loader__&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> 
+<span class="st">&#39;_frozen_importlib.BuiltinImporter&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;__spec__&#39;</span>: ModuleSpec(name<span class="op">=</span><span class="st">&#39;builtins&#39;</span>, loader<span class="op">=&lt;</span><span class="kw">class</span> <span class="st">&#39;_frozen_importlib.BuiltinImporter&#39;</span><span class="op">&gt;</span>), <span class="st">&#39;__build_class__&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function __build_class__<span class="op">&gt;</span>, <span class="st">&#39;__import__&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">__import__</span><span class="op">&gt;</span>, <span class="st">&#39;abs&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> 
+function <span class="bu">abs</span><span class="op">&gt;</span>, <span class="st">&#39;all&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">all</span><span class="op">&gt;</span>, <span class="st">&#39;any&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">any</span><span class="op">&gt;</span>, <span class="st">&#39;ascii&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">ascii</span><span class="op">&gt;</span>, <span class="st">&#39;bin&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">bin</span><span class="op">&gt;</span>, <span class="st">&#39;breakpoint&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function breakpoint<span class="op">&gt;</span>, <span class="st">&#39;callable&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">callable</span><span class="op">&gt;</span>, <span class="st">&#39;chr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">chr</span><span class="op">&gt;</span>, <span class="st">&#39;compile&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">compile</span><span class="op">&gt;</span>, <span class="st">&#39;delattr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">delattr</span><span class="op">&gt;</span>, <span class="st">&#39;dir&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">dir</span><span class="op">&gt;</span>, <span class="st">&#39;divmod&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">divmod</span><span class="op">&gt;</span>, <span class="st">&#39;eval&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">eval</span><span class="op">&gt;</span>, <span class="st">&#39;exec&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">exec</span><span class="op">&gt;</span>, <span class="st">&#39;format&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">format</span><span class="op">&gt;</span>, <span class="st">&#39;getattr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">getattr</span><span class="op">&gt;</span>, <span class="st">&#39;globals&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">globals</span><span class="op">&gt;</span>, <span class="st">&#39;hasattr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">hasattr</span><span class="op">&gt;</span>, <span class="st">&#39;hash&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">hash</span><span class="op">&gt;</span>, <span class="st">&#39;hex&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">hex</span><span class="op">&gt;</span>, <span class="st">&#39;id&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">id</span><span class="op">&gt;</span>, <span class="st">&#39;input&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">input</span><span class="op">&gt;</span>, <span class="st">&#39;isinstance&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">isinstance</span><span class="op">&gt;</span>, <span class="st">&#39;issubclass&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">issubclass</span><span class="op">&gt;</span>, <span class="st">&#39;iter&#39;</span>: 
+<span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">iter</span><span class="op">&gt;</span>, <span class="st">&#39;len&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">len</span><span class="op">&gt;</span>, <span class="st">&#39;locals&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">locals</span><span class="op">&gt;</span>, <span class="st">&#39;max&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">max</span><span class="op">&gt;</span>, <span class="st">&#39;min&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">min</span><span class="op">&gt;</span>, <span class="st">&#39;next&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">next</span><span class="op">&gt;</span>, <span class="st">&#39;oct&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">oct</span><span class="op">&gt;</span>, <span class="st">&#39;ord&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">ord</span><span class="op">&gt;</span>, <span class="st">&#39;pow&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">pow</span><span class="op">&gt;</span>, <span class="st">&#39;print&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">print</span><span class="op">&gt;</span>, <span class="st">&#39;repr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">repr</span><span class="op">&gt;</span>, <span class="st">&#39;round&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">round</span><span class="op">&gt;</span>, <span class="st">&#39;setattr&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">setattr</span><span class="op">&gt;</span>, <span class="st">&#39;sorted&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">sorted</span><span class="op">&gt;</span>, <span class="st">&#39;sum&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function 
+<span class="bu">sum</span><span class="op">&gt;</span>, <span class="st">&#39;vars&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">vars</span><span class="op">&gt;</span>, <span class="st">&#39;None&#39;</span>: <span class="va">None</span>, <span class="st">&#39;Ellipsis&#39;</span>: <span class="va">Ellipsis</span>, <span class="st">&#39;NotImplemented&#39;</span>: <span class="va">NotImplemented</span>, <span class="st">&#39;False&#39;</span>: <span class="va">False</span>, <span class="st">&#39;True&#39;</span>: <span class="va">True</span>, <span class="st">&#39;bool&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;bool&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;memoryview&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;memoryview&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;bytearray&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;bytearray&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;bytes&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> 
+<span class="st">&#39;bytes&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;classmethod&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;classmethod&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;complex&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;complex&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;dict&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;dict&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;enumerate&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;enumerate&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;filter&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;filter&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;float&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;float&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;frozenset&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;frozenset&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;property&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;property&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;int&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;list&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;list&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;map&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;map&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;object&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;object&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;range&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;range&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;reversed&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;reversed&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;set&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;set&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;slice&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;slice&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;staticmethod&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;staticmethod&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;str&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;str&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;super&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;super&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;tuple&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;tuple&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;type&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;type&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;zip&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;zip&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;__debug__&#39;</span>: <span class="va">True</span>, <span class="st">&#39;BaseException&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BaseException&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;Exception&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;Exception&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;TypeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;TypeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;StopAsyncIteration&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;StopAsyncIteration&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;StopIteration&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;StopIteration&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;GeneratorExit&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;GeneratorExit&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;SystemExit&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;SystemExit&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;KeyboardInterrupt&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;KeyboardInterrupt&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ImportError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ImportError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ModuleNotFoundError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ModuleNotFoundError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;OSError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OSError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;EnvironmentError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OSError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;IOError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OSError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;WindowsError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OSError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;EOFError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;EOFError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;RuntimeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> 
+<span class="st">&#39;RuntimeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;RecursionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;RecursionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;NotImplementedError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;NotImplementedError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;NameError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;NameError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnboundLocalError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnboundLocalError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;AttributeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;AttributeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;SyntaxError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;SyntaxError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;IndentationError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;IndentationError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;TabError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;TabError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;LookupError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;LookupError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;IndexError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;IndexError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;KeyError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;KeyError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ValueError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ValueError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeEncodeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeEncodeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeDecodeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeDecodeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeTranslateError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeTranslateError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;AssertionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;AssertionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ArithmeticError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ArithmeticError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;FloatingPointError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;FloatingPointError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;OverflowError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;OverflowError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ZeroDivisionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ZeroDivisionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;SystemError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;SystemError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ReferenceError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ReferenceError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;MemoryError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;MemoryError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;BufferError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BufferError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;Warning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;Warning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UserWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UserWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;DeprecationWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;DeprecationWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;PendingDeprecationWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;PendingDeprecationWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;SyntaxWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;SyntaxWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;RuntimeWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;RuntimeWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;FutureWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;FutureWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ImportWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ImportWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;UnicodeWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;UnicodeWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;BytesWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BytesWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ResourceWarning&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ResourceWarning&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ConnectionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ConnectionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;BlockingIOError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BlockingIOError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;BrokenPipeError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;BrokenPipeError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ChildProcessError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ChildProcessError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ConnectionAbortedError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ConnectionAbortedError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ConnectionRefusedError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ConnectionRefusedError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ConnectionResetError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ConnectionResetError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;FileExistsError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;FileExistsError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;FileNotFoundError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;FileNotFoundError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;IsADirectoryError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;IsADirectoryError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;NotADirectoryError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;NotADirectoryError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;InterruptedError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;InterruptedError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;PermissionError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;PermissionError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;ProcessLookupError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;ProcessLookupError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;TimeoutError&#39;</span>: <span class="op">&lt;</span><span class="kw">class</span> <span class="st">&#39;TimeoutError&#39;</span><span class="op">&gt;</span>, <span class="st">&#39;open&#39;</span>: <span class="op">&lt;</span>built<span class="op">-</span><span class="kw">in</span> function <span class="bu">open</span><span class="op">&gt;</span>, <span class="st">&#39;quit&#39;</span>: Use quit() <span class="kw">or</span> Ctrl<span class="op">-</span>Z plus Return to exit, <span class="st">&#39;exit&#39;</span>: Use exit() <span class="kw">or</span> Ctrl<span class="op">-</span>Z plus Return to exit, <span class="st">&#39;copyright&#39;</span>: Copyright (c) <span class="dv">2001</span><span class="op">-</span><span class="dv">2019</span> Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) <span class="dv">2000</span> BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) <span class="dv">1995</span><span class="op">-</span><span class="dv">2001</span> Corporation <span class="cf">for</span> National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) <span class="dv">1991</span><span class="op">-</span><span class="dv">1995</span> Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., <span class="st">&#39;credits&#39;</span>:     Thanks to CWI, CNRI, BeOpen.com, Zope Corporation <span class="kw">and</span> a cast of thousands
+    <span class="cf">for</span> supporting Python development.  See www.python.org <span class="cf">for</span> more information., <span class="st">&#39;license&#39;</span>: Type license() to see the full license text, <span class="st">&#39;help&#39;</span>: Type <span class="bu">help</span>() <span class="cf">for</span> interactive <span class="bu">help</span>, <span class="kw">or</span> <span class="bu">help</span>(<span class="bu">object</span>) <span class="cf">for</span> <span class="bu">help</span> about <span class="bu">object</span>., <span class="st">&#39;_&#39;</span>: <span class="va">None</span>}}</code></pre></div>
+<h2 id="ast">ast</h2>
+<h2 id="literal_eval-parse-dump">literal_eval, parse, dump</h2>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> ast
+<span class="op">&gt;&gt;&gt;</span> ast.literal_eval(<span class="st">&quot;__import__(&#39;os&#39;)&quot;</span>)   <span class="co"># safer than built in function eval</span>
+Traceback (most recent call last):
+  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span>
+  File <span class="st">&quot;C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l
+ine <span class="dv">91</span>, <span class="kw">in</span> literal_eval
+    <span class="cf">return</span> _convert(node_or_string)
+  File <span class="st">&quot;C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l
+ine <span class="dv">90</span>, <span class="kw">in</span> _convert
+    <span class="cf">return</span> _convert_signed_num(node)
+  File <span class="st">&quot;C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l
+ine <span class="dv">63</span>, <span class="kw">in</span> _convert_signed_num
+    <span class="cf">return</span> _convert_num(node)
+  File <span class="st">&quot;C:\Users\Lenovo\AppData\Local\Programs\Python\Python37-32\lib</span><span class="ch">\a</span><span class="st">st.py&quot;</span>, l
+ine <span class="dv">55</span>, <span class="kw">in</span> _convert_num
+    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;malformed node or string: &#39;</span> <span class="op">+</span> <span class="bu">repr</span>(node))
+<span class="pp">ValueError</span>: malformed node <span class="kw">or</span> string: <span class="op">&lt;</span>_ast.Call <span class="bu">object</span> at <span class="bn">0x00B11C50</span><span class="op">&gt;</span>
+<span class="op">&gt;&gt;&gt;</span> ast.literal_eval(<span class="st">&quot;[1, 2, 3]&quot;</span>)
+[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]
+<span class="op">&gt;&gt;&gt;</span> hello_world <span class="op">=</span> ast.parse(<span class="st">&quot;print(&#39;Hello World!&#39;)&quot;</span>, <span class="st">&quot;&lt;string)&quot;</span>, <span class="st">&quot;exec&quot;</span>)   <span class="co"># abstract syntax trees</span>
+<span class="op">&gt;&gt;&gt;</span> ast.dump(hello_world)
+<span class="co">&quot;Module(body=[Expr(value=Call(func=Name(id=&#39;print&#39;, ctx=Load()), args=[Str(s=&#39;He</span>
+<span class="co">llo World!&#39;)], keywords=[]))])&quot;</span></code></pre></div>
+<h2 id="keyword">keyword</h2>
+<h4 id="kwlist-iskeyword">kwlist, iskeyword</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> keyword
+<span class="op">&gt;&gt;&gt;</span> keyword.kwlist
+[<span class="st">&#39;False&#39;</span>, <span class="st">&#39;None&#39;</span>, <span class="st">&#39;True&#39;</span>, <span class="st">&#39;and&#39;</span>, <span class="st">&#39;as&#39;</span>, <span class="st">&#39;assert&#39;</span>, <span class="st">&#39;async&#39;</span>, <span class="st">&#39;await&#39;</span>, <span class="st">&#39;break&#39;</span>, <span class="st">&#39;class&#39;</span>, <span class="st">&#39;continue&#39;</span>, <span class="st">&#39;def&#39;</span>, <span class="st">&#39;de</span>
+<span class="st">l&#39;</span>, <span class="st">&#39;elif&#39;</span>, <span class="st">&#39;else&#39;</span>, <span class="st">&#39;except&#39;</span>, <span class="st">&#39;finally&#39;</span>, <span class="st">&#39;for&#39;</span>, <span class="st">&#39;from&#39;</span>, <span class="st">&#39;global&#39;</span>, <span class="st">&#39;if&#39;</span>, <span class="st">&#39;import&#39;</span>, <span class="st">&#39;in&#39;</span>, <span class="st">&#39;is&#39;</span>, <span class="st">&#39;lambda&#39;</span>, <span class="st">&#39;no</span>
+<span class="st">nlocal&#39;</span>, <span class="st">&#39;not&#39;</span>, <span class="st">&#39;or&#39;</span>, <span class="st">&#39;pass&#39;</span>, <span class="st">&#39;raise&#39;</span>, <span class="st">&#39;return&#39;</span>, <span class="st">&#39;try&#39;</span>, <span class="st">&#39;while&#39;</span>, <span class="st">&#39;with&#39;</span>, <span class="st">&#39;yield&#39;</span>]
+<span class="op">&gt;&gt;&gt;</span> keyword.iskeyword(<span class="st">&quot;True&quot;</span>)
+<span class="va">True</span></code></pre></div>
+<h2 id="dis">dis</h2>
+<h4 id="dis-show_code-code_info">dis, show_code, code_info</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> dis
+<span class="op">&gt;&gt;&gt;</span> <span class="kw">def</span> func():
+...     <span class="bu">print</span>(<span class="st">&quot;Hello World&quot;</span>)
+...
+<span class="op">&gt;&gt;&gt;</span> dis.dis(func)
+  <span class="dv">2</span>           <span class="dv">0</span> LOAD_GLOBAL              <span class="dv">0</span> (<span class="bu">print</span>)
+              <span class="dv">2</span> LOAD_CONST               <span class="dv">1</span> (<span class="st">&#39;Hello World&#39;</span>)
+              <span class="dv">4</span> CALL_FUNCTION            <span class="dv">1</span>
+              <span class="dv">6</span> POP_TOP
+              <span class="dv">8</span> LOAD_CONST               <span class="dv">0</span> (<span class="va">None</span>)
+             <span class="dv">10</span> RETURN_VALUE
+<span class="op">&gt;&gt;&gt;</span> dis.show_code(func)
+Name:              func
+Filename:          <span class="op">&lt;</span>stdin<span class="op">&gt;</span>
+Argument count:    <span class="dv">0</span>
+Kw<span class="op">-</span>only arguments: <span class="dv">0</span>
+Number of <span class="bu">locals</span>:  <span class="dv">0</span>
+Stack size:        <span class="dv">2</span>
+Flags:             OPTIMIZED, NEWLOCALS, NOFREE
+Constants:
+   <span class="dv">0</span>: <span class="va">None</span>
+   <span class="dv">1</span>: <span class="st">&#39;Hello World&#39;</span>
+Names:
+   <span class="dv">0</span>: <span class="bu">print</span>
+<span class="op">&gt;&gt;&gt;</span> dis.code_info(func)
+<span class="co">&quot;Name:              func\nFilename:          &lt;stdin&gt;\nArgument count:    0\nKw-only arguments: 0\nNumber of locals:  0\nStack size:        2\nFlags:             OPTIMIZED, NEWLOCALS, NOFREE\nConstants:\n   0: None\n   1: &#39;Hello World&#39;\nNames:\n   0: print&quot;</span></code></pre></div>
+<h2 id="this">this</h2>
+<h4 id="this-1">this</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> this
+The Zen of Python, by Tim Peters
+
+Beautiful <span class="kw">is</span> better than ugly.
+Explicit <span class="kw">is</span> better than implicit.
+Simple <span class="kw">is</span> better than <span class="bu">complex</span>.
+Complex <span class="kw">is</span> better than complicated.
+Flat <span class="kw">is</span> better than nested.
+Sparse <span class="kw">is</span> better than dense.
+Readability counts.
+Special cases aren<span class="st">&#39;t special enough to break the rules.</span>
+<span class="st">Although practicality beats purity.</span>
+<span class="st">Errors should never pass silently.</span>
+<span class="st">Unless explicitly silenced.</span>
+<span class="st">In the face of ambiguity, refuse the temptation to guess.</span>
+<span class="st">There should be one-- and preferably only one --obvious way to do it.</span>
+<span class="st">Although that way may not be obvious at first unless you&#39;</span>re Dutch.
+Now <span class="kw">is</span> better than never.
+Although never <span class="kw">is</span> often better than <span class="op">*</span>right<span class="op">*</span> now.
+If the implementation <span class="kw">is</span> hard to explain, it<span class="st">&#39;s a bad idea.</span>
+<span class="st">If the implementation is easy to explain, it may be a good idea.</span>
+<span class="st">Namespaces are one honking great idea -- let&#39;</span>s do more of those<span class="op">!</span></code></pre></div>
+<h2 id="antigravity">antigravity</h2>
+<h4 id="antigravity-1">antigravity</h4>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> antigravity</code></pre></div>
+
+</body>
+</html>
