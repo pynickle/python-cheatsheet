@@ -76,8 +76,8 @@ def main(choice1, choice2):
         all_code_without_prefix = without_prefix(all_code)
         all_data = replace(all_data, all_code_without_prefix)
         all_data = all_data.replace("\r\n", "\n")
-    with open("python-cheatsheet.md", "w", encoding="utf-8") as f:
-        f.write(all_data)
+        with open("python-cheatsheet.md", "w", encoding="utf-8") as f:
+            f.write(all_data)
 
     print(f"Using: {time.time()-start:.2f} s")
 
