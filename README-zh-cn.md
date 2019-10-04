@@ -19,7 +19,8 @@
 
 **二进制数据**: [``codecs``](#codecs)
 
-**数据类型**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect)
+**数据类型**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect), [``heapq``](#heapq),
+[``weakref``](#weakref)
      
 **数学模块**: [``math``](#math), [``cmath``](#cmath), [``random``](#random)，
 [``fractions``](#fractions), [``decimal``](#decimal), [``statistics``](#statistics)
@@ -46,7 +47,8 @@
 
 **互联网协议**: [``webbrowser``](#webbrowser)
 
-**多媒体服务**: [``wave``](#wave), [``sndhdr``](#sndhdr), [``imghdr``](#imghdr)
+**多媒体服务**: [``wave``](#wave), [``sndhdr``](#sndhdr), [``imghdr``](#imghdr),
+[``colorsys``](#colorsys)
 
 **程序框架**: [``turtle``](#turtle)
 
@@ -63,6 +65,8 @@
 **导入模块**: [``zipimport``](#zipimport), [``importlib``](#importlib)
 
 **Python 语言服务**: [``ast``](#ast), [``keyword``](#keyword), [``dis``](#dis)
+
+**彩蛋**: [``this``](#this), [``antigravity``](#antigravity)
 
 ## string
 
@@ -446,6 +450,41 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 >>> bisect.insort_right(a, 4)
 >>> a
 [1, 1, 2, 2, 4, 4, 5]
+```
+
+## heapq
+
+#### heappush, heappop
+
+```python
+>>> import heapq
+>>> def heapsort(iterable):
+...     h = []
+...     for i in iterable:
+...         heapq.heappush(h, i)
+...     return [heapq.heappop(h) for i in range(len(h))]
+... 
+>>> heapsort([4, 3, 6, 9, 1, 7])
+[1, 3, 4, 6, 7, 9]
+```
+
+## weakref
+
+#### ref
+
+```python
+>>> import weakref
+>>> class A:   
+...     def method():
+...         print("A")
+... 
+>>> def b(reference):
+...     print(reference)
+... 
+>>> c = A()
+>>> d = weakref.ref(c, b)
+>>> del c
+<weakref at 0x000001C94E12F778; dead>
 ```
 
 ## math
@@ -1050,6 +1089,20 @@ SndHeaders(filetype='wav', framerate=44100, nchannels=2, nframes=442368, sampwid
 'jpeg'
 ```
 
+## colorsys
+
+#### rgb_to_yiq, rgb_to_hls, rgb_to_hsv 
+
+```python
+>>> import colorsys
+>>> colorsys.rgb_to_yiq(128, 128, 0)
+(113.91999999999999, 41.177600000000005, -39.948799999999984)
+>>> colorsys.rgb_to_hls(128, 128, 0)
+(0.16666666666666666, 64.0, -1.0158730158730158)
+>>> colorsys.rgb_to_hsv(128, 128, 0)
+(0.16666666666666666, 1.0, 128)
+```
+
 ## turtle
 
 #### pensize, pencolor, begin_fill, forward, right, end_fill
@@ -1447,4 +1500,41 @@ Names:
    0: print
 >>> dis.code_info(func)
 "Name:              func\nFilename:          <stdin>\nArgument count:    0\nKw-only arguments: 0\nNumber of locals:  0\nStack size:        2\nFlags:             OPTIMIZED, NEWLOCALS, NOFREE\nConstants:\n   0: None\n   1: 'Hello World'\nNames:\n   0: print"
+```
+
+## this
+
+#### this
+
+```python
+>>> import this
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
+
+## antigravity
+
+#### antigravity
+
+```python
+>>> import antigravity
 ```
