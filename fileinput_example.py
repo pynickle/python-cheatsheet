@@ -1,3 +1,6 @@
+"""
+file for fileinput
+"""
 import fileinput
 
 for line in fileinput.input():
