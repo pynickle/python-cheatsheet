@@ -2,7 +2,7 @@
 
 **PS**: **README.md为最新文档！**
 
-使用Python v3.7.4
+使用Python v3.7.4制作
 
 - [中文](README-zh-cn.md)
 - [English](README.md)
