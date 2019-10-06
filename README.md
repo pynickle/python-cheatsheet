@@ -25,7 +25,7 @@ Depend on Python v3.7.4
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
 
 **Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile),
-[``filecmp``](#filecmp), [``fileinput``](#fileinput)
+[``filecmp``](#filecmp), [``fileinput``](#fileinput), [``shutil``](#shutil)
 
 **Data Persistence**: [``pickle``](#pickle)
 
@@ -783,6 +783,19 @@ cmp1.txt | Line Number: 3 |:  3
 cmp1.txt | Line Number: 4 |:  4
 
 cmp1.txt | Line Number: 5 |:  5
+```
+
+## shutil
+
+#### copyfile, rmtree, move
+
+```python
+>>> import shutil
+>>> shutil.copyfile("song.wav", "copysong.wav")
+'copysong.wav'
+>>> shutil.rmtree("shutil_tree")
+>>> shutil.move("copysong.wav", "myapp/copysong.wav")
+'myapp/copysong.wav'
 ```
 
 ## pickle
