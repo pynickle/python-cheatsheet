@@ -1,6 +1,7 @@
 import doctest
 import re
 
+
 NOTEST = ["random.random", "random.randint", "random.randrange",
           "random.uniform", "codecs.getdecoder", "codecs.getencoder",
           "time.ctime", "time.perf_counter", "time.strftime",
