@@ -36,7 +36,6 @@ def main(file_name):
                         code += i
     return code
 
-
 if __name__ == "__main__":
     code = main("README.md")
     # print(code)
