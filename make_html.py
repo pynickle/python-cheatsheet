@@ -3,14 +3,6 @@ import os
 from GETREADME import main
 
 
-main("2", "1")
-
-os.popen("pandoc python-cheatsheet.md -t html -o python-cheatsheet.html")
-
-with open("python-cheatsheet.html", "r", encoding="utf-8") as f:
-    data = f.read()
-os.remove("python-cheatsheet.html")
-
 before = """
 <!DOCTYPE html>
 <html>
@@ -29,6 +21,14 @@ after = """
 </body>
 </html>
 """
+
+main("2", "1")
+
+os.popen("pandoc python-cheatsheet.md -t html -o python-cheatsheet.html")
+
+with open("python-cheatsheet.html", "r", encoding="utf-8") as f:
+    data = f.read()
+os.remove("python-cheatsheet.html")
 
 data = before + data + after
 
