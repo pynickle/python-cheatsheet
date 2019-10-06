@@ -7,6 +7,7 @@ NOTEST = ["random.random", "random.randint", "random.randrange",
           "time.ctime", "time.perf_counter", "time.strftime",
           "time.localtime", "os.getcwd", "os.name", "secrets.choice"]
 
+
 def main(file_name):
     status = None
     code = ""
@@ -34,6 +35,7 @@ def main(file_name):
                     else:
                         code += i
     return code
+
 
 if __name__ == "__main__":
     code = main("README.md")
