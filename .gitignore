@@ -4,4 +4,6 @@ HtmlDiff.html
 LICENSE.zip
 myapp.pyz
 
+web/
+
 *.pyc
