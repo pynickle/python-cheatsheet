@@ -37,7 +37,7 @@ Depend on Python v3.7.4
 
 **Operating System**: [``os``](#os), [``time``](#time), [``logging``](#logging),
 [``getpass``](#getpass),  [``platform``](#platform), [``argparse``](#argparse),
-[``errno``](#errno)
+[``errno``](#errno), [``io``](#io)
 
 **Internet Data**: [``json``](#json)
 
@@ -50,6 +50,8 @@ Depend on Python v3.7.4
 
 **Program Frameworks**: [``turtle``](#turtle)
 
+**Graphical Interfaces**: [``tkinter``](#tkinter)
+
 **Development Tools**: [``typing``](#typing), [``doctest``](#doctest)
 
 **Debugging Profiling**: [``timeit``](#timeit), [``pdb``](#pdb)
@@ -58,11 +60,11 @@ Depend on Python v3.7.4
 
 **Runtime Services**: [``sys``](#sys), [``dataclasses``](#dataclasses),
 [``contextlib``](#contextlib), [``abc``](#abc), [``traceback``](#traceback),
-[``__future__``](#__future__), [``atexit``](#atexit)
+[``__future__``](#__future__), [``atexit``](#atexit), [``builtins``](#builtins)
 
 **Importing Modules**: [``zipimport``](#zipimport), [``importlib``](#importlib), [``runpy``](#runpy)
 
-**Language Services**: [``ast``](#ast), [``keyword``](#keyword), [``dis``](#dis)
+**Language Services**: [``ast``](#ast), [``keyword``](#keyword), [``dis``](#dis), [``tabnanny``](#tabnanny)
 
 **Bonus Scene**: [``this``](#this), [``antigravity``](#antigravity)
 
@@ -1040,6 +1042,30 @@ optional arguments:
 {19: 'ENODEV', 10065: 'WSAEHOSTUNREACH', 122: 'ENOMSG', 120: 'ENODATA', 40: 'ENOSYS', 32: 'EPIPE', 22: 'EINVAL', 132: 'EOVERFLOW', 4: 'EINTR', 10068: 'WSAEUSERS', 41: 'ENOTEMPTY', 10055: 'WSAENOBUFS', 134: 'EPROTO', 10071: 'WSAEREMOTE', 10: 'ECHILD', 10062: 'WSAELOOP', 18: 'EXDEV', 7: 'E2BIG', 3: 'ESRCH', 10040: 'WSAEMSGSIZE', 10047: 'WSAEAFNOSUPPORT', 10064: 'WSAEHOSTDOWN', 10046: 'WSAEPFNOSUPPORT', 10042: 'WSAENOPROTOOPT', 16: 'EBUSY', 10035: 'WSAEWOULDBLOCK', 10056: 'WSAEISCONN', 10058: 'WSAESHUTDOWN', 9: 'EBADF', 5: 'EIO', 10041: 'WSAEPROTOTYPE', 28: 'ENOSPC', 8: 'ENOEXEC', 10037: 'WSAEALREADY', 10050: 'WSAENETDOWN', 13: 'EACCES', 42: 'EILSEQ', 20: 'ENOTDIR', 1: 'EPERM', 33: 'EDOM', 10061: 'WSAECONNREFUSED', 21: 'EISDIR', 10043: 'WSAEPROTONOSUPPORT', 30: 'EROFS', 10049: 'WSAEADDRNOTAVAIL', 111: 'EIDRM', 104: 'EBADMSG', 23: 'ENFILE', 29: 'ESPIPE', 121: 'ENOLINK', 10052: 'WSAENETRESET', 10060: 'WSAETIMEDOUT', 2: 'ENOENT', 17: 'EEXIST', 10069: 'WSAEDQUOT', 125: 'ENOSTR', 14: 'EFAULT', 27: 'EFBIG', 36: 'EDEADLOCK', 10057: 'WSAENOTCONN', 10039: 'WSAEDESTADDRREQ', 39: 'ENOLCK', 10053: 'WSAECONNABORTED', 10051: 'WSAENETUNREACH', 10070: 'WSAESTALE', 124: 'ENOSR', 12: 'ENOMEM', 10038: 'WSAENOTSOCK', 31: 'EMLINK', 34: 'ERANGE', 10054: 'WSAECONNRESET', 10048: 'WSAEADDRINUSE', 10045: 'WSAEOPNOTSUPP', 11: 'EAGAIN', 38: 'ENAMETOOLONG', 25: 'ENOTTY', 10044: 'WSAESOCKTNOSUPPORT', 137: 'ETIME', 10059: 'WSAETOOMANYREFS', 24: 'EMFILE', 139: 'ETXTBSY', 10036: 'WSAEINPROGRESS', 6: 'ENXIO', 10024: 'WSAEMFILE', 10092: 'WSAVERNOTSUPPORTED', 10067: 'WSAEPROCLIM', 10014: 'WSAEFAULT', 10093: 'WSANOTINITIALISED', 10063: 'WSAENAMETOOLONG', 10066: 'WSAENOTEMPTY', 10013: 'WSAEACCES', 10000: 'WSABASEERR', 10009: 'WSAEBADF', 10101: 'WSAEDISCON', 10004: 'WSAEINTR', 10091: 'WSASYSNOTREADY', 10022: 'WSAEINVAL', 105: 'ECANCELED', 133: 'EOWNERDEAD', 127: 'ENOTRECOVERABLE', 129: 'ENOTSUP'}  
 ```
 
+## io
+
+#### StringIO, BytesIO
+
+```python
+>>> import io
+>>> stringio = io.StringIO()
+>>> stringio.write("Hello World!")
+12
+>>> stringio.seek(6)
+6
+>>> stringio.read()
+'World!'
+>>> stringio.close()
+>>> bytesio = io.BytesIO()
+>>> bytesio.write(b"Hello World")
+11
+>>> bytesio.seek(0)
+0
+>>> bytesio.read()
+b'Hello World'
+>>> bytesio.close()
+```
+
 ## json
 
 #### dumps, loads
@@ -1138,6 +1164,15 @@ SndHeaders(filetype='wav', framerate=44100, nchannels=2, nframes=442368, sampwid
 ...     turtle.right(144)
 ...
 >>> turtle.end_fill()
+```
+
+## tkinter
+
+#### Tk, Label
+
+run in bash:
+```bash
+python tkinter_example.py
 ```
 
 ## typing
@@ -1426,6 +1461,27 @@ ZeroDivisionError: division by zero
 bye!
 ```
 
+## builtins
+
+#### range
+
+```python
+>>> import builtins
+>>> for i in builtins.range(10):
+...     print(i)
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
 ## zipimport
 
 #### importer
@@ -1575,6 +1631,17 @@ Names:
    0: print
 >>> dis.code_info(func)
 "Name:              func\nFilename:          <stdin>\nArgument count:    0\nKw-only arguments: 0\nNumber of locals:  0\nStack size:        2\nFlags:             OPTIMIZED, NEWLOCALS, NOFREE\nConstants:\n   0: None\n   1: 'Hello World'\nNames:\n   0: print"
+```
+
+## tabnanny
+
+#### verbose, check
+
+```python
+>>> import tabnanny
+>>> tabnanny.verbose = True
+>>> tabnanny.check("tabnanny_example.py")
+'tabnanny_example.py': Clean bill of health.
 ```
 
 ## this
