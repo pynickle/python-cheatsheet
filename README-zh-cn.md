@@ -17,7 +17,7 @@
 **文本处理**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata)
 
-**二进制数据**: [``codecs``](#codecs)
+**二进制数据**: [``codecs``](#codecs), [``struct``](#struct)
 
 **数据类型**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect), [``heapq``](#heapq),
 [``weakref``](#weakref)
@@ -28,9 +28,9 @@
 **函数式编程**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
 
 **目录访问**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile),
-[``filecmp``](#filecmp), [``fileinput``](#fileinput)
+[``filecmp``](#filecmp), [``fileinput``](#fileinput), [``shutil``](#shutil)
 
-**数据持久化**: [``pickle``](#pickle)
+**数据持久化**: [``pickle``](#pickle), [``copyreg``](#copyreg)
 
 **数据压缩**: [``zlib``](#zlib), [``lzma``](#lzma), [``zipfile``](#zipfile)
 
@@ -40,7 +40,7 @@
 
 **操作系统**: [``os``](#os), [``time``](#time), [``logging``](#logging),
 [``getpass``](#getpass),  [``platform``](#platform), [``argparse``](#argparse),
-[``errno``](#errno)
+[``errno``](#errno), [``io``](#io)
 
 **互联网数据**: [``json``](#json)
 
@@ -52,6 +52,8 @@
 [``colorsys``](#colorsys)
 
 **程序框架**: [``turtle``](#turtle)
+
+**图形化界面**: [``tkinter``](#tkinter)
 
 **开发工具**: [``typing``](#typing)
 
@@ -65,7 +67,7 @@
 
 **导入模块**: [``zipimport``](#zipimport), [``importlib``](#importlib), [``runpy``](#runpy)
 
-**Python 语言服务**: [``ast``](#ast), [``keyword``](#keyword), [``dis``](#dis)
+**Python 语言服务**: [``ast``](#ast), [``keyword``](#keyword), [``dis``](#dis), [``tabnanny``](#tabnanny)
 
 **彩蛋**: [``this``](#this), [``antigravity``](#antigravity)
 
@@ -281,6 +283,18 @@ b'\xe4\xbd\xa0\xe5\xa5\xbd'
 <built-in function utf_8_encode>
 >>> codecs.getdecoder("gbk")
 <built-in method decode of MultibyteCodec object at 0x0000019E080AA078>
+```
+
+## struct
+
+#### pack, unpack
+
+```python
+>>> import struct
+>>> struct.pack(">l", 1024)
+b'\x00\x00\x04\x00'
+>>> struct.unpack(">lH", b'\x00\x00\x04\x00\xf0\xf0')
+(1024, 61680)
 ```
 
 ## datetime
@@ -788,6 +802,19 @@ cmp1.txt | Line Number: 4 |:  4
 cmp1.txt | Line Number: 5 |:  5
 ```
 
+## shutil
+
+#### copyfile, rmtree, move
+
+```python
+>>> import shutil
+>>> shutil.copyfile("song.wav", "copysong.wav")
+'copysong.wav'
+>>> shutil.rmtree("shutil_tree")
+>>> shutil.move("copysong.wav", "myapp/copysong.wav")
+'myapp/copysong.wav'
+```
+
 ## pickle
 
 #### loads, dumps
@@ -801,6 +828,31 @@ cmp1.txt | Line Number: 5 |:  5
 b'\x80\x03]q\x00(]q\x01(K\x01X\x05\x00\x00\x00firstq\x02e]q\x03(K\x02X\x06\x00\x00\x00secondq\x04ee.'
 >>> pickle.loads(dumps)
 [[1, 'first'], [2, 'second']]
+```
+
+## copyreg
+
+#### pickle
+
+```python
+>>> import copyreg
+>>> import copy
+>>> import pickle
+>>> class A:
+...     def __init__(self, a):
+...         self.a = a
+...
+>>> def pickle_a(a):
+...     print("pickle A")
+...     return A, (a.a,)
+...
+>>> copyreg.pickle(A, pickle_a)
+>>> a = A(1)
+>>> b = copy.copy(a)
+pickle A
+>>>
+>>> c = pickle.dumps(a)
+pickle A
 ```
 
 ## zlib
@@ -992,7 +1044,7 @@ Password:
 
 ## argparse
 
-####
+#### ArgumentParser
 
 ```python
 >>> import os
@@ -1028,6 +1080,30 @@ optional arguments:
 >>> import errno
 >>> errno.errorcode
 {19: 'ENODEV', 10065: 'WSAEHOSTUNREACH', 122: 'ENOMSG', 120: 'ENODATA', 40: 'ENOSYS', 32: 'EPIPE', 22: 'EINVAL', 132: 'EOVERFLOW', 4: 'EINTR', 10068: 'WSAEUSERS', 41: 'ENOTEMPTY', 10055: 'WSAENOBUFS', 134: 'EPROTO', 10071: 'WSAEREMOTE', 10: 'ECHILD', 10062: 'WSAELOOP', 18: 'EXDEV', 7: 'E2BIG', 3: 'ESRCH', 10040: 'WSAEMSGSIZE', 10047: 'WSAEAFNOSUPPORT', 10064: 'WSAEHOSTDOWN', 10046: 'WSAEPFNOSUPPORT', 10042: 'WSAENOPROTOOPT', 16: 'EBUSY', 10035: 'WSAEWOULDBLOCK', 10056: 'WSAEISCONN', 10058: 'WSAESHUTDOWN', 9: 'EBADF', 5: 'EIO', 10041: 'WSAEPROTOTYPE', 28: 'ENOSPC', 8: 'ENOEXEC', 10037: 'WSAEALREADY', 10050: 'WSAENETDOWN', 13: 'EACCES', 42: 'EILSEQ', 20: 'ENOTDIR', 1: 'EPERM', 33: 'EDOM', 10061: 'WSAECONNREFUSED', 21: 'EISDIR', 10043: 'WSAEPROTONOSUPPORT', 30: 'EROFS', 10049: 'WSAEADDRNOTAVAIL', 111: 'EIDRM', 104: 'EBADMSG', 23: 'ENFILE', 29: 'ESPIPE', 121: 'ENOLINK', 10052: 'WSAENETRESET', 10060: 'WSAETIMEDOUT', 2: 'ENOENT', 17: 'EEXIST', 10069: 'WSAEDQUOT', 125: 'ENOSTR', 14: 'EFAULT', 27: 'EFBIG', 36: 'EDEADLOCK', 10057: 'WSAENOTCONN', 10039: 'WSAEDESTADDRREQ', 39: 'ENOLCK', 10053: 'WSAECONNABORTED', 10051: 'WSAENETUNREACH', 10070: 'WSAESTALE', 124: 'ENOSR', 12: 'ENOMEM', 10038: 'WSAENOTSOCK', 31: 'EMLINK', 34: 'ERANGE', 10054: 'WSAECONNRESET', 10048: 'WSAEADDRINUSE', 10045: 'WSAEOPNOTSUPP', 11: 'EAGAIN', 38: 'ENAMETOOLONG', 25: 'ENOTTY', 10044: 'WSAESOCKTNOSUPPORT', 137: 'ETIME', 10059: 'WSAETOOMANYREFS', 24: 'EMFILE', 139: 'ETXTBSY', 10036: 'WSAEINPROGRESS', 6: 'ENXIO', 10024: 'WSAEMFILE', 10092: 'WSAVERNOTSUPPORTED', 10067: 'WSAEPROCLIM', 10014: 'WSAEFAULT', 10093: 'WSANOTINITIALISED', 10063: 'WSAENAMETOOLONG', 10066: 'WSAENOTEMPTY', 10013: 'WSAEACCES', 10000: 'WSABASEERR', 10009: 'WSAEBADF', 10101: 'WSAEDISCON', 10004: 'WSAEINTR', 10091: 'WSASYSNOTREADY', 10022: 'WSAEINVAL', 105: 'ECANCELED', 133: 'EOWNERDEAD', 127: 'ENOTRECOVERABLE', 129: 'ENOTSUP'}  
+```
+
+## io
+
+#### StringIO, BytesIO
+
+```python
+>>> import io
+>>> stringio = io.StringIO()
+>>> stringio.write("Hello World!")
+12
+>>> stringio.seek(6)
+6
+>>> stringio.read()
+'World!'
+>>> stringio.close()
+>>> bytesio = io.BytesIO()
+>>> bytesio.write(b"Hello World")
+11
+>>> bytesio.seek(0)
+0
+>>> bytesio.read()
+b'Hello World'
+>>> bytesio.close()
 ```
 
 ## json
@@ -1128,6 +1204,15 @@ SndHeaders(filetype='wav', framerate=44100, nchannels=2, nframes=442368, sampwid
 ...     turtle.right(144)
 ...
 >>> turtle.end_fill()
+```
+
+## tkinter
+
+#### Tk, Label
+
+run in bash:
+```bash
+python tkinter_example.py
 ```
 
 ## typing
@@ -1254,6 +1339,17 @@ Run in bash:
 ```bash
 python -m ensurepip   # download pip
 python -m ensurepip --upgrade   # upgrade pip
+```
+
+## zipapp
+
+#### create_archive
+
+```python
+>>> import zipapp
+>>> zipapp.create_archive("myapp", "myapp.pyz", main="app:main")
+>>> __import__("os").popen("python myapp.pyz").read()
+'Hello, zipapp!\n'
 ```
 
 ## sys
@@ -1405,6 +1501,27 @@ ZeroDivisionError: division by zero
 bye!
 ```
 
+## builtins
+
+#### range
+
+```python
+>>> import builtins
+>>> for i in builtins.range(10):
+...     print(i)
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+```
+
 ## zipimport
 
 #### importer
@@ -1434,6 +1551,49 @@ Using: 0.98 s
 >>> sys = importlib.__import__("sys")   # equal to built in function __import__
 >>> importlib.reload(sys)
 <module 'sys' (built-in)>
+```
+
+## runpy
+
+#### run_module, run_path
+
+```python
+>>> runpy.run_module("app")
+{'__name__': 'app', '__file__': 'C:\\Users\\Nick\\Desktop\\my-github\\python-cheatsheet\\app.py', '__cached__': 'C:\\Users\\Nick\\Desktop\\my-github\\python-cheatsheet\\__pycache__\\app.cpython-37.pyc', '__doc__': None, '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x000001AF031DFE88>, '__package__': '', '__spec__': ModuleSpec(name='app', loader=<_frozen_importlib_external.SourceFileLoader object at 0x000001AF031DFE88>, origin='C:\\Users\\Nick\\Desktop\\my-github\\python-cheatsheet\\app.py'), '__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, exceptions, and other objects.\n\nNoteworthy: None is the `nil' object; Ellipsis represents `...' in slices.", '__package__': '', '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in 
+function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': <built-in function iter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': 
+<class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'Exception': <class 'Exception'>, 'TypeError': <class 'TypeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'GeneratorExit': <class 'GeneratorExit'>, 'SystemExit': <class 'SystemExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'ImportError': <class 'ImportError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'OSError': <class 'OSError'>, 'EnvironmentError': <class 'OSError'>, 
+'IOError': <class 'OSError'>, 'WindowsError': <class 'OSError'>, 'EOFError': <class 'EOFError'>, 'RuntimeError': <class 'RuntimeError'>, 'RecursionError': <class 'RecursionError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'NameError': <class 'NameError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'AttributeError': <class 'AttributeError'>, 'SyntaxError': <class 'SyntaxError'>, 'IndentationError': <class 'IndentationError'>, 'TabError': <class 'TabError'>, 'LookupError': <class 'LookupError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ValueError': <class 'ValueError'>, 'UnicodeError': <class 'UnicodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'AssertionError': <class 'AssertionError'>, 'ArithmeticError': <class 'ArithmeticError'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'SystemError': <class 'SystemError'>, 'ReferenceError': <class 'ReferenceError'>, 'MemoryError': <class 'MemoryError'>, 'BufferError': <class 'BufferError'>, 'Warning': <class 'Warning'>, 'UserWarning': <class 'UserWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'BytesWarning': <class 'BytesWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'ConnectionError': <class 'ConnectionError'>, 'BlockingIOError': <class 'BlockingIOError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'InterruptedError': <class 'InterruptedError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-Z plus Return to exit, 'exit': Use exit() or Ctrl-Z plus Return to exit, 'copyright': Copyright (c) 2001-2019 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen.com, Zope Corporation and a cast of thousands
+    for supporting Python development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object., '_': None}}
+>>> runpy.run_path("myapp")
+Hello, runpy!
+{'__name__': '<run_path>', '__doc__': None, '__package__': '', '__loader__': <_frozen_importlib_external.SourceFileLoader object at 0x000001AF031A5B88>, '__spec__': ModuleSpec(name='__main__', loader=<_frozen_importlib_external.SourceFileLoader object at 0x000001AF031A5B88>, origin='myapp\\__main__.py'), '__file__': 'myapp\\__main__.py', '__cached__': 'myapp\\__pycache__\\__main__.cpython-37.pyc', '__builtins__': {'__name__': 'builtins', '__doc__': "Built-in functions, exceptions, and other objects.\n\nNoteworthy: None is the `nil' object; Ellipsis represents `...' in slices.", '__package__': '', '__loader__': <class 
+'_frozen_importlib.BuiltinImporter'>, '__spec__': ModuleSpec(name='builtins', loader=<class '_frozen_importlib.BuiltinImporter'>), '__build_class__': <built-in function __build_class__>, '__import__': <built-in function __import__>, 'abs': <built-in 
+function abs>, 'all': <built-in function all>, 'any': <built-in function any>, 'ascii': <built-in function ascii>, 'bin': <built-in function bin>, 'breakpoint': <built-in function breakpoint>, 'callable': <built-in function callable>, 'chr': <built-in function chr>, 'compile': <built-in function compile>, 'delattr': <built-in function delattr>, 'dir': <built-in function dir>, 'divmod': <built-in function divmod>, 'eval': <built-in function eval>, 'exec': <built-in function exec>, 'format': <built-in function format>, 'getattr': <built-in function getattr>, 'globals': <built-in function globals>, 'hasattr': <built-in function hasattr>, 'hash': <built-in function hash>, 'hex': <built-in function hex>, 'id': <built-in function id>, 'input': <built-in function input>, 'isinstance': <built-in function isinstance>, 'issubclass': <built-in function issubclass>, 'iter': 
+<built-in function iter>, 'len': <built-in function len>, 'locals': <built-in function locals>, 'max': <built-in function max>, 'min': <built-in function min>, 'next': <built-in function next>, 'oct': <built-in function oct>, 'ord': <built-in function ord>, 'pow': <built-in function pow>, 'print': <built-in function print>, 'repr': <built-in function repr>, 'round': <built-in function round>, 'setattr': <built-in function setattr>, 'sorted': <built-in function sorted>, 'sum': <built-in function 
+sum>, 'vars': <built-in function vars>, 'None': None, 'Ellipsis': Ellipsis, 'NotImplemented': NotImplemented, 'False': False, 'True': True, 'bool': <class 'bool'>, 'memoryview': <class 'memoryview'>, 'bytearray': <class 'bytearray'>, 'bytes': <class 
+'bytes'>, 'classmethod': <class 'classmethod'>, 'complex': <class 'complex'>, 'dict': <class 'dict'>, 'enumerate': <class 'enumerate'>, 'filter': <class 'filter'>, 'float': <class 'float'>, 'frozenset': <class 'frozenset'>, 'property': <class 'property'>, 'int': <class 'int'>, 'list': <class 'list'>, 'map': <class 'map'>, 'object': <class 'object'>, 'range': <class 'range'>, 'reversed': <class 'reversed'>, 'set': <class 'set'>, 'slice': <class 'slice'>, 'staticmethod': <class 'staticmethod'>, 'str': <class 'str'>, 'super': <class 'super'>, 'tuple': <class 'tuple'>, 'type': <class 'type'>, 'zip': <class 'zip'>, '__debug__': True, 'BaseException': <class 'BaseException'>, 'Exception': <class 'Exception'>, 'TypeError': <class 'TypeError'>, 'StopAsyncIteration': <class 'StopAsyncIteration'>, 'StopIteration': <class 'StopIteration'>, 'GeneratorExit': <class 'GeneratorExit'>, 'SystemExit': <class 'SystemExit'>, 'KeyboardInterrupt': <class 'KeyboardInterrupt'>, 'ImportError': <class 'ImportError'>, 'ModuleNotFoundError': <class 'ModuleNotFoundError'>, 'OSError': <class 'OSError'>, 'EnvironmentError': <class 'OSError'>, 'IOError': <class 'OSError'>, 'WindowsError': <class 'OSError'>, 'EOFError': <class 'EOFError'>, 'RuntimeError': <class 
+'RuntimeError'>, 'RecursionError': <class 'RecursionError'>, 'NotImplementedError': <class 'NotImplementedError'>, 'NameError': <class 'NameError'>, 'UnboundLocalError': <class 'UnboundLocalError'>, 'AttributeError': <class 'AttributeError'>, 'SyntaxError': <class 'SyntaxError'>, 'IndentationError': <class 'IndentationError'>, 'TabError': <class 'TabError'>, 'LookupError': <class 'LookupError'>, 'IndexError': <class 'IndexError'>, 'KeyError': <class 'KeyError'>, 'ValueError': <class 'ValueError'>, 'UnicodeError': <class 'UnicodeError'>, 'UnicodeEncodeError': <class 'UnicodeEncodeError'>, 'UnicodeDecodeError': <class 'UnicodeDecodeError'>, 'UnicodeTranslateError': <class 'UnicodeTranslateError'>, 'AssertionError': <class 'AssertionError'>, 'ArithmeticError': <class 'ArithmeticError'>, 'FloatingPointError': <class 'FloatingPointError'>, 'OverflowError': <class 'OverflowError'>, 'ZeroDivisionError': <class 'ZeroDivisionError'>, 'SystemError': <class 'SystemError'>, 'ReferenceError': <class 'ReferenceError'>, 'MemoryError': <class 'MemoryError'>, 'BufferError': <class 'BufferError'>, 'Warning': <class 'Warning'>, 'UserWarning': <class 'UserWarning'>, 'DeprecationWarning': <class 'DeprecationWarning'>, 'PendingDeprecationWarning': <class 'PendingDeprecationWarning'>, 'SyntaxWarning': <class 'SyntaxWarning'>, 'RuntimeWarning': <class 'RuntimeWarning'>, 'FutureWarning': <class 'FutureWarning'>, 'ImportWarning': <class 'ImportWarning'>, 'UnicodeWarning': <class 'UnicodeWarning'>, 'BytesWarning': <class 'BytesWarning'>, 'ResourceWarning': <class 'ResourceWarning'>, 'ConnectionError': <class 'ConnectionError'>, 'BlockingIOError': <class 'BlockingIOError'>, 'BrokenPipeError': <class 'BrokenPipeError'>, 'ChildProcessError': <class 'ChildProcessError'>, 'ConnectionAbortedError': <class 'ConnectionAbortedError'>, 'ConnectionRefusedError': <class 'ConnectionRefusedError'>, 'ConnectionResetError': <class 'ConnectionResetError'>, 'FileExistsError': <class 'FileExistsError'>, 'FileNotFoundError': <class 'FileNotFoundError'>, 'IsADirectoryError': <class 'IsADirectoryError'>, 'NotADirectoryError': <class 'NotADirectoryError'>, 'InterruptedError': <class 'InterruptedError'>, 'PermissionError': <class 'PermissionError'>, 'ProcessLookupError': <class 'ProcessLookupError'>, 'TimeoutError': <class 'TimeoutError'>, 'open': <built-in function open>, 'quit': Use quit() or Ctrl-Z plus Return to exit, 'exit': Use exit() or Ctrl-Z plus Return to exit, 'copyright': Copyright (c) 2001-2019 Python Software Foundation.
+All Rights Reserved.
+
+Copyright (c) 2000 BeOpen.com.
+All Rights Reserved.
+
+Copyright (c) 1995-2001 Corporation for National Research Initiatives.
+All Rights Reserved.
+
+Copyright (c) 1991-1995 Stichting Mathematisch Centrum, Amsterdam.
+All Rights Reserved., 'credits':     Thanks to CWI, CNRI, BeOpen.com, Zope Corporation and a cast of thousands
+    for supporting Python development.  See www.python.org for more information., 'license': Type license() to see the full license text, 'help': Type help() for interactive help, or help(object) for help about object., '_': None}}
 ```
 
 ## ast
@@ -1511,6 +1671,17 @@ Names:
    0: print
 >>> dis.code_info(func)
 "Name:              func\nFilename:          <stdin>\nArgument count:    0\nKw-only arguments: 0\nNumber of locals:  0\nStack size:        2\nFlags:             OPTIMIZED, NEWLOCALS, NOFREE\nConstants:\n   0: None\n   1: 'Hello World'\nNames:\n   0: print"
+```
+
+## tabnanny
+
+#### verbose, check
+
+```python
+>>> import tabnanny
+>>> tabnanny.verbose = True
+>>> tabnanny.check("tabnanny_example.py")
+'tabnanny_example.py': Clean bill of health.
 ```
 
 ## this
