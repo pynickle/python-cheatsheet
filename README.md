@@ -39,6 +39,8 @@ Depend on Python v3.7.4
 [``getpass``](#getpass),  [``platform``](#platform), [``argparse``](#argparse),
 [``errno``](#errno), [``io``](#io)
 
+**Networking Communication**: [``socket``](#socket)
+
 **Internet Data**: [``json``](#json)
 
 **Structured Markup**: [``html``](#html)
@@ -60,7 +62,8 @@ Depend on Python v3.7.4
 
 **Runtime Services**: [``sys``](#sys), [``dataclasses``](#dataclasses),
 [``contextlib``](#contextlib), [``abc``](#abc), [``traceback``](#traceback),
-[``__future__``](#__future__), [``atexit``](#atexit), [``builtins``](#builtins)
+[``__future__``](#__future__), [``atexit``](#atexit), [``builtins``](#builtins),
+[``inspect``](#inspect)
 
 **Importing Modules**: [``zipimport``](#zipimport), [``importlib``](#importlib), [``runpy``](#runpy)
 
@@ -1103,6 +1106,22 @@ b'Hello World'
 >>> bytesio.close()
 ```
 
+## socket
+
+#### socket
+
+Run in bash:
+
+```bash
+python socker_server.py
+Connected by ('127.0.0.1', 64346)
+```
+
+```bash
+python socket_client.py
+Received b'Hello, world'
+```
+
 ## json
 
 #### dumps, loads
@@ -1517,6 +1536,29 @@ bye!
 7
 8
 9
+```
+
+## inspect
+
+#### getmembers, ismethod, isfunction, isclass, isbuiltin
+
+```python
+>>> import inspect
+>>> inspect.getmembers([1, 2, 3])
+[('__add__', <method-wrapper '__add__' of list object at 0x000002644D026148>), ('__class__', <class 'list'>), ('__contains__', <method-wrapper '__contains__' of list object at 0x000002644D026148>), ('__delattr__', <method-wrapper '__delattr__' of list object at 0x000002644D026148>), ('__delitem__', <method-wrapper '__delitem__' of list object at 0x000002644D026148>), ('__dir__', <built-in method __dir__ of list object at 0x000002644D026148>), ('__doc__', 'Built-in mutable sequence.\n\nIf no argument is given, the constructor creates a new empty list.\nThe argument must be an iterable if specified.'), ('__eq__', <method-wrapper '__eq__' of list object at 0x000002644D026148>), ('__format__', <built-in method __format__ of list object at 0x000002644D026148>), ('__ge__', <method-wrapper '__ge__' of list object at 0x000002644D026148>), ('__getattribute__', <method-wrapper '__getattribute__' of list object at 0x000002644D026148>), ('__getitem__', <built-in method __getitem__ of list object at 0x000002644D026148>), ('__gt__', <method-wrapper '__gt__' of list object at 0x000002644D026148>), ('__hash__', None), ('__iadd__', <method-wrapper '__iadd__' of list object at 0x000002644D026148>), ('__imul__', <method-wrapper '__imul__' of list object at 0x000002644D026148>), ('__init__', <method-wrapper '__init__' of list object at 0x000002644D026148>), ('__init_subclass__', <built-in method __init_subclass__ of type object at 0x00007FFB5C9A2D30>), ('__iter__', <method-wrapper '__iter__' of list object at 0x000002644D026148>), ('__le__', <method-wrapper '__le__' of list object at 0x000002644D026148>), ('__len__', <method-wrapper '__len__' of list object at 0x000002644D026148>), ('__lt__', <method-wrapper '__lt__' of list object at 0x000002644D026148>), ('__mul__', <method-wrapper '__mul__' of list object at 0x000002644D026148>), ('__ne__', <method-wrapper '__ne__' of list object at 0x000002644D026148>), ('__new__', <built-in method __new__ of type object at 0x00007FFB5C9A2D30>), ('__reduce__', <built-in method __reduce__ of list object at 0x000002644D026148>), ('__reduce_ex__', <built-in method __reduce_ex__ of list object at 0x000002644D026148>), ('__repr__', <method-wrapper '__repr__' of list object at 0x000002644D026148>), ('__reversed__', <built-in method __reversed__ of list object at 0x000002644D026148>), ('__rmul__', <method-wrapper '__rmul__' of list object at 0x000002644D026148>), ('__setattr__', <method-wrapper '__setattr__' of list object at 0x000002644D026148>), ('__setitem__', <method-wrapper '__setitem__' of list object at 0x000002644D026148>), ('__sizeof__', <built-in method __sizeof__ of list object at 0x000002644D026148>), ('__str__', <method-wrapper '__str__' of list object at 0x000002644D026148>), ('__subclasshook__', <built-in method __subclasshook__ of type object at 0x00007FFB5C9A2D30>), ('append', <built-in method append of list object at 0x000002644D026148>), ('clear', <built-in method clear of list object at 0x000002644D026148>), ('copy', <built-in method copy of list object at 0x000002644D026148>), ('count', <built-in method count of list object at 0x000002644D026148>), ('extend', <built-in method extend of list object at 0x000002644D026148>), ('index', <built-in method index of list object at 0x000002644D026148>), ('insert', <built-in method insert of list object at 0x000002644D026148>), ('pop', <built-in method pop of list object at 0x000002644D026148>), ('remove', <built-in method remove of list object at 0x000002644D026148>), ('reverse', <built-in method reverse of list object at 0x000002644D026148>), ('sort', <built-in method sort of list object at 0x000002644D026148>)]
+>>> print(inspect.getdoc([1, 2, 3]))
+Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.
+>>> inspect.ismethod(inspect.getmembers)
+False
+>>> inspect.isbuiltin(repr)
+True
+>>> inspect.isfunction(lambda x:x+1)
+True
+>>> inspect.isclass(inspect.Signature)
+True
 ```
 
 ## zipimport
