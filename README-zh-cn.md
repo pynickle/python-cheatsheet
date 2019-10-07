@@ -10,7 +10,7 @@
 **注意**:
 - **这里的每个代码片段都可以独立运行 （一些需要这个库提供的文件）**
 - **如果你希望复制代码，请使用[command to code](https://pynickle.github.io/ctc.html)**
-- **你可以使用GETREADME.py来从仓库中下载README.md**
+- **你可以使用GETREADME.py来从仓库中下载README.md（中英文，命令行前缀有无皆可选择）**
 
 ## 目录
 
