@@ -15,7 +15,7 @@ Depend on Python v3.7.4
 **Text Processing**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
 [``textwrap``](#textwrap), [``unicodedata``](#unicodedata)
 
-**Binary Data**: [``codecs``](#codecs)
+**Binary Data**: [``codecs``](#codecs), [``struct``](#struct)
 
 **Data Type**: [``datetime``](#datetime), [``calendar``](#calendar), [``collections``](#collections),[``copy``](#copy), [``pprint``](#pprint), [``enum``](#enum), [``bisect``](#bisect), [``heapq``](#heapq)
 
@@ -27,7 +27,7 @@ Depend on Python v3.7.4
 **Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile),
 [``filecmp``](#filecmp), [``fileinput``](#fileinput), [``shutil``](#shutil)
 
-**Data Persistence**: [``pickle``](#pickle)
+**Data Persistence**: [``pickle``](#pickle), [``copyreg``](#copyreg)
 
 **Data Compression**: [``zlib``](#zlib), [``lzma``](#lzma), [``zipfile``](#zipfile)
 
@@ -280,6 +280,18 @@ b'\xe4\xbd\xa0\xe5\xa5\xbd'
 <built-in function utf_8_encode>
 >>> codecs.getdecoder("gbk")
 <built-in method decode of MultibyteCodec object at 0x0000019E080AA078>
+```
+
+## struct
+
+#### pack, unpack
+
+```python
+>>> import struct
+>>> struct.pack(">l", 1024)
+b'\x00\x00\x04\x00'
+>>> struct.unpack(">lH", b'\x00\x00\x04\x00\xf0\xf0')
+(1024, 61680)
 ```
 
 ## datetime
@@ -813,6 +825,31 @@ cmp1.txt | Line Number: 5 |:  5
 b'\x80\x03]q\x00(]q\x01(K\x01X\x05\x00\x00\x00firstq\x02e]q\x03(K\x02X\x06\x00\x00\x00secondq\x04ee.'
 >>> pickle.loads(dumps)
 [[1, 'first'], [2, 'second']]
+```
+
+## copyreg
+
+#### pickle
+
+```python
+>>> import copyreg
+>>> import copy
+>>> import pickle
+>>> class A:
+...     def __init__(self, a):
+...         self.a = a
+...
+>>> def pickle_a(a):
+...     print("pickle A")
+...     return A, (a.a,)
+...
+>>> copyreg.pickle(A, pickle_a)
+>>> a = A(1)
+>>> b = copy.copy(a)
+pickle A
+>>>
+>>> c = pickle.dumps(a)
+pickle A
 ```
 
 ## zlib
