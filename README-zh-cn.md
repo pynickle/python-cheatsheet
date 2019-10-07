@@ -53,7 +53,7 @@
 
 **程序框架**: [``turtle``](#turtle)
 
-**图形化界面制作**: [``tkinter``](#tkinter)
+**图形化用户界面**: [``tkinter``](#tkinter)
 
 **开发工具**: [``typing``](#typing)
 
