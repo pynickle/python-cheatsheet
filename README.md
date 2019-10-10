@@ -1720,7 +1720,9 @@ Names:
 >>> import tabnanny
 >>> tabnanny.verbose = True
 >>> tabnanny.check("tabnanny_example.py")
-'tabnanny_example.py': Clean bill of health.
+'tabnanny_example.py': *** Line 3: trouble in tab city! ***
+offending line: '\tprint(i)'
+indent not greater e.g. at tab sizes 1, 2, 3, 4
 ```
 
 ## this
