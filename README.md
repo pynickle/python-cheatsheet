@@ -104,11 +104,11 @@ Depend on Python v3.7.4
 >>> formatter = string.Formatter()
 >>> strcmp = "my name is {name}"
 >>> dct = {"name": "nick"}
->>> formatter.format(strcmp, **dct)
+>>> formatter.format(strcmp, **dct)   # use dict to format
 'my name is nick'
->>> data = ("3")
+>>> data = ("3",)   # add , to make it a tuple
 >>> strcmp = "pi is about {}"
->>> formatter.format(strcmp, *data)
+>>> formatter.format(strcmp, *data)   # use tuple to format
 'pi is about 3'
 ```
 
@@ -116,11 +116,11 @@ Depend on Python v3.7.4
 
 ```python
 >>> import string
->>> strcmp = "Hello $World"
+>>> strcmp = "Hello $World"   # the default delimiter is $
 >>> t = string.Template(strcmp)
->>> t.substitute({"World": "nick"})
+>>> t.substitute({"World": "nick"})   # use dict
 'Hello nick'
->>> t.substitute(World = "nick")
+>>> t.substitute(World = "nick")   # use args
 'Hello nick'
 >>> class MyTemplate(string.Template):
 ...     delimiter = "^"
@@ -205,7 +205,7 @@ Depend on Python v3.7.4
 ... """
 >>> text1_lines = text1.splitlines()
 >>> text2_lines = text2.splitlines()
->>> with open("HtmlDiff.html", "w", encoding="utf-8") as f:
+>>> with open("HtmlDiff.html", "w", encoding="utf-8") as f:   # make it a html file
 ...     HtmlDiff = d.make_file(text1_lines, text2_lines)
 ...     f.write(HtmlDiff)
 ...
@@ -234,13 +234,13 @@ Match(a=1, b=0, size=4)
 ```python
 >>> import textwrap
 >>> strcmp = "Hello,World! My name is nick, l am 14 years old"
->>> textwrap.wrap(strcmp, width = 10)
+>>> textwrap.wrap(strcmp, width = 10)   # 10 for an element
 ['Hello,Worl', 'd! My name', 'is nick, l', 'am 14', 'years old']
 >>> textwrap.fill(strcmp, width = 10)
 'Hello,Worl\nd! My name\nis nick, l\nam 14\nyears old'
->>> textwrap.shorten(strcmp, width = 45)
+>>> textwrap.shorten(strcmp, width = 45)   # content over 45 will be [...]
 'Hello,World! My name is nick, l am 14 [...]'
->>> textwrap.shorten(strcmp, width = 45, placeholder = "...")
+>>> textwrap.shorten(strcmp, width = 45, placeholder = "...")   # change the placeholder
 'Hello,World! My name is nick, l am 14...'
 >>> strcmp = """
 ...     hello world!
