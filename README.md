@@ -495,7 +495,7 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 ...     h = []
 ...     for i in iterable:
 ...         heapq.heappush(h, i)
-...     return [heapq.heappop(h) for i in range(len(h))]
+...     return [heapq.heappop(h) for i in range(len(h))]   # it was orderly extracted
 ... 
 >>> heapsort([4, 3, 6, 9, 1, 7])
 [1, 3, 4, 6, 7, 9]
@@ -515,7 +515,7 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 ...     print(reference)
 ... 
 >>> c = A()
->>> d = weakref.ref(c, b)
+>>> d = weakref.ref(c, b)   # when c is deleted, b is called
 >>> del c
 <weakref at 0x000001C94E12F778; dead>
 ```
@@ -532,11 +532,11 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 120
 >>> math.floor(1.6)
 1
->>> math.modf(1.6)
+>>> math.modf(1.6)   # return the fractional and integer parts 
 (0.6000000000000001, 1.0)
 >>> math.log(8)
 2.0794415416798357
->>> math.pow(2,5)
+>>> math.pow(2,5)   # pow in math produces float type number, pow in builtin function produces int type number
 32.0
 >>> math.sqrt(9)
 3.0
@@ -570,9 +570,9 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 0.6381052887323486
 >>> random.uniform(5,6)
 5.325285695528384
->>> random.randint(6, 9)
+>>> random.randint(6, 9)   # include nine
 9
->>> random.randrange(5, 10)
+>>> random.randrange(5, 10)   # don't include ten
 9
 ```
 
