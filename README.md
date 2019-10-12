@@ -13,7 +13,7 @@ Depend on Python v3.7.4
 ## Contents
 
 **Text Processing**: [``string``](#string), [``re``](#re), [``difflib``](#difflib),
-[``textwrap``](#textwrap), [``unicodedata``](#unicodedata)
+[``textwrap``](#textwrap), [``unicodedata``](#unicodedata), [``readline``](#readline)
 
 **Binary Data**: [``codecs``](#codecs), [``struct``](#struct)
 
@@ -267,6 +267,16 @@ Match(a=1, b=0, size=4)
 'LEFT PARENTHESIS'
 >>> unicodedata.unidata_version
 '11.0.0'
+```
+
+## readline
+
+#### parse_and_bind
+
+```python
+>>> import readline
+>>> readline.parse_and_bind('tab: complete')
+>>> histfile = '.pythonhistory'
 ```
 
 ## codecs
