@@ -261,9 +261,9 @@ Match(a=1, b=0, size=4)
 
 ```python
 >>> import unicodedata
->>> unicodedata.lookup('LEFT CURLY BRACKET')
+>>> unicodedata.lookup('LEFT CURLY BRACKET')   # get the symbol of the description
 '{'
->>> unicodedata.name("(")
+>>> unicodedata.name("(")   # reverse to lookup
 'LEFT PARENTHESIS'
 >>> unicodedata.unidata_version
 '11.0.0'
@@ -273,9 +273,15 @@ Match(a=1, b=0, size=4)
 
 #### parse_and_bind
 
+**Notice**: If you are using Windows, you need to first install pyreadline module:
+
+```bash
+pip install pyreadline
+```
+
 ```python
 >>> import readline
->>> readline.parse_and_bind('tab: complete')
+>>> readline.parse_and_bind('tab: complete')   # use tab to autocomplete
 >>> histfile = '.pythonhistory'
 ```
 
@@ -299,9 +305,11 @@ b'\xe4\xbd\xa0\xe5\xa5\xbd'
 
 #### pack, unpack
 
+**Notice**: The format is on [``struct docs``](#https://docs.python.org/3/library/struct.html)
+
 ```python
 >>> import struct
->>> struct.pack(">l", 1024)
+>>> struct.pack(">l", 1024)   # return a bytes containing the values packed according to the format string format
 b'\x00\x00\x04\x00'
 >>> struct.unpack(">lH", b'\x00\x00\x04\x00\xf0\xf0')
 (1024, 61680)
@@ -360,25 +368,25 @@ Mo Tu We Th Fr Sa Su
 
 ```python
 >>> import collections
->>> point = collections.namedtuple("point", ["x", "y"])
+>>> point = collections.namedtuple("point", ["x", "y"])   # create tuple subclasses with named fields
 >>> p = point(2, 1)
 >>> p.x, p.y
 (2, 1)
->>> deque = collections.deque(["b", "c", "d"])
+>>> deque = collections.deque(["b", "c", "d"])   # list-like container with fast appends and pops on either end
 >>> deque.appendleft("a")
 >>> deque.append("e")
 >>> deque
 deque(['a', 'b', 'c', 'd', 'e'])
->>> dd = collections.defaultdict(lambda: "None")
+>>> dd = collections.defaultdict(lambda: "None")   # dict which has an default value
 >>> dd ["key-1"] = "value-1"
 >>> dd["key-1"]
 'value-1'
 >>> dd["key-2"]
 'None'
->>> od = collections.OrderedDict([("a", 1), ("b", 2)])
+>>> od = collections.OrderedDict([("a", 1), ("b", 2)])   # dict which always keeps the order
 >>> od
 OrderedDict([('a', 1), ('b', 2)])
->>> c = collections.Counter()
+>>> c = collections.Counter()   # dict subclass for counting hashable objects
 >>> for i in "Hello, World":
 ...     c[i] = c[i] + 1
 ...
@@ -398,9 +406,9 @@ Counter({'l': 3, 'o': 2, 'H': 1, 'e': 1, ',': 1, ' ': 1, 'W': 1, 'r': 1, 'd': 1}
 >>> copy1 is copy2
 False
 >>> origin[2][0] = "Hello, copy"
->>> copy1
+>>> copy1   # change when origin changes
 [1, 2, ['Hello, copy', 4]]
->>> copy2
+>>> copy2   # don't change when origin changes
 [1, 2, [3, 4]]
 ```
 
@@ -409,7 +417,7 @@ False
 #### pprint
 
 ```python
->>> import pprint
+>>> import pprint   # pretty print
 >>> strcmp = ("hello world", {"nick": 13, "ben": 12}, (1, 2, 3, 4), [5, 6, 7, 8], "Hello pprint")
 >>> pprint.pprint(strcmp)
 ('hello world',
@@ -433,7 +441,7 @@ False
 ...
 >>> Seasons.Spring
 <Seasons.Spring: 1>
->>> @enum.unique
+>>> @enum.unique   # don't allow same value
 ... class Unique(enum.Enum):
 ...     Nick = 13
 ...     Ben = 12
@@ -449,7 +457,7 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 ...     VSCode = enum.auto()
 ...     Pycharm = enum.auto()
 ...
->>> list(Auto)
+>>> list(Auto)   # auto is from one
 [<Auto.VS: 1>, <Auto.VSCode: 2>, <Auto.Pycharm: 3>]
 ```
 
@@ -460,13 +468,13 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 ```python
 >>> import bisect
 >>> a = [1, 2, 4, 5]
->>> bisect.bisect_left(a, 1)
+>>> bisect.bisect_left(a, 1)   # if it has the same, choose left
 0
->>> bisect.bisect_right(a, 1)
+>>> bisect.bisect_right(a, 1)   # if it has the same, choose right
 1
 >>> bisect.bisect(a, 1)
 1
->>> bisect.insort(a, 1)
+>>> bisect.insort(a, 1)   # bisect and insert
 >>> a
 [1, 1, 2, 4, 5]
 >>> bisect.insort_left(a, 2)
