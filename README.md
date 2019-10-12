@@ -25,7 +25,7 @@ Depend on Python v3.7.4
 **Functional Programming**: [``itertools``](#itertools), [``functools``](#functools), [``operator``](#operator)
 
 **Directory Access**: [``pathlib``](#pathlib), [``os.path``](#os.path), [``glob``](#glob), [``tempfile``](#tempfile),
-[``filecmp``](#filecmp), [``fileinput``](#fileinput), [``shutil``](#shutil)
+[``filecmp``](#filecmp), [``fileinput``](#fileinput), [``shutil``](#shutil), [``linecache``](#linecache)
 
 **Data Persistence**: [``pickle``](#pickle), [``copyreg``](#copyreg)
 
@@ -823,6 +823,16 @@ cmp1.txt | Line Number: 5 |:  5
 >>> shutil.rmtree("shutil_tree")
 >>> shutil.move("copysong.wav", "myapp/copysong.wav")
 'myapp/copysong.wav'
+```
+
+## linecache
+
+#### getline
+
+```python
+>>> import linecache
+>>> linecache.getline("GETREADME.py", 1)
+'from sys import exit\n'
 ```
 
 ## pickle
