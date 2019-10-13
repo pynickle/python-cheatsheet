@@ -828,7 +828,7 @@ cmp1.txt | Line Number: 5 |:  5
 >>> import shutil
 >>> shutil.copyfile("song.wav", "copysong.wav")
 'copysong.wav'
->>> shutil.rmtree("shutil_tree")
+>>> shutil.rmtree("shutil_tree")   # can delete tree has contents
 >>> shutil.move("copysong.wav", "myapp/copysong.wav")
 'myapp/copysong.wav'
 ```
@@ -839,7 +839,7 @@ cmp1.txt | Line Number: 5 |:  5
 
 ```python
 >>> import linecache
->>> linecache.getline("GETREADME.py", 1)
+>>> linecache.getline("GETREADME.py", 1)   # start from one
 'from sys import exit\n'
 ```
 
@@ -1044,7 +1044,7 @@ time.struct_time(tm_year=2019, tm_mon=7, tm_mday=29, tm_hour=12, tm_min=18, tm_s
 
 ```python
 >>> import getpass
->>> password = getpass.getpass()
+>>> password = getpass.getpass()   # what you enter will not be displayed on the screen
 Password:
 >>> password
 'xxx'
@@ -1116,7 +1116,7 @@ optional arguments:
 
 ```python
 >>> import io
->>> stringio = io.StringIO()
+>>> stringio = io.StringIO()   # similar as file operation
 >>> stringio.write("Hello World!")
 12
 >>> stringio.seek(6)
@@ -1239,7 +1239,7 @@ SndHeaders(filetype='wav', framerate=44100, nchannels=2, nframes=442368, sampwid
 #### pensize, pencolor, begin_fill, forward, right, end_fill
 
 ```python
->>> import turtle
+>>> import turtle   # it can draw a five-pointed star
 >>> turtle.pensize(5)
 >>> turtle.pencolor("yellow")
 >>> turtle.begin_fill()
@@ -1254,6 +1254,8 @@ SndHeaders(filetype='wav', framerate=44100, nchannels=2, nframes=442368, sampwid
 
 #### Tk, Label
 
+details in [tkinter docs](#https://docs.python.org/3/library/tkinter.html)
+
 run in bash:
 ```bash
 python tkinter_example.py
@@ -1265,7 +1267,7 @@ python tkinter_example.py
 
 ```python
 >>> import typing
->>> lst = typing.List[int]
+>>> lst = typing.List[int]   # list full of int
 >>> float_lst = typing.List[float]
 >>> def foo(x: float, lst: lst)->float_lst:
 ...     return [x*num for num in lst]
@@ -1392,7 +1394,7 @@ python -m ensurepip --upgrade   # upgrade pip
 ```python
 >>> import zipapp
 >>> zipapp.create_archive("myapp", "myapp.pyz", main="app:main")
->>> __import__("os").popen("python myapp.pyz").read()
+>>> __import__("os").popen("python myapp.pyz").read()   # pyz file can also be executed
 'Hello, zipapp!\n'
 ```
 
