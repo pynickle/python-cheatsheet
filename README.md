@@ -350,11 +350,11 @@ datetime.date(2019, 7, 21)
 
 ```python
 >>> import calendar
->>> calendar.isleap(2000)
+>>> calendar.isleap(2000)   # check if it is leap year
 True
 >>> calendar.firstweekday()
 0
->>> print(calendar.month(2019, 7))
+>>> print(calendar.month(2019, 7))   # get the pretty calendar
      July 2019
 Mo Tu We Th Fr Sa Su
  1  2  3  4  5  6  7
