@@ -376,7 +376,7 @@ Mo Tu We Th Fr Sa Su
 >>> p.x, p.y
 (2, 1)
 >>> deque = collections.deque(["b", "c", "d"])   # list-like container with fast appends and pops on either end
->>> deque.appendleft("a")
+>>> deque.appendleft("a")    # much faster than original list
 >>> deque.append("e")
 >>> deque
 deque(['a', 'b', 'c', 'd', 'e'])
