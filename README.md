@@ -305,7 +305,7 @@ b'\xe4\xbd\xa0\xe5\xa5\xbd'
 
 #### pack, unpack
 
-**Notice**: The format is on [``struct docs``](#https://docs.python.org/3/library/struct.html)
+**Notice**: The format is on [struct docs](#https://docs.python.org/3/library/struct.html)
 
 ```python
 >>> import struct
@@ -319,7 +319,7 @@ b'\x00\x00\x04\x00'
 
 #### MINYEAR, MAXYEAR, date
 
-More Information about strftime is on [``strftime docs``](#https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior)
+More Information about strftime is on [strftime docs](#https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior)
 
 ```python
 >>> import datetime
@@ -1023,7 +1023,7 @@ time.struct_time(tm_year=2019, tm_mon=7, tm_mday=29, tm_hour=12, tm_min=18, tm_s
 
 #### log, info, debug, warning, error, critical
 
-More details about format for logging is on [``logging docs``](#https://docs.python.org/3/library/logging.html#logrecord-attributes)
+More details about format for logging is on [logging docs](#https://docs.python.org/3/library/logging.html#logrecord-attributes)
 
 ```python
 >>> import logging
