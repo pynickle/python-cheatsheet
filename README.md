@@ -138,7 +138,7 @@ Depend on Python v3.7.4
 ```python
 >>> import re
 >>> strcmp = "www.baidu.com"
->>> re.match("www", strcmp).span()
+>>> re.match("www", strcmp).span()   # span function to get index
 (0, 3)
 >>> re.match("baidu", strcmp)   # re.match only match from the beginning of the string
 >>> re.search("baidu", strcmp).span()   # re.search search from all string and return the first
@@ -156,7 +156,7 @@ Depend on Python v3.7.4
 
 ```python
 >>> import re
->>> re.split(r"\W", "hello,world")
+>>> re.split(r"\W", "hello,world")   # use regular expression
 ['hello', 'world']
 >>> re.sub(r"Boy|Girl", "Human", "boy and girl", flags = re.I)   # re.I means ignoring apitalization
 'Human and Human'
@@ -319,6 +319,8 @@ b'\x00\x00\x04\x00'
 
 #### MINYEAR, MAXYEAR, date
 
+More Information about strftime is on [``strftime docs``](#https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior)
+
 ```python
 >>> import datetime
 >>> datetime.MINYEAR
@@ -381,7 +383,7 @@ deque(['a', 'b', 'c', 'd', 'e'])
 >>> dd ["key-1"] = "value-1"
 >>> dd["key-1"]
 'value-1'
->>> dd["key-2"]
+>>> dd["key-2"]   # if the key is not exist, it will return the default value instead of raising an error
 'None'
 >>> od = collections.OrderedDict([("a", 1), ("b", 2)])   # dict which always keeps the order
 >>> od
@@ -494,7 +496,7 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 >>> def heapsort(iterable):
 ...     h = []
 ...     for i in iterable:
-...         heapq.heappush(h, i)
+...         heapq.heappush(h, i)   # first push all numbers
 ...     return [heapq.heappop(h) for i in range(len(h))]   # it was orderly extracted
 ... 
 >>> heapsort([4, 3, 6, 9, 1, 7])
@@ -526,11 +528,11 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 
 ```python
 >>> import math
->>> math.ceil(1.4)
+>>> math.ceil(1.4)   # return the smallest integer greater than or equal to x
 2
 >>> math.factorial(5)
 120
->>> math.floor(1.6)
+>>> math.floor(1.6)   # return the largest integer less than or equal to x
 1
 >>> math.modf(1.6)   # return the fractional and integer parts 
 (0.6000000000000001, 1.0)
@@ -540,9 +542,9 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 32.0
 >>> math.sqrt(9)
 3.0
->>> math.pi
+>>> math.pi   # equal to π
 3.141592653589793
->>> math.e
+>>> math.e   # constant e's value
 2.718281828459045
 ```
 
@@ -551,7 +553,7 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 #### sin, tan, cos
 
 ```python
->>> import cmath
+>>> import cmath   # complex maths
 >>> cmath.sin(7)
 (0.6569865987187891+0j)
 >>> cmath.tan(7)
@@ -566,9 +568,9 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 
 ```python
 >>> import random
->>> random.random()
+>>> random.random()   # from 0 to 1
 0.6381052887323486
->>> random.uniform(5,6)
+>>> random.uniform(5,6)   # from x to y
 5.325285695528384
 >>> random.randint(6, 9)   # include nine
 9
@@ -586,14 +588,14 @@ ValueError: duplicate values found in <enum 'Unique'>: Jack -> Nick
 Fraction(-8, 5)
 >>> fractions.Fraction("-16/10")
 Fraction(-8, 5)
->>> fractions.Fraction(8, 5) - fractions.Fraction(7, 5)
+>>> fractions.Fraction(8, 5) - fractions.Fraction(7, 5)   # fractions can do substraction
 Fraction(1, 5)
->>> fractions.Fraction(1.1)
+>>> fractions.Fraction(1.1)   # sometimes it will be strange
 Fraction(2476979795053773, 2251799813685248)
->>> fractions.Fraction(1.1).limit_denominator()
+>>> fractions.Fraction(1.1).limit_denominator()   # use limit denominator to get right fraction
 Fraction(11, 10)
 >>> import math
->>> math.floor(fractions.Fraction(5, 3))
+>>> math.floor(fractions.Fraction(5, 3))   # it can also be combined with math module
 1
 ```
 
@@ -628,11 +630,11 @@ Decimal('-0.17609')
 2
 >>> statistics.harmonic_mean([2, 5, 10])
 3.75
->>> statistics.median([2, 3, 5, 6])
+>>> statistics.median([2, 3, 5, 6])   # get the median of these numbers, median can not be in it
 4.0
->>> statistics.median_low([2, 3, 5, 6])
+>>> statistics.median_low([2, 3, 5, 6])   # median must be in it and get the lower median
 3
->>> statistics.median_high([2, 3, 5, 6])
+>>> statistics.median_high([2, 3, 5, 6])   # get the higher median
 5
 ```
 
@@ -677,7 +679,7 @@ Hello Repeat!
 >>> def add(a, b):
 ...     return a+b
 ...
->>> functools.reduce(add, range(1,100))
+>>> functools.reduce(add, range(1,100))   # add from 1 to 100
 4950
 ```
 
@@ -686,7 +688,7 @@ Hello Repeat!
 #### lt, eq, le, ne, gt, ge, abs, pow, concat, contains, indexOf, add
 
 ```python
->>> import operator
+>>> import operator   # substitute for builtin operator
 >>> operator.lt(3, 4)   # 3<4
 True
 >>> operator.eq(3, 4)   # 3=4
@@ -722,7 +724,7 @@ True
 >>> p = pathlib.Path(".")
 >>> list(p.glob('**/*.py'))
 [WindowsPath('GETREADME.py'), WindowsPath('test.py')]
->>> p/"dir"
+>>> p/"dir"   # use / to get further path
 WindowsPath('dir')
 >>> (p/"GETREADME.py").name
 'GETREADME.py'
@@ -744,7 +746,7 @@ True
 True
 >>> os.path.isdir("./doc")
 False
->>> os.path.join("./doc", "tutorial", "basic")
+>>> os.path.join("./doc", "tutorial", "basic")   # join the directory and file
 './doc\\tutorial\\basic'
 ```
 
@@ -764,7 +766,7 @@ False
 
 ```python
 >>> import tempfile
->>> with tempfile.TemporaryFile() as f:
+>>> with tempfile.TemporaryFile() as f:   # only a temp file, when we finish operating, it will be deleted
 	f.write(b"Hello tempfile")
 	f.seek(0)
 	f.read()
@@ -807,7 +809,7 @@ True
 
 ```python
 >>> import os
->>> cmd = os.popen("python fileinput_example.py cmp1.txt")
+>>> cmd = os.popen("python fileinput_example.py cmp1.txt")   # subprocess.Popen provides more features
 >>> print(cmd.read())
 cmp1.txt | Line Number: 1 |:  1
 
@@ -828,7 +830,7 @@ cmp1.txt | Line Number: 5 |:  5
 >>> import shutil
 >>> shutil.copyfile("song.wav", "copysong.wav")
 'copysong.wav'
->>> shutil.rmtree("shutil_tree")   # can delete tree has contents
+>>> shutil.rmtree("shutil_tree")   # can delete tree has contents, os.remove can't
 >>> shutil.move("copysong.wav", "myapp/copysong.wav")
 'myapp/copysong.wav'
 ```
@@ -839,7 +841,7 @@ cmp1.txt | Line Number: 5 |:  5
 
 ```python
 >>> import linecache
->>> linecache.getline("GETREADME.py", 1)   # start from one
+>>> linecache.getline("GETREADME.py", 1)   # start from one, not zero
 'from sys import exit\n'
 ```
 
@@ -848,10 +850,10 @@ cmp1.txt | Line Number: 5 |:  5
 #### loads, dumps
 
 ```python
->>> import pickle
+>>> import pickle   # pickle is a python-specific compression method
 >>> data = [[1, "first"],
 ...         [2, "second"]]
->>> dumps = pickle.dumps(data)
+>>> dumps = pickle.dumps(data)   # similar to json module
 >>> dumps
 b'\x80\x03]q\x00(]q\x01(K\x01X\x05\x00\x00\x00firstq\x02e]q\x03(K\x02X\x06\x00\x00\x00secondq\x04ee.'
 >>> pickle.loads(dumps)
@@ -913,11 +915,11 @@ b'Hello, python3!'
 
 ```python
 >>> import zipfile
->>> with zipfile.ZipFile("README.zip") as f:
+>>> with zipfile.ZipFile("README.zip") as f:   # extract zip file
 ...     f.extractall()
 ...
->>> with zipfile.ZipFile("LICENSE.zip", "a") as zip:
-...     zip.write("LICENSE")
+>>> with zipfile.ZipFile("LICENSE.zip", "a") as zip:   # create zip file
+...     zip.write("LICENSE")   # use write method to write files into zip file
 ...
 ```
 
@@ -927,12 +929,12 @@ b'Hello, python3!'
 
 ```python
 >>> import configparser
->>> config = configparser.ConfigParser()
+>>> config = configparser.ConfigParser()   # create an instance
 >>> config.read("config.ini")
 ['config.ini']
 >>> config.sections()
 ['python', 'java']
->>> config["python"]["type"]
+>>> config["python"]["type"]   # all sections has values in DEFAULT
 'programming language'
 >>> config["java"]["popular"]
 '1'
@@ -945,7 +947,7 @@ b'Hello, python3!'
 ```python
 >>> import hashlib
 >>> md5 = hashlib.md5()
->>> md5.update(b"Hello World")
+>>> md5.update(b"Hello World")   # use update method to join in batches
 >>> md5.block_size
 64
 >>> md5.digest_size
@@ -963,7 +965,7 @@ b'\xb1\n\x8d\xb1d\xe0uA\x05\xb7\xa9\x9b\xe7.?\xe5'
 ```python
 >>> import hmac
 >>> msg = b"Hello World"
->>> secret = b"key"
+>>> secret = b"key"   # use key to encrypt
 >>> h = hmac.new(secret, msg, digestmod='md5')
 >>> h.hexdigest()
 '432c3ea3b9a503183f3d1258d9016a0c'
@@ -980,7 +982,7 @@ False
 
 ```python
 >>> import secrets
->>> secrets.choice("Hello World!")
+>>> secrets.choice("Hello World!")   # choose one character from the string
 'd'
 >>> secrets.token_bytes(32)
 b'\xd7\x98\xba\xc5\x18[/\xeaLx\xdb\x962\x84\xff`(7&\xe6\xae\xd4\x17n,\xc3\x9e\xb0V\x1c\x1d\x99'
@@ -996,7 +998,7 @@ b'\xd7\x98\xba\xc5\x18[/\xeaLx\xdb\x962\x84\xff`(7&\xe6\xae\xd4\x17n,\xc3\x9e\xb
 >>> import os
 >>> os.name
 'nt'
->>> os.getcwd()
+>>> os.getcwd()   # get the working directory now
 'C:\\Users\\Nick'
 ```
 
@@ -1021,6 +1023,8 @@ time.struct_time(tm_year=2019, tm_mon=7, tm_mday=29, tm_hour=12, tm_min=18, tm_s
 
 #### log, info, debug, warning, error, critical
 
+More details about format for logging is on [``logging docs``](#https://docs.python.org/3/library/logging.html#logrecord-attributes)
+
 ```python
 >>> import logging
 >>> logging.basicConfig(level = logging.INFO,format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -1034,7 +1038,7 @@ time.struct_time(tm_year=2019, tm_mon=7, tm_mday=29, tm_hour=12, tm_min=18, tm_s
 2019-07-29 12:30:36,446 - __main__ - CRITICAL - critical
 >>> logger.warning("warning")
 2019-07-29 12:30:48,815 - __main__ - WARNING - warning
->>> logger.log(35, "log")
+>>> logger.log(35, "log")   # customize the level
 2019-07-29 12:31:59,758 - __main__ - Level 35 - log
 ```
 
