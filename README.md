@@ -2,7 +2,7 @@
 
 Depend on Python v3.7.4
 
-[Download pdf](#http://pythoncheatsheet.herokuapp.com/pdf/en) or fork me on [GitHub](#https://github.com/pynickle/python-cheatsheet)
+[Download pdf](http://pythoncheatsheet.herokuapp.com/pdf/en) or fork me on [GitHub](https://github.com/pynickle/python-cheatsheet)
 
 - [中文](README-zh-cn.md)
 - [English](README.md)

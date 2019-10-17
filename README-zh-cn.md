@@ -4,7 +4,7 @@
 
 使用Python v3.7.4制作
 
-[下载pdf](#http://pythoncheatsheet.herokuapp.com/pdf/zh-cn) 或在 [GitHub](#https://github.com/pynickle/python-cheatsheet) 上fork我
+[下载pdf](http://pythoncheatsheet.herokuapp.com/pdf/zh-cn) 或在 [GitHub](https://github.com/pynickle/python-cheatsheet) 上fork我
 
 - [中文](README-zh-cn.md)
 - [English](README.md)
