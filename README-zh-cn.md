@@ -4,6 +4,8 @@
 
 使用Python v3.7.4制作
 
+[下载pdf](http://pythoncheatsheet.herokuapp.com/pdf/zh-cn)
+
 - [中文](README-zh-cn.md)
 - [English](README.md)
 

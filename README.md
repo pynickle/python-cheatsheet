@@ -2,6 +2,8 @@
 
 Depend on Python v3.7.4
 
+[Download pdf](http://pythoncheatsheet.herokuapp.com/pdf/en)
+
 - [中文](README-zh-cn.md)
 - [English](README.md)
 
